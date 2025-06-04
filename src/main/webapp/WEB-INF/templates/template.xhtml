@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition 
+  xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:f="http://xmlns.jcp.org/jsf/core" 
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:jsf="http://xmlns.jcp.org/jsf"
+  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" 
+  xmlns:p="http://primefaces.org/ui"
+  template="/admin.xhtml">
+
+  <ui:define name="head">
+    <title><h:outputText value="Cantos para missa:: " /><ui:insert name="title" /></title>
+    <h:outputStylesheet library="webjars" name="font-awesome/6.5.1/css/all.min-jsf.css" />
+    <h:outputStylesheet library="webjars" name="font-awesome/6.5.1/css/v4-shims.min-jsf.css" />
+  </ui:define>
+  
+  <ui:define name="logo-lg">
+    <span class="logo-lg"><b>Cantos para Missa</b></span>
+  </ui:define>
+
+  <ui:define name="logo-mini">
+    OWS
+  </ui:define>
+
+  <ui:define name="menu">
+    <ul class="sidebar-menu">
+
+      <!-- Menu entries. -->
+      <li><p:link outcome="/index">
+          <i class="fa fa-home"></i>
+          <span><h:outputText value="#{msgs['menu.home']}" /></span>
+        </p:link></li>
+    </ul>
+  </ui:define>
+
+  <ui:define name="top-menu">
+    <ul class="nav navbar-nav">
+      <!-- User Account Menu -->
+      <h:panelGroup rendered="#{sessionController.loggedIn}">
+        <li class="dropdown user user-menu">
+          <!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <h:outputText value="#{sessionController.currentUser.email}"/><span class="hidden-xs"/>
+        </a>
+          <ul class="dropdown-menu">
+            <!-- The user image in the menu -->
+            <li class="user-header">
+              <p>
+                <h:outputText value="#{sessionController.currentUser.email}"/>
+              </p>
+            </li>
+            <!-- Menu Footer-->
+            <li class="user-footer">
+              <div class="pull-left">
+<!--                <p:link outcome="/core/editProfile/index" styleClass="btn btn-default btn-flat">-->
+                <p:link outcome="/index" styleClass="btn btn-default btn-flat">
+                  <h:outputText value="#{msgs['menu.profile']}"/>
+                </p:link>
+              </div>
+              <div class="pull-right">
+                <a href="#{facesContext.externalContext.requestContextPath}/logout" class="btn btn-default btn-flat">
+                  <h:outputText value="#{msgs['menu.logout']}"/>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </h:panelGroup>
+    </ul>
+  </ui:define>
+
+  <ui:define name="footer">
+    <h:outputText value="#{msgs['text.developedBy']}" escape="false" />
+    <div class="pull-right hidden-xs" style="color: gray">
+      <i>1.0.0</i>
+    </div>
+
+    <!-- Customized JButler style. -->
+    <style type="text/css">
+      .ui-datatable td, th {
+        padding: 4px 10px !important;
+      }
+    </style>
+  </ui:define>
+</ui:composition>

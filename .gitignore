@@ -1,0 +1,11 @@
+# Maven / Gradle
+target/
+
+# IntelliJ IDEA
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# Logs
+*.log
