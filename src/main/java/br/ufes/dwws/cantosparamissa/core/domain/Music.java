@@ -92,6 +92,14 @@ public class Music extends PersistentObjectSupport {
         this.chords = chords;
     }
 
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
     @Override
     public String toString() {
         return title;
