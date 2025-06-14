@@ -18,4 +18,8 @@ public class RegistrationArtistServiceBean extends CrudServiceImpl<Artist> imple
     public BaseDAO<Artist> getDAO() {
         return artistDAO;
     }
+
+    public void registerArtist(Artist artist) {
+        artistDAO.save(artist);
+    }
 }

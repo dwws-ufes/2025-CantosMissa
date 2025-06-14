@@ -18,4 +18,8 @@ public class RegistrationMusicServiceBean extends CrudServiceImpl<Music> impleme
     public BaseDAO<Music> getDAO() {
         return musicDAO;
     }
+
+    public void registerMusic(Music music) {
+        musicDAO.save(music);
+    }
 }
