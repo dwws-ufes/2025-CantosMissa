@@ -1,14 +1,13 @@
 package br.ufes.dwws.cantosparamissa.core.domain;
 
 import br.ufes.inf.labes.jbutler.ejb.persistence.PersistentObjectSupport;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
+import jakarta.inject.Named;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
+@Named
 public class Music extends PersistentObjectSupport {
     @ManyToOne
     private Artist artist;
@@ -18,27 +17,28 @@ public class Music extends PersistentObjectSupport {
     private String title;
 
     @NotNull
+    @Size(max = 100)
     private String chords;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    private Key key;
+    private MusicKey musicKey;
 
     @Enumerated(EnumType.STRING)
-    private LiturgicalSeason season;
+    private LiturgicalSeason liturgicalSeason;
 
     @Enumerated(EnumType.STRING)
-    private SongType type;
+    private SongType songType;
 
+    @Size(max = 200)
     private String youtubeLink;
 
-    public Music(String title, Artist artist, String chords, Key key, LiturgicalSeason season, SongType type) {
+    public Music(String title, Artist artist, String chords, MusicKey musicKey, LiturgicalSeason liturgicalSeason, SongType songType) {
         this.title = title;
         this.artist = artist;
         this.chords = chords;
-        this.key = key;
-        this.season = season;
-        this.type = type;
+        this.musicKey = musicKey;
+        this.liturgicalSeason = liturgicalSeason;
+        this.songType = songType;
     }
 
     public Music() {
@@ -60,12 +60,12 @@ public class Music extends PersistentObjectSupport {
         this.title = title;
     }
 
-    public Key getKey() {
-        return key;
+    public MusicKey getKey() {
+        return musicKey;
     }
 
-    public void setKey(Key key) {
-        this.key = key;
+    public void setKey(MusicKey musicKey) {
+        this.musicKey = musicKey;
     }
 
     public String getChords() {
@@ -77,19 +77,19 @@ public class Music extends PersistentObjectSupport {
     }
 
     public LiturgicalSeason getSeason() {
-        return season;
+        return liturgicalSeason;
     }
 
-    public void setSeason(LiturgicalSeason season) {
-        this.season = season;
+    public void setSeason(LiturgicalSeason liturgicalSeason) {
+        this.liturgicalSeason = liturgicalSeason;
     }
 
     public SongType getType() {
-        return type;
+        return songType;
     }
 
-    public void setType(SongType type) {
-        this.type = type;
+    public void setType(SongType songType) {
+        this.songType = songType;
     }
 
     public Artist getArtist() {

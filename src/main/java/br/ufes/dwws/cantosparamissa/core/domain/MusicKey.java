@@ -1,6 +1,6 @@
 package br.ufes.dwws.cantosparamissa.core.domain;
 
-public enum Key {
+public enum MusicKey {
     C("C"),
     C_SHARP("C#"),
     D("D"),
@@ -26,13 +26,13 @@ public enum Key {
     F_DOUBLE_SHARP("Fx"),
     G_DOUBLE_SHARP("Gx");
 
-    private final String key;
+    private final String musicKey;
 
-    Key(String key) {
-        this.key = key;
+    MusicKey(String musicKey) {
+        this.musicKey = musicKey;
     }
 
     public String getKey() {
-        return key;
+        return musicKey;
     }
 }

@@ -18,6 +18,7 @@ public class Artist extends PersistentObjectSupport {
     @Size(max = 100)
     private String name;
 
+    @Size(max = 200)
     private String image;
 
     public Artist(String name, String image) {
