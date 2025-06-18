@@ -15,6 +15,8 @@ import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 @Named
 @ViewScoped
@@ -55,8 +57,19 @@ public class ManageArtistsController extends CrudController<Artist> {
                     .contentType("image/png")
                     .build();
         } else {
-            System.out.println("Nenhuma imagem no upload");
-            return null;
+            System.out.println("Nenhuma imagem");
+            return DefaultStreamedContent.builder()
+                    .stream(() -> {
+                        InputStream is = FacesContext.getCurrentInstance().getExternalContext()
+                                .getResourceAsStream("/resources/images/default.png");
+                        if (is == null) {
+                            System.out.println("Imagem padrão não encontrada!");
+                            return new ByteArrayInputStream(new byte[0]); // evita NPE
+                        }
+                        return is;
+                    })
+                    .contentType("image/png")
+                    .build();
         }
     }
 }

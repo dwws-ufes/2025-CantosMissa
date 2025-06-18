@@ -51,7 +51,7 @@
                         <h:outputText value="#{entity.name}" />
                     </p:column>
                     <p:column headerText="#{msgsCore['manageArtists.field.picture']}">
-                        <p:graphicImage value="#{manageArtistsController.getArtistImage(entity)}" stream="true"
+                        <p:graphicImage value="#{manageArtistsController.getArtistImage(entity)}" stream="false"
                                         width="100" height="100"/>
                     </p:column>
 
@@ -97,7 +97,7 @@
                                               value="#{manageArtistsController.uploadedFile}"
                                               mode="simple"
                                               accept="image/*"
-                                              allowTypes="/(\.|\/)(jpe?g|png)$/"
+                                              allowTypes="/(\.|\/)(png)$/"
                                               sizeLimit="1048576"
                                               label="Selecionar Imagem" />
                             </h:panelGroup>
