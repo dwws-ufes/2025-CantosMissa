@@ -1,6 +1,7 @@
 package br.ufes.dwws.cantosparamissa.core.domain;
 
 import br.ufes.inf.labes.jbutler.ejb.persistence.PersistentObjectSupport;
+import jakarta.inject.Named;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import java.awt.*;
 import java.util.Set;
 
 @Entity
+@Named
 public class Artist extends PersistentObjectSupport {
     @OneToMany(mappedBy = "artist")
     private Set<Music> musics;
