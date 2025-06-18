@@ -2,12 +2,11 @@ package br.ufes.dwws.cantosparamissa.core.domain;
 
 import br.ufes.inf.labes.jbutler.ejb.persistence.PersistentObjectSupport;
 import jakarta.annotation.Nullable;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class Music extends PersistentObjectSupport {
     @NotNull
     @Size(max = 100)
@@ -17,12 +16,15 @@ public class Music extends PersistentObjectSupport {
     private String chords;
 
     @NotNull
-    private Key key;
+    @Enumerated(EnumType.STRING)
+    private MusicKey musicKey;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private LiturgicalSeason liturgicalSeason;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private SongType songType;
 
     @Nullable
@@ -34,10 +36,10 @@ public class Music extends PersistentObjectSupport {
     public Music() {
     }
 
-    public Music(String title, String chords, Key key, LiturgicalSeason liturgicalSeason, SongType songType, @Nullable String youtubeLink) {
+    public Music(String title, String chords, MusicKey musicKey, LiturgicalSeason liturgicalSeason, SongType songType, @Nullable String youtubeLink) {
         this.title = title;
         this.chords = chords;
-        this.key = key;
+        this.musicKey = musicKey;
         this.liturgicalSeason = liturgicalSeason;
         this.songType = songType;
         this.youtubeLink = youtubeLink;
@@ -76,12 +78,12 @@ public class Music extends PersistentObjectSupport {
         this.liturgicalSeason = liturgicalSeason;
     }
 
-    public Key getKey() {
-        return key;
+    public MusicKey getMusicKey() {
+        return musicKey;
     }
 
-    public void setKey(Key key) {
-        this.key = key;
+    public void setMusicKey(MusicKey musicKey) {
+        this.musicKey = musicKey;
     }
 
     public String getChords() {

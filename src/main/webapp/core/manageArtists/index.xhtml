@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:jsf="http://xmlns.jcp.org/jsf"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:adm="http://github.com/adminfaces"
+        template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{msgsCore['manageArtists.title']}" />
+    </ui:define>
+
+    <ui:define name="description">
+        <h:outputText value="#{msgsCore['manageArtists.title.description']}" />
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb link="/core/manageArtists/index" title="#{msgsCore['manageArtists.title']}" />
+
+        <h:form id="form" enctype="multipart/form-data">
+            <!-- The listing. -->
+            <p:panel header="#{msgsCore['manageArtists.text.entities']}" styleClass="card no-border">
+                <p:dataTable id="dt-entities" widgetVar="dtEntities" var="entity" value="#{manageArtistsController.entities}" emptyMessage="#{msgsCore['manageArtists.text.emptyMessage']}" reflow="true" selection="#{manageArtistsController.selectedEntities}" rowKey="#{entity.id}" paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
+                    <p:ajax event="filter" ignoreAutoUpdate="true" />
+                    <f:facet name="footer">
+                        <!-- New and Delete buttons. -->
+                        <div style="float: right; margin-top: -40px;">
+                            <p:commandButton value="#{msgs['jbutler.crud.button.create']}" icon="pi pi-plus" actionListener="#{manageArtistsController.openNew}" update=":form:manage-entity-content" oncomplete="PF('formDialog').show()" style="margin-right: .5rem">
+                                <p:resetInput target=":form:manage-entity-content" />
+                            </p:commandButton>
+                            <p:commandButton id="delete-entities-button" value="#{msgs['jbutler.crud.button.delete']}" icon="pi pi-trash" actionListener="#{manageArtistsController.deleteSelectedEntities}" disabled="#{!manageArtistsController.hasSelectedEntities()}" update="@this">
+                                <p:confirm header="#{msgs['jbutler.crud.title.confirmation']}" message="#{msgsCore['manageArtists.text.deleteConfirmation']}" icon="pi pi-exclamation-triangle" />
+                            </p:commandButton>
+                        </div>
+                    </f:facet>
+
+                    <p:ajax event="rowSelect" update="delete-entities-button" />
+                    <p:ajax event="rowUnselect" update="delete-entities-button" />
+                    <p:ajax event="rowSelectCheckbox" update="delete-entities-button" />
+                    <p:ajax event="rowUnselectCheckbox" update="delete-entities-button" />
+                    <p:ajax event="toggleSelect" update="delete-entities-button" />
+
+                    <p:column width="40" selectionMode="multiple" exportable="false"></p:column>
+
+                    <!-- Music data. -->
+                    <p:column headerText="#{msgsCore['manageArtists.field.name']}" sortBy="#{entity.name}" filterBy="#{entity.name}" filterStyle="display: none">
+                        <h:outputText value="#{entity.name}" />
+                    </p:column>
+                    <p:column headerText="#{msgsCore['manageArtists.field.picture']}">
+                        <p:graphicImage value="#{manageArtistsController.getArtistImage(entity)}" stream="true"
+                                        width="100" height="100"/>
+                    </p:column>
+
+                    <p:column exportable="false" style="text-align: center;">
+                        <f:facet name="header">
+                            <i class="pi pi-search"></i>
+                            <p:inputText id="globalFilter" onkeyup="PF('dtEntities').filter()" placeholder="#{msgs['jbutler.crud.text.search']}" style="margin-left: 10px;" />
+                        </f:facet>
+                        <p:commandButton icon="pi pi-pencil" update=":form:manage-entity-content" oncomplete="PF('formDialog').show()" process="@this">
+                            <f:setPropertyActionListener value="#{entity}" target="#{manageArtistsController.selectedEntity}" />
+                            <p:resetInput target=":form:manage-entity-content" />
+                        </p:commandButton>
+                        <p:commandButton icon="pi pi-trash" process="@this" oncomplete="PF('deleteEntityDialog').show()">
+                            <f:setPropertyActionListener value="#{entity}" target="#{manageArtistsController.selectedEntity}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+
+            <!-- Dialog to create new entities or update existing ones. -->
+            <p:dialog header="#{msgsCore['manageArtists.title.detail']}"
+                      showEffect="fade"
+                      widgetVar="formDialog"
+                      responsive="true"
+                      width="450"
+                      modal="true"
+                      style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
+                <p:outputPanel id="manage-entity-content">
+                    <p:outputPanel rendered="#{not empty manageArtistsController.selectedEntity}">
+                        <p:panelGrid columns="2" cellpadding="5" layout="grid" styleClass="ui-fluid card" columnClasses="ui-grid-col-4,ui-grid-col-8">
+                            <p:outputLabel for="nameField" value="#{msgsCore['manageArtists.field.name']}" />
+                            <h:panelGroup id="nameGroup">
+                                <p:message id="nameMsgs" for="nameField" />
+                                <p:inputText id="nameField" value="#{manageArtistsController.selectedEntity.name}" required="true">
+                                    <p:ajax event="blur" process="@this" update="nameMsgs" />
+                                </p:inputText>
+                            </h:panelGroup>
+
+                            <p:outputLabel for="pictureField" value="#{msgsCore['manageArtists.field.picture']}" />
+                            <h:panelGroup id="pictureGroup">
+                                <p:message id="pictureMsgs" for="pictureField" />
+                                <p:fileUpload id="pictureField"
+                                              value="#{manageArtistsController.uploadedFile}"
+                                              mode="simple"
+                                              accept="image/*"
+                                              allowTypes="/(\.|\/)(jpe?g|png)$/"
+                                              sizeLimit="1048576"
+                                              label="Selecionar Imagem" />
+                            </h:panelGroup>
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:outputPanel>
+
+                <f:facet name="footer">
+                    <p:commandButton id="saveButton" value="#{msgs['jbutler.crud.button.save']}" icon="pi pi-check" actionListener="#{manageArtistsController.save}" update="manage-entity-content" process="manage-entity-content @this" oncomplete="if(!args.validationError) PF('formDialog').hide()" />
+                    <p:commandButton value="#{msgs['jbutler.crud.button.cancel']}" icon="pi pi-times" onclick="PF('formDialog').hide()" />
+                    <p:defaultCommand target="saveButton" />
+                </f:facet>
+            </p:dialog>
+
+            <!-- Dialog to confirm deletion. -->
+            <p:confirmDialog widgetVar="deleteEntityDialog" showEffect="fade" width="300" message="#{msgsCore['manageArtists.text.deleteConfirmation']}" header="#{msgs['jbutler.crud.title.confirmation']}" severity="warn">
+                <p:commandButton value="#{msgs['jbutler.crud.button.yes']}" icon="pi pi-check" actionListener="#{manageArtistsController.delete}" process="@this" oncomplete="PF('deleteEntityDialog').hide()" />
+                <p:commandButton value="#{msgs['jbutler.crud.button.no']}" type="button" icon="pi pi-times" onclick="PF('deleteEntityDialog').hide()" />
+            </p:confirmDialog>
+
+            <!-- Global dialog used by p:confirm tags. -->
+            <p:confirmDialog global="true" showEffect="fade" width="300">
+                <p:commandButton value="#{msgs['jbutler.crud.button.no']}" type="button" icon="pi pi-times" styleClass="ui-confirmdialog-no" />
+                <p:commandButton value="#{msgs['jbutler.crud.button.yes']}" type="button" icon="pi pi-check" styleClass="ui-confirmdialog-yes" />
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

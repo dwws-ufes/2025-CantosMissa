@@ -95,7 +95,7 @@ public class SessionController extends AdminSession {
      * @return {@code true} if the user has the Admin role, {@code false} otherwise.
      */
     public boolean isAdmin() {
-        return Faces.isUserInRole(Role.ADMIN.getKey());
+        return Faces.isUserInRole(Role.ADMIN.getValue());
     }
 
     /**

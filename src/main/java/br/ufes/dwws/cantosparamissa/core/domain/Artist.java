@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.util.Set;
 
+@Entity
 public class Artist extends PersistentObjectSupport {
     private String name;
 

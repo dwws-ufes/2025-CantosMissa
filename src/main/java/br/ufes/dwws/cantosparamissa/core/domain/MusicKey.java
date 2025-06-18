@@ -1,6 +1,6 @@
 package br.ufes.dwws.cantosparamissa.core.domain;
 
-public enum Key {
+public enum MusicKey {
     A("A"), A_MINOR("Am"), B_FLAT("Bb"), B_FLAT_MINOR("Bbm"),
     B("B"), B_MINOR("Bm"), C("C"), C_MINOR("Cm"),
     C_SHARP_MINOR("C#m"), D_FLAT("Db"), D("D"), D_MINOR("Dm"),
@@ -10,7 +10,7 @@ public enum Key {
 
     private final String value;
 
-    Key(String value) { this.value = value; }
+    MusicKey(String value) { this.value = value; }
 
     public String getValue() { return value; }
 
