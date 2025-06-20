@@ -8,6 +8,8 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 
+import java.util.List;
+
 @Stateless
 @RolesAllowed("ADMIN")
 public class ManageArtistsServiceBean extends CrudServiceImpl<Artist> implements ManageArtistsService{
@@ -17,5 +19,9 @@ public class ManageArtistsServiceBean extends CrudServiceImpl<Artist> implements
     @Override
     public BaseDAO<Artist> getDAO() {
         return artistDAO;
+    }
+
+    public List<Artist> findByNameContaining(String namePart) {
+        return artistDAO.searchByName(namePart);
     }
 }

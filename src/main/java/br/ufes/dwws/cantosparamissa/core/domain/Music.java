@@ -12,6 +12,7 @@ public class Music extends PersistentObjectSupport {
     @Size(max = 100)
     private String title;
 
+    @Lob
     @NotNull
     private String chords;
 
@@ -104,6 +105,6 @@ public class Music extends PersistentObjectSupport {
 
     @Override
     public String toString() {
-        return title;
+        return title + " - " + artist.getName();
     }
 }

@@ -49,4 +49,7 @@ public class Artist extends PersistentObjectSupport {
     public void addMusic(Music music) {
         musics.add(music);
     }
+
+    @Override
+    public String toString() { return name; }
 }

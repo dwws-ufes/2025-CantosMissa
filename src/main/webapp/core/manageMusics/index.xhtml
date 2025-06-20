@@ -50,22 +50,22 @@
                     <p:column headerText="#{msgsCore['manageMusics.field.title']}" sortBy="#{entity.title}" filterBy="#{entity.title}" filterStyle="display: none">
                         <h:outputText value="#{entity.title}" />
                     </p:column>
-                    <p:column headerText="#{msgsCore['manageMusics.field.artist']}" sortBy="#{entity.artist}" filterBy="#{entity.artist}" filterStyle="display: none">
-                        <h:outputText value="#{entity.artist}" />
+                    <p:column headerText="#{msgsCore['manageMusics.field.artist']}" sortBy="#{entity.artist.name}" filterBy="#{entity.artist.name}" filterStyle="display: none">
+                        <h:outputText value="#{entity.artist.name}" />
                     </p:column>
-                    <p:column headerText="#{msgsCore['manageMusics.field.musicKey']}" sortBy="#{entity.musicKey}">
-                        <h:outputText value="#{entity.artist}" />
+                    <p:column headerText="#{msgsCore['manageMusics.field.musicKey']}">
+                        <h:outputText value="#{entity.musicKey}" />
                     </p:column>
-                    <p:column headerText="#{msgsCore['manageMusics.field.chords']}" sortBy="#{entity.chords}">
+                    <p:column headerText="#{msgsCore['manageMusics.field.chords']}">
                         <h:outputText value="#{entity.chords}" />
                     </p:column>
-                    <p:column headerText="#{msgsCore['manageMusics.field.liturgicalSeason']}" sortBy="#{entity.liturgicalSeason}" filterBy="#{entity.liturgicalSeason}" filterStyle="display: none">
+                    <p:column headerText="#{msgsCore['manageMusics.field.liturgicalSeason']}" filterBy="#{entity.liturgicalSeason}" filterStyle="display: none">
                         <h:outputText value="#{entity.liturgicalSeason}" />
                     </p:column>
-                    <p:column headerText="#{msgsCore['manageMusics.field.songType']}" sortBy="#{entity.songType}" filterBy="#{entity.songType}" filterStyle="display: none">
+                    <p:column headerText="#{msgsCore['manageMusics.field.songType']}" filterBy="#{entity.songType}" filterStyle="display: none">
                         <h:outputText value="#{entity.songType}" />
                     </p:column>
-                    <p:column headerText="#{msgsCore['manageMusics.field.youtubeLink']}" sortBy="#{entity.youtubeLink}">
+                    <p:column headerText="#{msgsCore['manageMusics.field.youtubeLink']}">
                         <h:outputText value="#{entity.youtubeLink}" />
                     </p:column>
 
@@ -99,7 +99,10 @@
                             <p:outputLabel for="titleField" value="#{msgsCore['manageMusics.field.title']}" />
                             <h:panelGroup id="titleGroup">
                                 <p:message id="titleMsgs" for="titleField" />
-                                <p:inputText id="titleField" value="#{manageMusicsController.selectedEntity.title}" required="true">
+                                <p:inputText id="titleField"
+                                             value="#{manageMusicsController.selectedEntity.title}"
+                                             placeholder="#{msgsCore['manageMusics.field.placeholder.title']}"
+                                             required="true">
                                     <p:ajax event="blur" process="@this" update="titleMsgs" />
                                 </p:inputText>
                             </h:panelGroup>
@@ -107,9 +110,18 @@
                             <p:outputLabel for="artistField" value="#{msgsCore['manageMusics.field.artist']}" />
                             <h:panelGroup id="artistGroup">
                                 <p:message id="artistMsgs" for="artistField" />
-                                <p:inputText id="artistField" value="#{manageMusicsController.selectedEntity.artist}" required="true">
+                                <p:autoComplete id="artistField"
+                                                value="#{manageMusicsController.artistName}"
+                                                completeMethod="#{manageMusicsController.completeArtist}"
+                                                var="artist"
+                                                itemLabel="#{artist}"
+                                                itemValue="#{artist.name}"
+                                                forceSelection="false"
+                                                placeholder="#{msgsCore['manageMusics.field.placeholder.artist']}"
+                                                minQueryLength="1"
+                                                required="true">
                                     <p:ajax event="blur" process="@this" update="artistMsgs" />
-                                </p:inputText>
+                                </p:autoComplete>
                             </h:panelGroup>
 
                             <p:outputLabel for="keyField" value="#{msgsCore['manageMusics.field.musicKey']}" />
@@ -132,6 +144,7 @@
                                 <p:message id="chordsMsgs" for="chordsField" />
                                 <p:inputTextarea id="chordsField"
                                                  value="#{manageMusicsController.selectedEntity.chords}"
+                                                 maxlength="65535"
                                                  required="true"
                                                  rows="7"
                                                  cols="50"
@@ -162,14 +175,13 @@
                                 <p:message id="songTypeMsgs" for="songTypeField" />
                                 <p:selectOneMenu id="songTypeField"
                                                  value="#{manageMusicsController.selectedEntity.songType}"
-                                                 required="true"
-                                                 requiredMessage="Selecione o Tipo de Canto">
+                                                 required="true">
                                     <f:selectItem itemLabel="#{msgsCore['manageMusics.field.menu.songType']}" itemValue="" noSelectionOption="true" />
                                     <f:selectItems value="#{manageMusicsController.songTypeValues}"
                                                    var="type"
                                                    itemValue="#{type}"
                                                    itemLabel="#{type.value}" />
-                                    <p:ajax event="change" process="@this" update="songTypeMsgs" />
+                                    <p:ajax event="blur" process="@this" update="songTypeMsgs" />
                                 </p:selectOneMenu>
                             </h:panelGroup>
 
@@ -177,7 +189,10 @@
                             <p:outputLabel for="youtubeLinkField" value="#{msgsCore['manageMusics.field.youtubeLink']}" />
                             <h:panelGroup id="youtubeLinkGroup">
                                 <p:message id="youtubeLinkMsgs" for="youtubeLinkField" />
-                                <p:inputText id="youtubeLinkField" value="#{manageMusicsController.selectedEntity.youtubeLink}" required="false">
+                                <p:inputText id="youtubeLinkField"
+                                             value="#{manageMusicsController.selectedEntity.youtubeLink}"
+                                             placeholder="#{msgsCore['manageMusics.field.placeholder.youtubeLink']}"
+                                             required="false">
                                     <p:ajax event="blur" process="@this" update="youtubeLinkMsgs" />
                                 </p:inputText>
                             </h:panelGroup>

@@ -9,6 +9,7 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -17,6 +18,7 @@ import org.primefaces.model.file.UploadedFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 @Named
 @ViewScoped
@@ -25,6 +27,8 @@ public class ManageArtistsController extends CrudController<Artist> {
     private ManageArtistsService manageArtistsService;
 
     private UploadedFile uploadedFile;
+
+    private boolean imageUploadError = false;
 
     public UploadedFile getUploadedFile() {
         return uploadedFile;
@@ -41,12 +45,46 @@ public class ManageArtistsController extends CrudController<Artist> {
 
     @Override
     protected void prepEntity() {
+        imageUploadError = false;  // Reset no início
+
         if (uploadedFile != null) {
+            // Valida tamanho
+            if (uploadedFile.getSize() > 1048576) {  // 1 MB
+                FacesContext.getCurrentInstance().addMessage("pictureField",
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Arquivo muito grande (máx 1MB)", null));
+                imageUploadError = true;
+                return;
+            }
+
+            // Valida tipo
+            if (!"image/png".equalsIgnoreCase(uploadedFile.getContentType())) {
+                FacesContext.getCurrentInstance().addMessage("pictureField",
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Apenas imagens PNG são permitidas", null));
+                imageUploadError = true;
+                return;
+            }
+
+            // Ok, salva
             selectedEntity.setPicture(uploadedFile.getContent());
             System.out.println("Imagem salva: " + uploadedFile.getContent().length + " bytes");
         } else {
             System.out.println("Nenhuma imagem no upload");
         }
+    }
+
+    @Override
+    public void save() {
+        // Prepara entidade e valida imagem
+        prepEntity();
+
+        // Checa se houve erro de imagem
+        if (imageUploadError) {
+            PrimeFaces.current().ajax().update("form:pictureGroup");
+            return;
+        }
+
+        // Chama o save padrão do CrudController do JButler
+        super.save();
     }
 
     public StreamedContent getArtistImage(Artist artist) {
