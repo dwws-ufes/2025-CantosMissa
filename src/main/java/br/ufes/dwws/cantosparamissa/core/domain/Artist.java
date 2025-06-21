@@ -3,11 +3,14 @@ package br.ufes.dwws.cantosparamissa.core.domain;
 import br.ufes.inf.labes.jbutler.ejb.persistence.PersistentObjectSupport;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
 
 @Entity
 public class Artist extends PersistentObjectSupport {
+    @NotNull
+    @Column(unique = true)
     private String name;
 
     @Lob

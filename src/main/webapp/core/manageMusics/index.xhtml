@@ -111,15 +111,16 @@
                             <h:panelGroup id="artistGroup">
                                 <p:message id="artistMsgs" for="artistField" />
                                 <p:autoComplete id="artistField"
-                                                value="#{manageMusicsController.artistName}"
+                                                value="#{manageMusicsController.selectedEntity.artist}"
                                                 completeMethod="#{manageMusicsController.completeArtist}"
                                                 var="artist"
-                                                itemLabel="#{artist}"
-                                                itemValue="#{artist.name}"
-                                                forceSelection="false"
+                                                itemLabel="#{artist.name}"
+                                                itemValue="#{artist}"
+                                                forceSelection="true"
                                                 placeholder="#{msgsCore['manageMusics.field.placeholder.artist']}"
                                                 minQueryLength="1"
-                                                required="true">
+                                                required="true"
+                                                converter="#{manageMusicsController.artistConverter}">
                                     <p:ajax event="blur" process="@this" update="artistMsgs" />
                                 </p:autoComplete>
                             </h:panelGroup>

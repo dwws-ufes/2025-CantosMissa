@@ -28,8 +28,6 @@ public class ManageArtistsController extends CrudController<Artist> {
 
     private UploadedFile uploadedFile;
 
-    private boolean imageUploadError = false;
-
     public UploadedFile getUploadedFile() {
         return uploadedFile;
     }
@@ -44,47 +42,10 @@ public class ManageArtistsController extends CrudController<Artist> {
     }
 
     @Override
-    protected void prepEntity() {
-        imageUploadError = false;  // Reset no início
-
+    protected void prepEntity() {//
         if (uploadedFile != null) {
-            // Valida tamanho
-            if (uploadedFile.getSize() > 1048576) {  // 1 MB
-                FacesContext.getCurrentInstance().addMessage("pictureField",
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Arquivo muito grande (máx 1MB)", null));
-                imageUploadError = true;
-                return;
-            }
-
-            // Valida tipo
-            if (!"image/png".equalsIgnoreCase(uploadedFile.getContentType())) {
-                FacesContext.getCurrentInstance().addMessage("pictureField",
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Apenas imagens PNG são permitidas", null));
-                imageUploadError = true;
-                return;
-            }
-
-            // Ok, salva
             selectedEntity.setPicture(uploadedFile.getContent());
-            System.out.println("Imagem salva: " + uploadedFile.getContent().length + " bytes");
-        } else {
-            System.out.println("Nenhuma imagem no upload");
         }
-    }
-
-    @Override
-    public void save() {
-        // Prepara entidade e valida imagem
-        prepEntity();
-
-        // Checa se houve erro de imagem
-        if (imageUploadError) {
-            PrimeFaces.current().ajax().update("form:pictureGroup");
-            return;
-        }
-
-        // Chama o save padrão do CrudController do JButler
-        super.save();
     }
 
     public StreamedContent getArtistImage(Artist artist) {
