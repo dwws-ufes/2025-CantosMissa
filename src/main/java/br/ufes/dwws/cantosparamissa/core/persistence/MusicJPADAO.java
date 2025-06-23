@@ -6,6 +6,8 @@ import br.ufes.dwws.cantosparamissa.core.domain.Music;
 import br.ufes.dwws.cantosparamissa.core.domain.SongType;
 import br.ufes.inf.labes.jbutler.ejb.persistence.BaseJPADAO;
 import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
