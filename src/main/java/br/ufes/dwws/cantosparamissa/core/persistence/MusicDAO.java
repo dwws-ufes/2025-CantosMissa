@@ -14,5 +14,5 @@ public interface MusicDAO extends BaseDAO<Music> {
     public List<Music> searchByTitle(String title);
     public List<Music> searchByLiturgicalSeason(LiturgicalSeason liturgicalSeason);
     public List<Music> searchByLiturgicalSeasonAndSongType(LiturgicalSeason liturgicalSeason, SongType songType);
-    public List<Music> searchByArtist(Artist artist);
+    public List<Music> searchByArtist(String name);
 }

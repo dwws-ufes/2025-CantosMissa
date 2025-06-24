@@ -17,8 +17,8 @@ import java.util.Map;
 @Named
 @ViewScoped
 public class MusicView implements Serializable {
-
-    private List<Music> musics;
+    private List<Music> musics = List.of();
+    private String query;
 
     @Inject
     private MusicDAO musicDAO;
@@ -31,28 +31,46 @@ public class MusicView implements Serializable {
 
         String seasonParam = params.get("season");
         String typeParam = params.get("type");
+        String queryParam = params.get("q");
 
         if (seasonParam != null && typeParam != null) {
             try {
-                LiturgicalSeason liturgicalSeason = LiturgicalSeason.valueOf(seasonParam);
-                SongType songType = SongType.valueOf(typeParam);
-                musics = musicDAO.searchByLiturgicalSeasonAndSongType(liturgicalSeason, songType);
-            } catch (IllegalArgumentException e) {
-                musics = List.of(); // parâmetros inválidos
-            }
-        } else if (seasonParam != null) {
-            try {
-                LiturgicalSeason liturgicalSeason = LiturgicalSeason.valueOf(seasonParam);
-                musics = musicDAO.searchByLiturgicalSeason(liturgicalSeason);
+                var season = LiturgicalSeason.valueOf(seasonParam);
+                var type = SongType.valueOf(typeParam);
+                musics = musicDAO.searchByLiturgicalSeasonAndSongType(season, type);
+                return;
             } catch (IllegalArgumentException e) {
                 musics = List.of();
+                return;
             }
-        } else {
-            musics = List.of(); // nenhum parâmetro
+        }
+
+        if (seasonParam != null) {
+            try {
+                var season = LiturgicalSeason.valueOf(seasonParam);
+                musics = musicDAO.searchByLiturgicalSeason(season);
+                return;
+            } catch (IllegalArgumentException e) {
+                musics = List.of();
+                return;
+            }
+        }
+
+        if (queryParam != null && !queryParam.isBlank()) {
+            query = queryParam;
+            musics = musicDAO.searchByTitle(queryParam);
         }
     }
 
     public List<Music> getMusics() {
         return musics;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
     }
 }

@@ -12,6 +12,7 @@ import jakarta.ejb.EJBTransactionRolledbackException;
 import jakarta.ejb.SessionContext;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 
 import java.util.logging.Level;
@@ -24,6 +25,7 @@ import java.util.logging.Logger;
  */
 @Stateless
 @PermitAll
+@Named
 public class LoginServiceBean implements LoginService {
     /** Logger for this class. */
     private static final Logger logger = Logger.getLogger(LoginServiceBean.class.getCanonicalName());

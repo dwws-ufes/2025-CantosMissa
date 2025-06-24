@@ -1,6 +1,6 @@
 <div id="header" class="header d-flex align-items-center fixed-top" xmlns:ui="http://java.sun.com/jsf/facelets"
      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
-    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+    <div class="header-container container-fluid container-sm position-relative d-flex align-items-center justify-content-between">
         <h:link outcome="/index" styleClass="logo d-flex align-items-center me-auto me-xl-0">
             <h1 class="sitename">Cantos para Missa</h1>
         </h:link>
@@ -8,13 +8,16 @@
         <nav id="navmenu" class="navmenu">
             <ul>
                 <li class="dropdown">
-                    <a href="#"><span>Selecionar Tempo Litúrgico</span>
+                    <a href="#"><span>Buscar por Tempo Litúrgico</span>
                         <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <ui:repeat value="#{menuController.liturgicalSeasons}" var="liturgicalSeason">
                             <li class="dropdown">
-                                <a href="#"><span>#{liturgicalSeason.value}</span>
-                                    <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <h:link outcome="/core/musics/index">
+                                    <f:param name="season" value="#{liturgicalSeason}" />
+                                    <h:outputText value="#{liturgicalSeason.value}" />
+                                    <i class="bi bi-chevron-down toggle-dropdown"></i>
+                                </h:link>
                                 <ul>
                                     <ui:repeat value="#{menuController.songTypes}" var="songType">
                                         <li>
@@ -34,8 +37,32 @@
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        <h:link outcome="/login" styleClass="btn-getstarted">
-            <h:outputText value="Administrador" />
-        </h:link>
+        <div class="d-flex align-items-center justify-content-between">
+            <h:panelGroup rendered="#{loginServiceBean.currentUser != null}">
+                <div class="d-flex gap-3">
+                    <h:link outcome="/core/manageMusics/index" styleClass="btn-getstarted">
+                        <h:outputText value="Gerenciar Músicas" />
+                    </h:link>
+
+                    <h:link outcome="/core/manageArtists/index" styleClass="btn-getstarted">
+                        <h:outputText value="Gerenciar Artistas" />
+                    </h:link>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup>
+                <h:link outcome="/login" styleClass="btn-getstarted"
+                        rendered="#{loginServiceBean.currentUser == null}">
+                    <h:outputText value="Administrador" />
+                </h:link>
+
+                <h:panelGroup rendered="#{loginServiceBean.currentUser != null}">
+                    <a href="#{facesContext.externalContext.requestContextPath}/logout"
+                       class="btn-getstarted">
+                        <h:outputText value="#{msgs['menu.logout']}" />
+                    </a>
+                </h:panelGroup>
+            </h:panelGroup>
+        </div>
     </div>
 </div>
