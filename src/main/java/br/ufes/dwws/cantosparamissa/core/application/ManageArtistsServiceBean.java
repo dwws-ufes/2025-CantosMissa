@@ -26,6 +26,7 @@ public class ManageArtistsServiceBean extends CrudServiceImpl<Artist> implements
         return artistDAO;
     }
 
+    @Override
     public List<Artist> findByNameContaining(String namePart) {
         return artistDAO.searchByName(namePart);
     }
