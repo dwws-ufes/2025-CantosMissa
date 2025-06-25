@@ -2,7 +2,8 @@
 				xmlns="http://www.w3.org/1999/xhtml"
 				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 				xmlns:h="http://xmlns.jcp.org/jsf/html"
-				xmlns:f="http://xmlns.jcp.org/jsf/core">
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
+				xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="title">
 		Página Inicial
@@ -17,32 +18,49 @@
 						<h:form styleClass="w-100">
 
 							<div class="text-center mb-2">
-								<strong style="font-size: 1.2rem;">Selecione o que você deseja buscar</strong>
+								<p style="font-size: 1.2rem;">Selecione o que você deseja buscar</p>
 							</div>
 
 							<div class="d-flex justify-content-center mb-4">
-								<h:selectOneRadio value="#{searchController.type}" layout="pageDirection" styleClass="btn-group-toggle" style="display: flex; gap: 1rem;">
+								<h:selectOneRadio value="#{searchController.type}"
+												  layout="pageDirection"
+												  styleClass="btn-group-toggle"
+												  style="display: flex; gap: 1rem;">
 									<f:selectItem itemValue="music" itemLabel="Música" />
 									<f:selectItem itemValue="artist" itemLabel="Artista" />
+									<f:ajax event="change"
+											render="searchPanel"
+											execute="@this"
+											listener="#{searchController.onTypeChange}" />
 								</h:selectOneRadio>
 							</div>
 
 							<!-- Barra de busca com botão lateral integrado -->
-							<div class="input-group rounded-pill shadow" style="overflow: hidden;">
-							<span class="input-group-text bg-white border-0">
-								<i class="fa fa-search"></i>
-							</span>
+							<h:panelGroup id="searchPanel">
+								<div class="search-container">
+                                    <span class="search-icon">
+                                        <i class="fa fa-search"></i>
+                                    </span>
 
-								<h:inputText value="#{searchController.query}"
-											 styleClass="form-control border-0 form-input"
-											 style="height: 50px;"
-											 placeholder="Buscar louvor ou artista..." />
+									<p:autoComplete id="searchInput"
+													value="#{searchController.query}"
+													completeMethod="#{searchController.completeText}"
+													minQueryLength="2"
+													delay="300"
+													placeholder="#{searchController.type eq 'music' ? 'Buscar música...' : 'Buscar artista...'}"
+													forceSelection="false"
+													styleClass="search-autocomplete"
+													panelStyleClass="search-suggestions"
+													cache="false"
+													dynamic="true">
+										<p:ajax event="itemSelect" listener="#{searchController.onItemSelect}" />
+									</p:autoComplete>
 
-								<h:commandButton value="Ver resultados"
-												 action="#{searchController.search}"
-												 styleClass="btn btn-primary px-4 text-white"
-												 style="border-radius: 0;" />
-							</div>
+									<h:commandButton value="Ver resultados"
+													 action="#{searchController.search}"
+													 styleClass="btn btn-getstarted search-button" />
+								</div>
+							</h:panelGroup>
 
 						</h:form>
 
