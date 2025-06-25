@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:adm="http://github.com/adminfaces"
+        template="/WEB-INF/templates/template.xhtml">
+
+   <ui:define name="title">
+      <h:outputText value="#{msgsCore['viewMusic.title']}" />
+   </ui:define>
+
+   <ui:define name="body">
+      <adm:breadcrumb link="/core/viewMusic/index" title="#{msgsCore['viewMusic.title']}" />
+
+      <h:outputScript name="js/chords.js" target="head" />
+
+      <h:form id="form">
+         <p:panel header="#{msgsCore['viewMusic.panel.title']}" styleClass="card no-border">
+            <p:panelGrid columns="2" cellpadding="5" layout="grid" styleClass="ui-fluid card" columnClasses="ui-grid-col-4,ui-grid-col-8">
+
+               <p:outputLabel value="#{msgsCore['manageMusics.field.title']}" />
+               <h:outputText value="#{viewMusicController.selectedEntity.title}" />
+
+               <p:outputLabel value="#{msgsCore['manageMusics.field.artist']}" />
+               <h:outputText value="#{viewMusicController.selectedEntity.artist.name}" />
+
+               <p:outputLabel value="#{msgsCore['manageMusics.field.musicKey']}" />
+               <h:outputText value="#{viewMusicController.selectedEntity.musicKey.value}" />
+
+               <p:outputLabel value="#{msgsCore['manageMusics.field.liturgicalSeason']}" />
+               <h:outputText value="#{viewMusicController.selectedEntity.liturgicalSeason.value}" />
+
+               <p:outputLabel value="#{msgsCore['manageMusics.field.songType']}" />
+               <h:outputText value="#{viewMusicController.selectedEntity.songType.value}" />
+
+               <p:outputLabel value="#{msgsCore['manageMusics.field.youtubeLink']}" />
+               <h:outputLink value="#{viewMusicController.selectedEntity.youtubeLink}" target="_blank">
+                  <h:outputText value="#{viewMusicController.selectedEntity.youtubeLink}" />
+               </h:outputLink>
+
+               <p:outputLabel value="#{msgsCore['manageMusics.field.chords']}" />
+               <h:outputText id="chordsDisplay" value="#{viewMusicController.selectedEntity.chords}" escape="false"
+                             style="font-family: monospace; white-space: pre-wrap;" />
+            </p:panelGrid>
+         </p:panel>
+      </h:form>
+   </ui:define>
+</ui:composition>
