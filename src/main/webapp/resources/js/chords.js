@@ -4,15 +4,14 @@ function formatChords() {
     if (chordsElement) {
         let rawChords = chordsElement.innerText;
 
-        const notes = "[A-G]",
-            accentuations = "(?:b|bb)",
-            chords = "*(?:#|##|sus|maj|min|aug|m|M|\\+|-|dim)",
-            withh = "*[\\d\\/]*",
-            numbers = "*(?:[1-9])",
-            outsideChords = "(?=\\s|$)(?! \\w)",
-            pattern = "("+"\\b(" + notes + accentuations + numbers + chords + withh + '(?:' + notes + accentuations + chords + withh + ')*)'+outsideChords+")",
-            regex = new RegExp(pattern, "g");
-
+        // Padrão para identificar (praticamente) todos os tipos de acordes e não considerar "acordes" no meio da letra
+        // Ex:         D
+        //     Que nenhuma família comece
+        //                       A7
+        //     Em qualquer de repente
+        // Nesse caso, "Em" (acorde de mi menor) não é identificado como acorde
+        const pattern = "(\\b[A-G](?:b|bb|#|##)*(?:[1-9])*(?:sus|maj|min|aug|m|M|\\+|-|dim|Maj)*[\\d\\/]*(\\(1?\\d(\\+|-)?(\\/1?\\d(\\+|-)?)?\\))?(\\/[A-G](b|bb|#|##)?)?)(M|maj|Maj)?(?=\\s|$)(?! [a-zH-Z0-9_]| [A-G][ac-z])"
+        const regex = new RegExp(pattern, "g");
         let lines = rawChords.split('\n');
         let formatted = [];
 
