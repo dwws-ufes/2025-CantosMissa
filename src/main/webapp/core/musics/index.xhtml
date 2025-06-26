@@ -26,7 +26,7 @@
 
                     <ui:repeat value="#{musicView.musics}" var="music">
                         <div class="card p-3 rounded-4 mb-3 shadow-sm music-card fs-3 ">
-                            <strong>#{music.title}</strong> #{music.artist.name}
+                            <strong>#{music.title}</strong> #{music.artist.name} #{music.songType} #{music.liturgicalSeason}
                         </div>
                     </ui:repeat>
                 </div>
