@@ -2,6 +2,7 @@ package br.ufes.dwws.cantosparamissa.core.controller;
 
 import br.ufes.dwws.cantosparamissa.core.application.ManageMusicsService;
 import br.ufes.dwws.cantosparamissa.core.domain.Music;
+import br.ufes.dwws.cantosparamissa.core.domain.MusicKey;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.faces.context.FacesContext;
@@ -9,6 +10,8 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,5 +83,39 @@ public class ViewMusicController implements Serializable {
 
     public Music getSelectedEntity() {
         return selectedEntity;
+    }
+
+    public List<MusicKey> getAvailableKeys(){
+        List<MusicKey> availableKeys = new ArrayList<>();
+        String entityKeyValue = selectedEntity.getMusicKey().getValue();
+        // Se o tom da música for menor, só pode escolher entre tons menores
+        if(entityKeyValue.endsWith("m")){
+            availableKeys.add(MusicKey.A_MINOR);
+            availableKeys.add(MusicKey.B_FLAT_MINOR);
+            availableKeys.add(MusicKey.B_MINOR);
+            availableKeys.add(MusicKey.C_MINOR);
+            availableKeys.add(MusicKey.C_SHARP_MINOR);
+            availableKeys.add(MusicKey.D_MINOR);
+            availableKeys.add(MusicKey.D_SHARP_MINOR);
+            availableKeys.add(MusicKey.E_MINOR);
+            availableKeys.add(MusicKey.F_MINOR);
+            availableKeys.add(MusicKey.F_SHARP_MINOR);
+            availableKeys.add(MusicKey.G_MINOR);
+            availableKeys.add(MusicKey.G_SHARP_MINOR);
+        } else { // Mesmo para tom maior
+            availableKeys.add(MusicKey.A);
+            availableKeys.add(MusicKey.B_FLAT);
+            availableKeys.add(MusicKey.B);
+            availableKeys.add(MusicKey.C);
+            availableKeys.add(MusicKey.D_FLAT);
+            availableKeys.add(MusicKey.D);
+            availableKeys.add(MusicKey.E_FLAT);
+            availableKeys.add(MusicKey.E);
+            availableKeys.add(MusicKey.F);
+            availableKeys.add(MusicKey.F_SHARP);
+            availableKeys.add(MusicKey.G);
+            availableKeys.add(MusicKey.A_FLAT);
+        }
+        return availableKeys;
     }
 }

@@ -28,7 +28,39 @@
                <h:outputText value="#{viewMusicController.selectedEntity.artist.name}" />
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.musicKey']}" />
-               <h:outputText value="#{viewMusicController.selectedEntity.musicKey.value}" />
+               <h:panelGroup layout="block" styleClass="key-controls" style="text-align:left; margin-bottom: 1rem;">
+                  <!-- Botão para diminuir 1/2 tom -->
+                  <p:commandButton icon="pi pi-minus"
+                                   onclick="transpose(-1);"
+                                   type="button"
+                                   styleClass="ui-button-secondary"
+                                   title="Diminuir ½ tom"
+                                   style="margin-right: 0.5rem; width: 2rem" />
+
+                  <!-- Tom atual clicável -->
+                  <h:outputText id="keyLabel"
+                                value="#{viewMusicController.selectedEntity.musicKey.value}"
+                                styleClass="key-label"
+                                style="font-weight: bold; font-size: 1.2rem; cursor: pointer; font-family: monospace;"
+                                onclick="toggleKeySelector()" />
+
+                  <!-- Botão para aumentar 1/2 tom -->
+                  <p:commandButton icon="pi pi-plus"
+                                   onclick="transpose(1);"
+                                   type="button"
+                                   styleClass="ui-button-secondary"
+                                   title="Aumentar ½ tom"
+                                   style="margin-left: 0.5rem; width: 2rem" />
+
+                  <!-- Seletor de tom -->
+                  <div id="keySelector" style="display:none; text-align: center; margin-bottom: 1rem;">
+                     <ui:repeat value="#{viewMusicController.availableKeys}" var="key">
+                        <p:commandLink value="#{key.value}"
+                                       onclick="transposeTo('#{key}'); return false;"
+                                       style="margin: 0 0.3rem; font-weight: bold;" />
+                     </ui:repeat>
+                  </div>
+               </h:panelGroup>
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.liturgicalSeason']}" />
                <h:outputText value="#{viewMusicController.selectedEntity.liturgicalSeason.value}" />
@@ -47,5 +79,16 @@
             </p:panelGrid>
          </p:panel>
       </h:form>
+      <style>
+         .chord {
+            color: #0066cc;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+         }
+         .chord:hover {
+            color: #ff6600;
+         }
+      </style>
    </ui:define>
 </ui:composition>
