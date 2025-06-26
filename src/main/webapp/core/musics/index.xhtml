@@ -10,14 +10,23 @@
     </ui:define>
 
     <ui:define name="content">
+        <style>
+            .music-card:hover {
+                background-color: #edeff0; /* cor mais clara no hover */
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                transform: scale(1.01);
+                transition: all 0.3s ease;
+            }
+        </style>
+
         <section id="hero" class="hero section">
             <div class="container">
                 <div class="row height d-flex justify-content-center align-items-center">
-                    <h2>Músicas encontradas</h2>
+                    <h2 class="text-center fw-bold fs-1 mb-4">Músicas encontradas</h2>
 
                     <ui:repeat value="#{musicView.musics}" var="music">
-                        <div>
-                            <strong>#{music.title}</strong> – #{music.artist.name}
+                        <div class="card p-3 rounded-4 mb-3 shadow-sm music-card fs-3 ">
+                            <strong>#{music.title}</strong> #{music.artist.name}
                         </div>
                     </ui:repeat>
                 </div>
