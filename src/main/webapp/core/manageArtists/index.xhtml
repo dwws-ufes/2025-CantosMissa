@@ -46,9 +46,11 @@
 
                     <p:column width="40" selectionMode="multiple" exportable="false"></p:column>
 
-                    <!-- Music data. -->
+                    <!-- Artist data. -->
                     <p:column headerText="#{msgsCore['manageArtists.field.name']}" sortBy="#{entity.name}" filterBy="#{entity.name}" filterStyle="display: none">
-                        <h:outputText value="#{entity.name}" />
+                        <p:link value="#{entity.name}" outcome="/core/viewArtist/index">
+                            <f:param name="id" value="#{entity.id}" />
+                        </p:link>
                     </p:column>
                     <p:column headerText="#{msgsCore['manageArtists.field.picture']}">
                         <p:graphicImage value="#{manageArtistsController.getArtistImage(entity)}" stream="false"
