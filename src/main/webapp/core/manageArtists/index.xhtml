@@ -8,17 +8,17 @@
         xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
         xmlns:p="http://primefaces.org/ui"
         xmlns:adm="http://github.com/adminfaces"
-        template="/WEB-INF/templates/template.xhtml">
+        template="/WEB-INF/templates/template-publico.xhtml">
 
     <ui:define name="title">
         <h:outputText value="#{msgsCore['manageArtists.title']}" />
     </ui:define>
 
-    <ui:define name="description">
+    <!--<ui:define name="description">
         <h:outputText value="#{msgsCore['manageArtists.title.description']}" />
-    </ui:define>
+    </ui:define>-->
 
-    <ui:define name="body">
+    <ui:define name="content">
         <adm:breadcrumb link="/core/manageArtists/index" title="#{msgsCore['manageArtists.title']}" />
 
         <h:form id="form" enctype="multipart/form-data">
