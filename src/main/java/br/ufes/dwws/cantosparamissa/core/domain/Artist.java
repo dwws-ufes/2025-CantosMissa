@@ -5,6 +5,7 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,7 @@ public class Artist extends PersistentObjectSupport {
     @Nullable
     private byte[] picture;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "artist")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "artist", fetch =  FetchType.EAGER)
     private Set<Music> musics;
 
     public Artist() {

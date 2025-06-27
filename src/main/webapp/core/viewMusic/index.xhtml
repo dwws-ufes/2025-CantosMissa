@@ -25,7 +25,9 @@
                <h:outputText value="#{viewMusicController.selectedEntity.title}" />
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.artist']}" />
-               <h:outputText value="#{viewMusicController.selectedEntity.artist.name}" />
+               <p:link outcome="/core/viewArtist/index.xhtml" value="#{viewMusicController.selectedEntity.artist.name}">
+                  <f:param name="id" value="#{viewMusicController.selectedEntity.artist.id}" />
+               </p:link>
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.liturgicalSeason']}" />
                <h:outputText value="#{viewMusicController.selectedEntity.liturgicalSeason.value}" />
