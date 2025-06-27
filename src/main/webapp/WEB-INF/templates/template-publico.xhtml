@@ -2,10 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 <h:head>
     <meta charset="utf-8"/>
@@ -24,27 +21,27 @@
     <h:outputStylesheet name="assets/vendor/glightbox/css/glightbox.min.css"/>
     <h:outputStylesheet name="assets/vendor/swiper/swiper-bundle.min.css"/>
     <h:outputStylesheet name="assets/css/main.css"/>
+    <h:outputStylesheet name="assets/css/no-scroll.css"/>
 </h:head>
 
 <h:body styleClass="index-page">
 
-    <!-- HEADER -->
+    <h:outputScript>
+        document.documentElement.classList.add('no-scroll');
+    </h:outputScript>
+
     <ui:include src="/includes/header.xhtml"/>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main class="main">
         <ui:insert name="content"/>
     </main>
 
-    <!-- FOOTER -->
     <ui:include src="/includes/footer.xhtml"/>
 
-    <!-- Scroll Top Button -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
         <i class="bi bi-arrow-up-short"></i>
     </a>
 
-    <!-- SCRIPTS -->
     <h:outputScript name="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"/>
     <h:outputScript name="assets/vendor/php-email-form/validate.js"/>
     <h:outputScript name="assets/vendor/aos/aos.js"/>

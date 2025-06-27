@@ -15,6 +15,7 @@
   --default-font: "Montserrat",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --heading-font: "Montserrat",  sans-serif;
   --nav-font: "Montserrat",  sans-serif;
+  --hero-font-scale: 1.8;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
@@ -22,7 +23,7 @@
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #36393b; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #45484b; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #696758; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --accent-color: #36393b; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff  ; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
@@ -121,7 +122,7 @@ h6 {
 }
 
 .header .logo h1 {
-  font-size: 24px;
+  font-size: 28px;
   margin: 0;
   font-weight: 500;
   color: var(--heading-color);
@@ -131,7 +132,7 @@ h6 {
 .header .btn-getstarted:focus {
   color: var(--contrast-color);
   background: var(--accent-color);
-  font-size: 14px;
+  font-size: 18px;
   padding: 8px 20px;
   margin: 0 0 0 30px;
   border-radius: 50px;
@@ -198,7 +199,7 @@ h6 {
   .navmenu a:focus {
     color: var(--nav-color);
     padding: 18px 15px;
-    font-size: 16px;
+    font-size: 20px;
     font-family: var(--nav-font), serif;
     font-weight: 400;
     display: flex;
@@ -210,7 +211,7 @@ h6 {
 
   .navmenu a i,
   .navmenu a:focus i {
-    font-size: 12px;
+    font-size: 18px;
     line-height: 0;
     margin-left: 5px;
     transition: 0.3s;
@@ -248,13 +249,13 @@ h6 {
 
   .navmenu .dropdown ul a {
     padding: 10px 20px;
-    font-size: 15px;
+    font-size: 17px;
     text-transform: none;
     color: var(--nav-dropdown-color);
   }
 
   .navmenu .dropdown ul a i {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .navmenu .dropdown ul a:hover,
@@ -420,10 +421,6 @@ h6 {
   position: relative;
 }
 
-.footer .footer-top {
-  padding-top: 50px;
-}
-
 .footer .footer-about .logo {
   line-height: 1;
   margin-bottom: 25px;
@@ -437,7 +434,7 @@ h6 {
 .footer .footer-about .logo span {
   color: var(--heading-color);
   font-family: var(--heading-font);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -473,58 +470,9 @@ h6 {
   padding-bottom: 12px;
 }
 
-.footer .footer-links {
-  margin-bottom: 30px;
-}
-
-.footer .footer-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer .footer-links ul i {
-  padding-right: 2px;
-  font-size: 12px;
-  line-height: 0;
-}
-
-.footer .footer-links ul li {
-  padding: 10px 0;
-  display: flex;
-  align-items: center;
-}
-
-.footer .footer-links ul li:first-child {
-  padding-top: 0;
-}
-
-.footer .footer-links ul a {
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
-  display: inline-block;
-  line-height: 1;
-}
-
-.footer .footer-links ul a:hover {
-  color: var(--accent-color);
-}
-
-.footer .footer-contact p {
-  margin-bottom: 5px;
-}
-
 .footer .copyright {
-  padding: 25px 0;
+  padding: 5px 0;
   border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-}
-
-.footer .copyright p {
-  margin-bottom: 0;
-}
-
-.footer .credits {
-  margin-top: 8px;
-  font-size: 13px;
 }
 
 /*--------------------------------------------------------------
@@ -1506,7 +1454,7 @@ section,
 
 /* Garante que a seção hero ocupe 100% da altura da viewport */
 #hero {
-  min-height: 100vh; /* 100% da altura da janela */
+  min-height: calc(100vh - 63px); /* 100% da altura da janela */
   display: flex; 
   align-items: center; 
   justify-content: center;
@@ -1523,6 +1471,14 @@ section,
   width: 100%;
   max-width: 400px; /* ou qualquer largura máxima que preferir */
   margin: 0 auto;
+}
+
+#hero .text-center p {
+  font-size: calc(1.2rem * var(--hero-font-scale)) !important;
+}
+
+#hero .d-flex.justify-content-center {
+  margin-bottom: 5.5rem !important;
 }
 
 .form {
@@ -1607,7 +1563,7 @@ section,
   border-radius: 50px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  height: 50px;
+  height: 65px;
 }
 
 /* Ícone de busca */
@@ -1615,8 +1571,13 @@ section,
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
+  padding: 0 25px;
   color: #666;
+  font-size: 2.5rem;
+}
+
+.search-icon i {
+  font-size: 2.5rem;
 }
 
 /* Autocomplete container */
@@ -1628,56 +1589,111 @@ section,
 /* Input do autocomplete */
 .search-autocomplete .ui-autocomplete-input {
   width: 100% !important;
-  height: 50px !important;
+  height: 65px !important;
   border: none !important;
   background: transparent !important;
-  padding: 0 15px !important;
-  font-size: 16px !important;
+  padding: 0 20px !important;
+  font-size: 2.4rem !important;
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
   outline: none !important;
   box-shadow: none !important;
 }
 
+/* Placeholder do input - com suporte para múltiplos navegadores */
+.search-autocomplete .ui-autocomplete-input::placeholder {
+  font-size: 2.4rem !important;
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  opacity: 0.7; /* ADICIONADO - ajusta visibilidade do placeholder */
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+.search-autocomplete .ui-autocomplete-input::-webkit-input-placeholder {
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  font-size: 2.4rem !important;
+}
+
+/* Mozilla Firefox */
+.search-autocomplete .ui-autocomplete-input::-moz-placeholder {
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  font-size: 2.4rem !important;
+}
+
+/* Internet Explorer/Edge antigo */
+.search-autocomplete .ui-autocomplete-input:-ms-input-placeholder {
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  font-size: 2.4rem !important;
+}
+
 /* Botão de busca */
 .search-button {
-  height: 50px !important;
+  height: 65px !important;
   padding: 0 30px !important;
   border: none !important;
   border-radius: 0 !important;
-  background: #696758 !important;
+  background: var(--accent-color) !important;
   color: white !important;
   font-weight: 500 !important;
+  font-size: 2.0rem !important;
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
   cursor: pointer !important;
   transition: background-color 0.3s !important;
 }
 
 .search-button:hover {
-  background: #36393b !important;
+  color: var(--contrast-color);
+  background: rgba(54, 57, 59, 0.85) !important;
 }
 
-/* Painel de sugestões */
+/* Painel de sugestões - AJUSTADO */
 .search-suggestions.ui-autocomplete-panel {
-  margin-top: 10px !important;
+  margin-top: 76px !important;
   border-radius: 15px !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
   border: none !important;
   background: white !important;
   overflow: hidden !important;
+  max-width: 100% !important;
+  max-height: 400px !important;
 }
 
-/* Lista de sugestões */
+/* Lista de sugestões - AJUSTADO */
 .search-suggestions .ui-autocomplete-list {
-  padding: 5px 0 !important;
+  padding: 7px 0 !important;
+  max-height: 385px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Estilização da barra de scroll - NOVO */
+.search-suggestions .ui-autocomplete-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.search-suggestions .ui-autocomplete-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.search-suggestions .ui-autocomplete-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.search-suggestions .ui-autocomplete-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /* Item da lista - aumentando especificidade */
 .search-suggestions .ui-autocomplete-items .ui-autocomplete-item {
-  padding: 12px 20px !important;
+  padding: 16px 25px !important;
   border: none !important;
   cursor: pointer !important;
   transition: all 0.2s !important;
-  font-size: 14px !important;
+  font-size: 2.2rem !important;
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
   color: #333 !important;
   background-color: transparent !important;
+  line-height: 1.5 !important;
 }
 
 /* Hover no item - com maior especificidade */
@@ -1699,9 +1715,83 @@ section,
   display: none !important;
 }
 
+
+/* TOGGLE ARTISTA/MUSICA */
+
 /* Remove qualquer gradiente ou imagem de fundo dos estados do PrimeFaces */
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
   background-image: none !important;
+}
+
+/* Container dos radio buttons */
+.custom-toggle-container {
+  display: inline-flex;
+  align-items: stretch;
+  background-color: #f0f0f0;
+  border-radius: 50px;
+  padding: 4px;
+  position: relative;
+  height: auto;
+  min-height: 48px; /* Define altura mínima */
+}
+
+/* Esconde os radio buttons originais */
+.custom-toggle-container input[type="radio"] {
+  display: none;
+}
+
+/* Ajusta elementos de tabela que o JSF pode gerar */
+.custom-toggle-container table,
+.custom-toggle-container tbody,
+.custom-toggle-container tr,
+.custom-toggle-container td {
+  display: contents;
+}
+
+/* Estilo dos labels */
+.custom-toggle-container label {
+  padding: 12px 30px;
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: calc(1rem * var(--hero-font-scale));
+  transition: all 0.3s ease;
+  border-radius: 50px;
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  height: 100%;
+  margin: 0;
+}
+
+/* Estilo do label quando selecionado */
+.custom-toggle-container input[type="radio"]:checked + label {
+  color: #fff;
+}
+
+/* Elemento que cria o fundo deslizante */
+.custom-toggle-container::before {
+  content: '';
+  position: absolute;
+  height: calc(100% - 8px);
+  width: 50%;
+  background-color: var(--accent-color);
+  border-radius: 50px;
+  top: 4px;
+  left: 4px;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+/* Move o fundo quando o segundo item é selecionado */
+.custom-toggle-container:has(input[type="radio"]:nth-of-type(2):checked)::before {
+  transform: translateX(calc(100% - 8px));
+}
+
+.custom-toggle-container.second-selected::before {
+  transform: translateX(calc(100% - 8px));
 }

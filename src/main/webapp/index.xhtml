@@ -10,6 +10,41 @@
 	</ui:define>
 
 	<ui:define name="content">
+		<!-- Script de controle do toggle de music/artist -->
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const toggleContainer = document.querySelector('.custom-toggle-container');
+				const radioButtons = toggleContainer.querySelectorAll('input[type="radio"]');
+
+				radioButtons.forEach((radio, index) => {
+					radio.addEventListener('change', function() {
+						if (index === 1 &amp;&amp; this.checked) {
+							toggleContainer.classList.add('second-selected');
+						} else {
+							toggleContainer.classList.remove('second-selected');
+						}
+					});
+				});
+			});
+			document.addEventListener('DOMContentLoaded', function() {
+				// Ajusta a posição do autocomplete quando ele aparecer
+				$(document).on('DOMNodeInserted', '.ui-autocomplete', function() {
+					var searchContainer = $('.search-container');
+					var autocomplete = $(this);
+
+					if (searchContainer.length &amp;&amp; autocomplete.length) {
+						var containerOffset = searchContainer.offset();
+						var containerHeight = searchContainer.outerHeight();
+
+						autocomplete.css({
+							'top': (containerOffset.top + containerHeight + 15) + 'px',
+							'left': containerOffset.left + 'px',
+							'width': searchContainer.outerWidth() + 'px'
+						});
+					}
+				});
+			});
+		</script>
 		<section id="hero" class="hero section">
 			<div class="container">
 				<div class="row height d-flex justify-content-center align-items-center">
@@ -23,9 +58,8 @@
 
 							<div class="d-flex justify-content-center mb-4">
 								<h:selectOneRadio value="#{searchController.type}"
-												  layout="pageDirection"
-												  styleClass="btn-group-toggle"
-												  style="display: flex; gap: 1rem;">
+												  layout="lineDirection"
+												  styleClass="custom-toggle-container">
 									<f:selectItem itemValue="music" itemLabel="Música" />
 									<f:selectItem itemValue="artist" itemLabel="Artista" />
 									<f:ajax event="change"
@@ -58,7 +92,7 @@
 
 									<h:commandButton value="Ver resultados"
 													 action="#{searchController.search}"
-													 styleClass="btn btn-getstarted search-button" />
+													 styleClass="btn btn-getstarted search-button"/>
 								</div>
 							</h:panelGroup>
 

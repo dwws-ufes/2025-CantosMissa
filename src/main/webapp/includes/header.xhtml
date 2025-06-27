@@ -2,13 +2,13 @@
      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
     <div class="header-container container-fluid container-sm position-relative d-flex align-items-center justify-content-between">
         <h:link outcome="/index" styleClass="logo d-flex align-items-center me-auto me-xl-0">
-            <h1 class="sitename">Cantos para Missa</h1>
+            <h1 class="sitename">#{msgsCore['application.title']}</h1>
         </h:link>
 
         <nav id="navmenu" class="navmenu">
             <ul>
                 <li class="dropdown">
-                    <a href="#"><span>Buscar por Tempo Litúrgico</span>
+                    <a href="#"><span>#{msgsCore['application.header.tempoLiturgico']}</span>
                         <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <ui:repeat value="#{menuController.liturgicalSeasons}" var="liturgicalSeason">
@@ -41,11 +41,11 @@
             <h:panelGroup rendered="#{loginServiceBean.currentUser != null}">
                 <div class="d-flex gap-3">
                     <h:link outcome="/core/manageMusics/index" styleClass="btn-getstarted">
-                        <h:outputText value="Gerenciar Músicas" />
+                        <h:outputText value="#{msgsCore['menu.core.manageMusics']}" />
                     </h:link>
 
                     <h:link outcome="/core/manageArtists/index" styleClass="btn-getstarted">
-                        <h:outputText value="Gerenciar Artistas" />
+                        <h:outputText value="#{msgsCore['menu.core.manageArtists']}" />
                     </h:link>
                 </div>
             </h:panelGroup>
@@ -53,7 +53,7 @@
             <h:panelGroup>
                 <h:link outcome="/login" styleClass="btn-getstarted"
                         rendered="#{loginServiceBean.currentUser == null}">
-                    <h:outputText value="Administrador" />
+                    <h:outputText value="#{msgsCore['application.header.administrador']}" />
                 </h:link>
 
                 <h:panelGroup rendered="#{loginServiceBean.currentUser != null}">
