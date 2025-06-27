@@ -118,4 +118,20 @@ public class ViewMusicController implements Serializable {
         }
         return availableKeys;
     }
+
+    public String getYoutubeEmbedUrl() {
+        String link = selectedEntity.getYoutubeLink();
+        if (link == null || link.isBlank()) return null;
+
+        try {
+            if (link.contains("youtube.com/watch?v=")) {
+                return "https://www.youtube.com/embed/" + link.split("v=")[1].split("&")[0];
+            } else if (link.contains("youtu.be/")) {
+                return "https://www.youtube.com/embed/" + link.split("youtu.be/")[1].split("\\?")[0];
+            }
+        } catch (Exception e) {
+            return null; // erro de parsing
+        }
+        return null;
+    }
 }

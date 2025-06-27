@@ -18,7 +18,7 @@
       <h:outputScript name="js/chords.js" target="head" />
 
       <h:form id="form">
-         <p:panel header="#{msgsCore['viewMusic.panel.title']}" styleClass="card no-border">
+         <p:panel styleClass="card no-border">
             <p:panelGrid columns="2" cellpadding="5" layout="grid" styleClass="ui-fluid card" columnClasses="ui-grid-col-4,ui-grid-col-8">
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.title']}" />
@@ -26,6 +26,26 @@
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.artist']}" />
                <h:outputText value="#{viewMusicController.selectedEntity.artist.name}" />
+
+               <p:outputLabel value="#{msgsCore['manageMusics.field.liturgicalSeason']}" />
+               <h:outputText value="#{viewMusicController.selectedEntity.liturgicalSeason.value}" />
+
+               <p:outputLabel value="#{msgsCore['manageMusics.field.songType']}" />
+               <h:outputText value="#{viewMusicController.selectedEntity.songType.value}" />
+
+               <p:outputLabel rendered="#{not empty viewMusicController.youtubeEmbedUrl}"
+                              value="#{msgsCore['manageMusics.field.youtubeLink']}" />
+               <h:panelGroup rendered="#{not empty viewMusicController.youtubeEmbedUrl}">
+                  <div class="video-container">
+                     <iframe width="560" height="315"
+                             src="#{viewMusicController.youtubeEmbedUrl}"
+                             title="YouTube video player"
+                             frameborder="0"
+                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                             allowfullscreen="true">
+                     </iframe>
+                  </div>
+               </h:panelGroup>
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.musicKey']}" />
                <h:panelGroup layout="block" styleClass="key-controls" style="text-align:left; margin-bottom: 1rem;">
@@ -35,14 +55,19 @@
                                    type="button"
                                    styleClass="ui-button-secondary"
                                    title="Diminuir ½ tom"
-                                   style="margin-right: 0.5rem; width: 2rem" />
+                                   style="margin-right: 0.5rem; width: 2rem;" />
 
                   <!-- Tom atual clicável -->
                   <h:outputText id="keyLabel"
                                 value="#{viewMusicController.selectedEntity.musicKey.value}"
-                                styleClass="key-label"
-                                style="font-weight: bold; font-size: 1.2rem; cursor: pointer; font-family: monospace;"
-                                onclick="toggleKeySelector()" />
+                                styleClass="key-label"/>
+
+                  <p:overlayPanel id="keySelectorPanel" for="keyLabel" dynamic="true" styleClass="key-selector-panel">
+                     <ui:repeat value="#{viewMusicController.availableKeys}" var="key">
+                        <p:commandLink value="#{key.value}" onclick="transposeTo('#{key.value}');" type="button" styleClass="key-option" />
+                        <br />
+                     </ui:repeat>
+                  </p:overlayPanel>
 
                   <!-- Botão para aumentar 1/2 tom -->
                   <p:commandButton icon="pi pi-plus"
@@ -51,27 +76,7 @@
                                    styleClass="ui-button-secondary"
                                    title="Aumentar ½ tom"
                                    style="margin-left: 0.5rem; width: 2rem" />
-
-                  <!-- Seletor de tom -->
-                  <div id="keySelector" style="display:none; text-align: center; margin-bottom: 1rem;">
-                     <ui:repeat value="#{viewMusicController.availableKeys}" var="key">
-                        <p:commandLink value="#{key.value}"
-                                       onclick="transposeTo('#{key}'); return false;"
-                                       style="margin: 0 0.3rem; font-weight: bold;" />
-                     </ui:repeat>
-                  </div>
                </h:panelGroup>
-
-               <p:outputLabel value="#{msgsCore['manageMusics.field.liturgicalSeason']}" />
-               <h:outputText value="#{viewMusicController.selectedEntity.liturgicalSeason.value}" />
-
-               <p:outputLabel value="#{msgsCore['manageMusics.field.songType']}" />
-               <h:outputText value="#{viewMusicController.selectedEntity.songType.value}" />
-
-               <p:outputLabel value="#{msgsCore['manageMusics.field.youtubeLink']}" />
-               <h:outputLink value="#{viewMusicController.selectedEntity.youtubeLink}" target="_blank">
-                  <h:outputText value="#{viewMusicController.selectedEntity.youtubeLink}" />
-               </h:outputLink>
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.chords']}" />
                <h:outputText id="chordsDisplay" value="#{viewMusicController.selectedEntity.chords}" escape="false"
@@ -80,13 +85,13 @@
          </p:panel>
       </h:form>
       <style>
-         .chord {
+         .chord, .key-label {
             color: #0066cc;
             font-weight: bold;
             cursor: pointer;
             transition: color 0.3s;
          }
-         .chord:hover {
+         .key-label:hover {
             color: #ff6600;
          }
       </style>

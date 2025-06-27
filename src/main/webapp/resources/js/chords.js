@@ -2,6 +2,8 @@ let majorKeys = ['A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab'
 let majorKeysEquivalents = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'Gb', 'G', 'G#']
 let minorKeys = ['Am', 'Bbm', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m']
 let minorKeysEquivalents = ['Am', 'A#m', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm']
+let naturalNotes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+let naturalNotesMinor = ['Am', 'Bm', 'Cm', 'Dm', 'Em', 'Fm', 'Gm']
 
 let majorKey = true;
 let keyListCurrentIndex = 0;
@@ -34,14 +36,17 @@ function formatChords() {
         //                       A7
         //     Em qualquer de repente
         // Nesse caso, "Em" (acorde de mi menor) não será identificado como acorde
-        const pattern = "(\\b[A-G](?:b|bb|#|##)*(?:[1-9])*(?:sus|maj|min|aug|m|M|\\+|-|dim|Maj)*[\\d\\/]*(\\(1?\\d(\\+|-)?(\\/1?\\d(\\+|-)?)?\\))?(\\/[A-G](b|bb|#|##)?)?)(M|maj|Maj)?(?=\\s|$)(?! [a-zH-Z0-9_]| [A-G][ac-z])"
+        // const pattern = "(\\b[A-G](?:b|bb|#|##)*(?:[1-9])*((?:sus|maj|min|aug|m|M|\\+|-|dim|Maj)?[\\d\\/]*)*(\\(((?:b|#)?1?\\d(\\+|-)?(\\/)?)*\\))?(\\/[A-G](b|bb|#|##)?)?)(M|maj|Maj)?(?=\\s|$)(?! [a-zH-Z0-9_]| [A-G][ac-z])";
+
+        // Pattern considerando white space ou nulo no final de cada acorde:
+        const pattern = "(\\b[A-G](?:b|bb|#|##)*(?:[1-9])*((?:sus|maj|min|aug|m|M|\\+|-|dim|Maj)?[\\d\\/]*)*(\\(((?:b|#)?1?\\d(\\+|-)?(\\/)?)*\\))?(\\/[A-G](b|bb|#|##)?)?)(M|maj|Maj)?(?=\\s|$)(?! [a-zH-Z0-9_]| [A-G][ac-ln-z])(\\s|\\n|\\b|$|\\0)";
         const regex = new RegExp(pattern, "g");
         let lines = rawChords.split('\n');
         let formatted = [];
 
         lines.forEach(line => {
             if(line.match(regex)){
-                formatted.push(line.replace(regex, "<span class=\"chord\">$1</span>")+"<br/>")
+                formatted.push(line.replace(regex, "<span class=\"chord\">$1 </span>")+"<br/>")
             } else {
                 formatted.push(line+"<br/>");
             }
@@ -71,7 +76,6 @@ function transposeChords(semitones){
     document.querySelectorAll('.chord').forEach(el => {
         const original = el.innerText;
         el.innerText = transposeChord(original, semitones);
-        // transposeChord(original, semitones);
     });
 }
 
@@ -110,10 +114,11 @@ function transposeChord(chord, semitones) {
     let rootNoteEquivalent = false;
     let bassNoteEquivalent = false;
     let rootNoteIndex = 0;
+    let bassNoteIndex = 0;
 
     // Se encontrou bass note
     if(bassNotePresent) {
-        let bassNoteIndex = majorKeys.indexOf(bassNote);
+        bassNoteIndex = majorKeys.indexOf(bassNote);
         if(bassNoteIndex === -1) {
             bassNoteIndex = majorKeysEquivalents.indexOf(bassNote);
             bassNoteEquivalent = true;
@@ -146,34 +151,60 @@ function transposeChord(chord, semitones) {
         }
     }
 
-    rootNoteIndex += semitones;
-    if(rootNoteIndex < 0){
-        rootNoteIndex = 12 + rootNoteIndex;
-    } else if(rootNoteIndex > 11){
-        rootNoteIndex = rootNoteIndex - 12;
+    let rootNoteNewIndex = rootNoteIndex + semitones;
+    if(rootNoteNewIndex < 0){
+        rootNoteNewIndex = 12 + rootNoteNewIndex;
+    } else if(rootNoteNewIndex > 11){
+        rootNoteNewIndex = rootNoteNewIndex - 12;
     }
 
+    let whitespaceRemoved = false;
     if(rootNote.endsWith('m')){
         if(rootNoteEquivalent){
-            chord = chord.replace(rootNote, minorKeysEquivalents.at(rootNoteIndex));
+            chord = chord.replace(rootNote, minorKeysEquivalents.at(rootNoteNewIndex));
         } else{
-            chord = chord.replace(rootNote, minorKeys.at(rootNoteIndex));
+            chord = chord.replace(rootNote, minorKeys.at(rootNoteNewIndex));
         }
-    } else{
-        if(rootNoteEquivalent){
-            chord = chord.replace(rootNote, majorKeysEquivalents.at(rootNoteIndex));
-        } else{
-            chord = chord.replace(rootNote, majorKeys.at(rootNoteIndex));
+
+        // Se a root note pós transpose é bemol/sustenido, remove o white space após o acorde
+        if(naturalNotesMinor.indexOf(minorKeys.at(rootNoteNewIndex)) === -1) {
+            chord = chord.replace(' ', '');
+            whitespaceRemoved = true;
         }
+        else if(!chord.endsWith(' '))
+            chord += ' ';
+    } else {
+        if (rootNoteEquivalent) {
+            chord = chord.replace(rootNote, majorKeysEquivalents.at(rootNoteNewIndex));
+        } else {
+            chord = chord.replace(rootNote, majorKeys.at(rootNoteNewIndex));
+        }
+        // Se a root note pós transpose é bemol/sustenido, remove o white space após o acorde
+        if (naturalNotes.indexOf(majorKeys.at(rootNoteNewIndex)) === -1){
+            chord = chord.replace(' ', '');
+            whitespaceRemoved = true;
+        }
+        else if(!chord.endsWith(' '))
+            chord += ' ';
     }
 
+    if(bassNotePresent && !whitespaceRemoved && naturalNotes.indexOf(majorKeys.at(bassNoteIndex)) === -1){
+        chord = chord.replace(' ', '');
+    }
+
+    // console.log("root note: " + rootNote + "    bass note: "+ bassNote +"    chord transposed: "+chord+"teste");
     return chord;
-    // console.log("root note: " + rootNote + "    bass note: "+ bassNote +"    chord transposed: "+chord);
 }
 
-function toggleKeySelector() {
-    const selector = document.getElementById("keySelector");
-    selector.style.display = selector.style.display === "none" ? "block" : "none";
+function transposeTo(key){
+    let semitones = 0;
+    if(majorKey)
+        semitones = majorKeys.indexOf(key) - keyListCurrentIndex;
+    else
+        semitones = minorKeys.indexOf(key) - keyListCurrentIndex;
+
+    if(semitones !== 0)
+        transpose(semitones);
 }
 
 window.onload = formatChords;
