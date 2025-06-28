@@ -39,7 +39,7 @@
             <div class="row mb-4">
                 <div class="col-12">
                     <p:commandButton id="loginButton"
-                                     styleClass="btn btn-success btn-lg w-100"
+                                     styleClass="btn btn-getstarted btn-lg w-100"
                                      value="#{msgsCore['login.button.login']}"
                                      action="#{sessionController.login}"
                                      update="@form"/>
@@ -48,7 +48,6 @@
 
             <div class="text-center mt-4">
                 <p:link outcome="/login.xhtml" value="#{msgsCore['login.text.forgot']}" styleClass="d-block mb-2"/>
-                <p:link outcome="/login.xhtml" value="#{msgsCore['login.text.register']}" styleClass="d-block"/>
             </div>
         </h:form>
     </ui:define>

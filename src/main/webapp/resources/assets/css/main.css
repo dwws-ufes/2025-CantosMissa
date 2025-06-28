@@ -61,10 +61,30 @@
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
+
+/* Background fixo com padrão personalizado */
 body {
-  color: var(--default-color);
-  background-color: var(--background-color);
+  background-image: url('/cantosparamissa/resources/images/background-cantos-para-missa.png');
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: 400px 400px;
   font-family: var(--default-font), serif;
+}
+
+/* Remove o body::before ou ajuste também */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/cantosparamissa/resources/images/background-cantos-para-missa.png');
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  opacity: 0.1 !important;
+  z-index: -1;
+  pointer-events: none;
 }
 
 a {
@@ -137,12 +157,20 @@ h6 {
   margin: 0 0 0 30px;
   border-radius: 50px;
   transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
 }
 
 .header .btn-getstarted:hover,
 .header .btn-getstarted:focus:hover {
   color: var(--contrast-color);
+  transform: scale(1.03);
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.header:hover,
+.header:focus:hover {
+  transform: scale(1.015);
 }
 
 @media (max-width: 1200px) {
@@ -241,10 +269,12 @@ h6 {
     border-radius: 4px;
     z-index: 99;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
   }
 
   .navmenu .dropdown ul li {
     min-width: 200px;
+    font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
   }
 
   .navmenu .dropdown ul a {
@@ -252,6 +282,8 @@ h6 {
     font-size: 17px;
     text-transform: none;
     color: var(--nav-dropdown-color);
+    font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+    font-weight: 400 !important; /* ADICIONADO */
   }
 
   .navmenu .dropdown ul a i {
@@ -262,12 +294,15 @@ h6 {
   .navmenu .dropdown ul .active:hover,
   .navmenu .dropdown ul li:hover>a {
     color: var(--nav-dropdown-hover-color);
+    font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+    transform: scale(1.02);
   }
 
   .navmenu .dropdown:hover>ul {
     opacity: 1;
     top: 100%;
     visibility: visible;
+    transform: scale(1.02);
   }
 
   .navmenu .dropdown .dropdown ul {
@@ -281,6 +316,20 @@ h6 {
     top: 0;
     left: -100%;
     visibility: visible;
+    transform: scale(1.02);
+  }
+
+  /* ADICIONADO - Força Montserrat no menu principal também */
+  .navmenu a,
+  .navmenu ul li a,
+  .navmenu > ul > li > a {
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  /* ADICIONADO - Garante que todos os elementos dentro do navmenu usem Montserrat */
+  .navmenu,
+  .navmenu * {
+    font-family: 'Montserrat', sans-serif !important;
   }
 }
 
@@ -298,6 +347,7 @@ h6 {
   .navmenu {
     padding: 0;
     z-index: 9997;
+    font-family: 'Montserrat', sans-serif !important;
   }
 
   .navmenu ul {
@@ -313,6 +363,7 @@ h6 {
     transition: 0.3s;
     z-index: 9998;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif !important;
   }
 
   .navmenu a,
@@ -327,6 +378,7 @@ h6 {
     justify-content: space-between;
     white-space: nowrap;
     transition: 0.3s;
+    font-family: 'Montserrat', sans-serif !important;
   }
 
   .navmenu a i,
@@ -342,6 +394,7 @@ h6 {
     border-radius: 50%;
     transition: 0.3s;
     background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+    font-family: 'Montserrat', sans-serif !important;
   }
 
   .navmenu a i:hover,
@@ -373,15 +426,18 @@ h6 {
     border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
     box-shadow: none;
     transition: all 0.5s ease-in-out;
+    font-family: 'Montserrat', sans-serif !important;
   }
 
   .navmenu .dropdown ul ul {
     background-color: rgba(33, 37, 41, 0.1);
+    font-family: 'Montserrat', sans-serif !important;
   }
 
   .navmenu .dropdown>.dropdown-active {
     display: block;
     background-color: rgba(33, 37, 41, 0.03);
+    font-family: 'Montserrat', sans-serif !important;
   }
 
   .mobile-nav-active {
@@ -404,6 +460,7 @@ h6 {
     inset: 0;
     background: rgba(33, 37, 41, 0.8);
     transition: 0.3s;
+    font-family: 'Montserrat', sans-serif !important;
   }
 
   .mobile-nav-active .navmenu>ul {
@@ -1474,7 +1531,7 @@ section,
 }
 
 #hero .text-center p {
-  font-size: calc(1.2rem * var(--hero-font-scale)) !important;
+  font-size: calc(1.2rem * var(--hero-font-scale));
 }
 
 #hero .d-flex.justify-content-center {
@@ -1566,6 +1623,11 @@ section,
   height: 65px;
 }
 
+.search-container:focus:hover,
+.search-container:hover {
+  transform: scale(1.002);
+}
+
 /* Ícone de busca */
 .search-icon {
   display: flex;
@@ -1573,11 +1635,11 @@ section,
   justify-content: center;
   padding: 0 25px;
   color: #666;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
 }
 
 .search-icon i {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
 }
 
 /* Autocomplete container */
@@ -1593,7 +1655,7 @@ section,
   border: none !important;
   background: transparent !important;
   padding: 0 20px !important;
-  font-size: 2.4rem !important;
+  font-size: 2.2rem !important;
   font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
   outline: none !important;
   box-shadow: none !important;
@@ -1601,7 +1663,7 @@ section,
 
 /* Placeholder do input - com suporte para múltiplos navegadores */
 .search-autocomplete .ui-autocomplete-input::placeholder {
-  font-size: 2.4rem !important;
+  font-size: 2.0rem !important;
   font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
   opacity: 0.7; /* ADICIONADO - ajusta visibilidade do placeholder */
 }
@@ -1609,19 +1671,19 @@ section,
 /* Webkit browsers (Chrome, Safari, Edge) */
 .search-autocomplete .ui-autocomplete-input::-webkit-input-placeholder {
   font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
-  font-size: 2.4rem !important;
+  font-size: 2.0rem !important;
 }
 
 /* Mozilla Firefox */
 .search-autocomplete .ui-autocomplete-input::-moz-placeholder {
   font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
-  font-size: 2.4rem !important;
+  font-size: 2.0rem !important;
 }
 
 /* Internet Explorer/Edge antigo */
 .search-autocomplete .ui-autocomplete-input:-ms-input-placeholder {
   font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
-  font-size: 2.4rem !important;
+  font-size: 2.2rem !important;
 }
 
 /* Botão de busca */
@@ -1658,7 +1720,7 @@ section,
 
 /* Lista de sugestões - AJUSTADO */
 .search-suggestions .ui-autocomplete-list {
-  padding: 7px 0 !important;
+  padding: 3px 0 !important;
   max-height: 385px !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
@@ -1666,7 +1728,7 @@ section,
 
 /* Estilização da barra de scroll - NOVO */
 .search-suggestions .ui-autocomplete-list::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 
 .search-suggestions .ui-autocomplete-list::-webkit-scrollbar-track {
@@ -1685,11 +1747,11 @@ section,
 
 /* Item da lista - aumentando especificidade */
 .search-suggestions .ui-autocomplete-items .ui-autocomplete-item {
-  padding: 16px 25px !important;
+  padding: 12px 20px !important;
   border: none !important;
   cursor: pointer !important;
   transition: all 0.2s !important;
-  font-size: 2.2rem !important;
+  font-size: 1.8rem !important;
   font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
   color: #333 !important;
   background-color: transparent !important;
@@ -1707,6 +1769,7 @@ section,
   background-image: none !important;
   border: none !important;
   outline: none !important;
+  transform: scale(1.01);
 }
 
 /* Remove elementos desnecessários do PrimeFaces */
@@ -1729,12 +1792,22 @@ section,
 .custom-toggle-container {
   display: inline-flex;
   align-items: stretch;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
+  border: 2px solid #e0e0e0;
   border-radius: 50px;
   padding: 4px;
   position: relative;
   height: auto;
-  min-height: 48px; /* Define altura mínima */
+  min-height: 48px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Efeito hover no container - MODIFICADO */
+.custom-toggle-container:hover {
+  transform: scale(1.03); /* ADICIONADO - efeito de levantar */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* MODIFICADO - sombra maior */
+  /* border-color removido */
 }
 
 /* Esconde os radio buttons originais */
@@ -1754,8 +1827,9 @@ section,
 .custom-toggle-container label {
   padding: 12px 30px;
   cursor: pointer;
-  color: var(--accent-color);
+  color: #666;
   font-size: calc(1rem * var(--hero-font-scale));
+  font-weight: 500;
   transition: all 0.3s ease;
   border-radius: 50px;
   position: relative;
@@ -1768,8 +1842,19 @@ section,
   margin: 0;
 }
 
+/* Hover nos labels não selecionados */
+.custom-toggle-container label:hover {
+  color: var(--accent-color);
+}
+
 /* Estilo do label quando selecionado */
 .custom-toggle-container input[type="radio"]:checked + label {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Hover no label selecionado */
+.custom-toggle-container input[type="radio"]:checked + label:hover {
   color: #fff;
 }
 
@@ -1783,8 +1868,9 @@ section,
   border-radius: 50px;
   top: 4px;
   left: 4px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1;
+  box-shadow: 0 2px 8px rgba(54, 57, 59, 0.3);
 }
 
 /* Move o fundo quando o segundo item é selecionado */
@@ -1794,4 +1880,231 @@ section,
 
 .custom-toggle-container.second-selected::before {
   transform: translateX(calc(100% - 8px));
+}
+
+/* Indicador visual de interatividade */
+.custom-toggle-container::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 54px;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  pointer-events: none;
+}
+
+/* Destaque no foco (acessibilidade) */
+.custom-toggle-container:focus-within::after {
+  border-color: var(--accent-color);
+  opacity: 0.3;
+}
+
+
+/* Força Montserrat especificamente no segundo nível de dropdown */
+.navmenu .dropdown .dropdown ul,
+.navmenu .dropdown .dropdown ul li,
+.navmenu .dropdown .dropdown ul li a,
+.navmenu .dropdown ul ul,
+.navmenu .dropdown ul ul li,
+.navmenu .dropdown ul ul li a {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Garante que TODOS os links dentro de dropdowns usem Montserrat */
+.navmenu li li a,
+.navmenu li li li a,
+.navmenu .dropdown .dropdown a {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 400 !important;
+}
+
+/* Força em qualquer nível de aninhamento */
+.navmenu ul ul a,
+.navmenu ul ul ul a,
+.navmenu ul ul ul ul a {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Seletor mais genérico para pegar todos os elementos aninhados */
+.navmenu .dropdown * {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+
+/*--------------------------------------------------------------
+# Login Page Customization
+--------------------------------------------------------------*/
+
+/* Aplica Montserrat em toda a página de login */
+#hero * {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Card de login */
+#hero .card {
+  border-radius: 20px !important; /* Bordas arredondadas */
+  border: none !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Título principal */
+#hero .card h2 {
+  font-size: 3.6rem !important;
+  font-weight: 600 !important;
+  color: var(--accent-color, #36393b) !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Texto de instruções */
+#hero .card p {
+  font-size: 2.0rem !important;
+  color: #666 !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Inputs de formulário */
+#hero .form-control {
+  font-size: 1.6rem !important;
+  padding: 20px 25px !important;
+  padding-left: 50px !important; /* Espaço para o ícone */
+  border-radius: 50px !important;
+  border: 2px solid #e0e0e0 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  transition: all 0.3s ease !important;
+}
+
+#hero .form-control:focus {
+  border-color: var(--accent-color, #36393b) !important;
+  box-shadow: 0 0 0 0.2rem rgba(54, 57, 59, 0.1) !important;
+}
+
+/* Placeholders */
+#hero .form-control::placeholder {
+  font-size: 1.6rem !important;
+  color: #999 !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Ícones dos inputs */
+#hero .form-control-feedback {
+  position: absolute !important;
+  padding-right: 35px !important;
+  left: 20px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #999 !important;
+  font-size: 1.8rem !important;
+  z-index: 3 !important;
+}
+
+/* Ajusta o grupo do formulário para posicionamento dos ícones */
+#hero .form-group {
+  position: relative !important;
+}
+
+#hero .btn-success:hover {
+  background-color: #4a4d50 !important;
+  transform: scale(1.02) !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Links de "esqueci senha" e "registrar" */
+#hero .text-center a {
+  font-size: 1.4rem !important;
+  color: var(--accent-color, #36393b) !important;
+  margin-top: 3rem !important;
+  text-decoration: none !important;
+  font-family: 'Montserrat', sans-serif !important;
+  transition: all 0.3s ease !important;
+}
+
+#hero .text-center a:hover {
+  color: #666 !important;
+  text-decoration: underline !important;
+}
+
+/* Mensagens de erro/sucesso */
+#hero .ui-messages {
+  font-size: 1.1rem !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+#hero .success-message {
+  font-size: 1.1rem !important;
+  color: #28a745 !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Ajusta padding do card body para acomodar fontes maiores */
+#hero .card-body {
+  padding: 3rem !important;
+}
+
+@media (min-width: 768px) {
+  #hero .card-body {
+    padding: 4rem !important;
+  }
+}
+
+/* Centraliza verticalmente considerando header e footer */
+#hero.hero.section {
+  min-height: calc(100vh - 63px) !important; /* Ajuste conforme altura do header/footer */
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+/* Efeito hover no card */
+#hero .card {
+  transition: all 0.3s ease !important;
+}
+
+#hero .card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Aplica o estilo do btn-getstarted ao botão de login */
+#hero .card .btn-getstarted {
+  font-size: 2.0rem !important;
+  font-weight: 500 !important;
+  padding: 15px 40px !important;
+  border-radius: 50px !important;
+  background-color: var(--accent-color, #36393b) !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-family: 'Montserrat', sans-serif !important;
+  transition: all 0.3s ease !important;
+  width: 100% !important; /* Ocupa toda largura no login */
+}
+
+#hero .card .btn-getstarted:hover {
+  transform: scale(1.03);
+  background: rgba(54, 57, 59, 0.85) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Reset para ícones Font Awesome */
+i.fa,
+i.fas,
+i.far,
+i.fab {
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free', FontAwesome, serif !important;
+  font-style: normal !important;
+  font-weight: 900 !important;
+}
+
+/* Garante que a regra global de Montserrat não afete os ícones */
+.search-icon i:before,
+.form-control-feedback:before {
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free', FontAwesome, serif !important;
+}
+
+
+/* Estilo específico para o título de seleção */
+.selection-title {
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 1rem !important;
 }
