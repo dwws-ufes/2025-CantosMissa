@@ -161,7 +161,7 @@ public class SessionController extends AdminSession {
 
         // If everything is OK, stores the current user and redirects back to the home screen.
         currentUser = loginService.getCurrentUser();
-        return "/index.xhtml?faces-redirect=true";
+        return "/public/index.xhtml?faces-redirect=true";
     }
 
     /**

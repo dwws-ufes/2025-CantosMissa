@@ -1,16 +1,14 @@
 package br.ufes.dwws.cantosparamissa.core.persistence;
 
 import br.ufes.dwws.cantosparamissa.core.domain.User;
-import br.ufes.dwws.cantosparamissa.core.domain.User_;
 import br.ufes.inf.labes.jbutler.ejb.persistence.BaseJPADAO;
 import br.ufes.inf.labes.jbutler.ejb.persistence.exceptions.MultiplePersistentObjectsFoundException;
 import br.ufes.inf.labes.jbutler.ejb.persistence.exceptions.PersistentObjectNotFoundException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
+
+import java.util.List;
 
 @Stateless
 public class UserJPADAO extends BaseJPADAO<User> implements UserDAO {
@@ -23,16 +21,27 @@ public class UserJPADAO extends BaseJPADAO<User> implements UserDAO {
   }
 
   @Override
-  public User retrieveByEmail(String email)
-      throws PersistentObjectNotFoundException, MultiplePersistentObjectsFoundException {
-    // Constructs the query over the User class.
-    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-    CriteriaQuery<User> cq = cb.createQuery(User.class);
-    Root<User> root = cq.from(User.class);
+  public List<User> searchByEmail(String emailPart) {
+    return entityManager.createQuery(
+                    "SELECT u FROM User u WHERE LOWER(u.email) LIKE :email", User.class)
+            .setParameter("email", "%" + emailPart.toLowerCase() + "%")
+            .getResultList();
+  }
 
-    // Filters the query with the email.
-    cq.where(cb.equal(root.get(User_.email), email));
-    User result = executeSingleResultQuery(cq, email);
-    return result;
+  @Override
+  public User retrieveByEmail(String email)
+          throws PersistentObjectNotFoundException, MultiplePersistentObjectsFoundException {
+    List<User> results = entityManager.createQuery(
+                    "SELECT u FROM User u WHERE LOWER(u.email) = :email", User.class)
+            .setParameter("email", email.toLowerCase())
+            .getResultList();
+
+    if (results.isEmpty()) {
+      throw new PersistentObjectNotFoundException(null, User.class, email);
+    } else if (results.size() > 1) {
+      throw new MultiplePersistentObjectsFoundException(null, User.class, email);
+    } else {
+      return results.get(0);
+    }
   }
 }

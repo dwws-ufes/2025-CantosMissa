@@ -4,6 +4,7 @@ import br.ufes.dwws.cantosparamissa.core.application.ManageArtistsService;
 import br.ufes.dwws.cantosparamissa.core.domain.Artist;
 import br.ufes.inf.labes.jbutler.ejb.application.CrudService;
 import br.ufes.inf.labes.jbutler.ejb.controller.CrudController;
+import jakarta.annotation.security.PermitAll;
 import jakarta.ejb.EJB;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -22,6 +23,7 @@ import java.util.List;
 
 @Named
 @ViewScoped
+@PermitAll
 public class ManageArtistsController extends CrudController<Artist> {
     @EJB
     private ManageArtistsService manageArtistsService;

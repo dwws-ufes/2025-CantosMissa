@@ -4,7 +4,7 @@
 
 	<!-- Files to look for when one is not specified. -->
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>/public/index.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<!-- Delegates rendering of XHTML pages to JSF. -->

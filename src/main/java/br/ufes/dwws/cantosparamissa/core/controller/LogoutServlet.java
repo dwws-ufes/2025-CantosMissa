@@ -30,6 +30,6 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
 
         // Redirects back to the initial page.
-        response.sendRedirect(request.getContextPath() + "/login.xhtml");
+        response.sendRedirect(request.getContextPath() + "/public/index.xhtml");
     }
 }
