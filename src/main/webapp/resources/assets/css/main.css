@@ -1,0 +1,2110 @@
+/**
+* Template Name: iLanding
+* Template URL: https://bootstrapmade.com/ilanding-bootstrap-landing-page-template/
+* Updated: Nov 12 2024 with Bootstrap v5.3.3
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+
+/*--------------------------------------------------------------
+# Font & Color Variables
+# Help: https://bootstrapmade.com/color-system/
+--------------------------------------------------------------*/
+/* Fonts */
+:root {
+  --default-font: "Montserrat",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Montserrat",  sans-serif;
+  --nav-font: "Montserrat",  sans-serif;
+  --hero-font-scale: 1.8;
+}
+
+/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
+:root { 
+  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+  --default-color: #36393b; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #45484b; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #36393b; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff  ; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+}
+
+/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
+:root {
+  --nav-color: #36393b;  /* The default color of the main navmenu links */
+  --nav-hover-color: #696758; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #36393b; /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #696758; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+}
+
+/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
+
+.light-background {
+  --background-color: #f3f9ff;
+  --surface-color: #ffffff;
+}
+
+.dark-background {
+  --background-color: #36393b;
+  --default-color: #36393b;
+  --heading-color: #36393b;
+  --surface-color: #696758;
+  --contrast-color: #36393b;
+}
+
+/* Smooth scroll */
+:root {
+  scroll-behavior: smooth;
+}
+
+/*--------------------------------------------------------------
+# General Styling & Shared Classes
+--------------------------------------------------------------*/
+
+/* Background fixo com padrão personalizado */
+body {
+  background-image: url('/cantosparamissa/resources/images/background-cantos-para-missa.png');
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: 400px 400px;
+  font-family: var(--default-font), serif;
+}
+
+/* Remove o body::before ou ajuste também */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/cantosparamissa/resources/images/background-cantos-para-missa.png');
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  opacity: 0.1 !important;
+  z-index: -1;
+  pointer-events: none;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: color-mix(in srgb, var(--accent-color), transparent 25%);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+  font-family: var(--default-font), serif;
+}
+
+/*--------------------------------------------------------------
+# Global Header
+--------------------------------------------------------------*/
+.header {
+  --background-color: rgba(255, 255, 255, 0);
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 20px 0;
+  transition: all 0.5s;
+  z-index: 997;
+}
+
+.header .header-container {
+  background: var(--surface-color);
+  border-radius: 50px;
+  padding: 5px 25px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.scrolled .header .header-container {
+  background: color-mix(in srgb, var(--surface-color), transparent 5%);
+}
+
+.header .logo {
+  line-height: 1;
+  padding-left: 5px;
+}
+
+.header .logo img {
+  max-height: 36px;
+  margin-right: 8px;
+}
+
+.header .logo h1 {
+  font-size: 28px;
+  margin: 0;
+  font-weight: 500;
+  color: var(--heading-color);
+}
+
+.header .btn-getstarted,
+.header .btn-getstarted:focus {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  font-size: 18px;
+  padding: 8px 20px;
+  margin: 0 0 0 30px;
+  border-radius: 50px;
+  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.header .btn-getstarted:hover,
+.header .btn-getstarted:focus:hover {
+  color: var(--contrast-color);
+  transform: scale(1.03);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.header:hover,
+.header:focus:hover {
+  transform: scale(1.015);
+}
+
+@media (max-width: 1200px) {
+  .header {
+    padding-top: 10px;
+  }
+
+  .header .header-container {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px 5px 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header .logo {
+    order: 1;
+  }
+
+  .header .btn-getstarted {
+    order: 2;
+    margin: 0 10px 0 0;
+    padding: 6px 15px;
+  }
+
+  .header .navmenu {
+    order: 3;
+  }
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/* Navmenu - Desktop */
+@media (min-width: 1200px) {
+  .navmenu {
+    padding: 0;
+  }
+
+  .navmenu ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+
+  .navmenu li {
+    position: relative;
+  }
+
+  .navmenu a,
+  .navmenu a:focus {
+    color: var(--nav-color);
+    padding: 18px 15px;
+    font-size: 20px;
+    font-family: var(--nav-font), serif;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    transition: 0.3s;
+  }
+
+  .navmenu a i,
+  .navmenu a:focus i {
+    font-size: 18px;
+    line-height: 0;
+    margin-left: 5px;
+    transition: 0.3s;
+  }
+
+  .navmenu li:last-child a {
+    padding-right: 0;
+  }
+
+  .navmenu li:hover>a,
+  .navmenu .active,
+  .navmenu .active:focus {
+    color: var(--nav-hover-color);
+  }
+
+  .navmenu .dropdown ul {
+    margin: 0;
+    padding: 10px 0;
+    background: var(--nav-dropdown-background-color);
+    display: block;
+    position: absolute;
+    visibility: hidden;
+    left: 14px;
+    top: 130%;
+    opacity: 0;
+    transition: 0.3s;
+    border-radius: 4px;
+    z-index: 99;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  }
+
+  .navmenu .dropdown ul li {
+    min-width: 200px;
+    font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  }
+
+  .navmenu .dropdown ul a {
+    padding: 10px 20px;
+    font-size: 17px;
+    text-transform: none;
+    color: var(--nav-dropdown-color);
+    font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+    font-weight: 400 !important; /* ADICIONADO */
+  }
+
+  .navmenu .dropdown ul a i {
+    font-size: 14px;
+  }
+
+  .navmenu .dropdown ul a:hover,
+  .navmenu .dropdown ul .active:hover,
+  .navmenu .dropdown ul li:hover>a {
+    color: var(--nav-dropdown-hover-color);
+    font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+    transform: scale(1.02);
+  }
+
+  .navmenu .dropdown:hover>ul {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+    transform: scale(1.02);
+  }
+
+  .navmenu .dropdown .dropdown ul {
+    top: 0;
+    left: -90%;
+    visibility: hidden;
+  }
+
+  .navmenu .dropdown .dropdown:hover>ul {
+    opacity: 1;
+    top: 0;
+    left: -100%;
+    visibility: visible;
+    transform: scale(1.02);
+  }
+
+  /* ADICIONADO - Força Montserrat no menu principal também */
+  .navmenu a,
+  .navmenu ul li a,
+  .navmenu > ul > li > a {
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  /* ADICIONADO - Garante que todos os elementos dentro do navmenu usem Montserrat */
+  .navmenu,
+  .navmenu * {
+    font-family: 'Montserrat', sans-serif !important;
+  }
+}
+
+/* Navmenu - Mobile */
+@media (max-width: 1199px) {
+  .mobile-nav-toggle {
+    color: var(--nav-color);
+    font-size: 28px;
+    line-height: 0;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .navmenu {
+    padding: 0;
+    z-index: 9997;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .navmenu ul {
+    display: none;
+    list-style: none;
+    position: absolute;
+    inset: 60px 20px 20px 20px;
+    padding: 10px 0;
+    margin: 0;
+    border-radius: 6px;
+    background-color: var(--nav-mobile-background-color);
+    overflow-y: auto;
+    transition: 0.3s;
+    z-index: 9998;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .navmenu a,
+  .navmenu a:focus {
+    color: var(--nav-dropdown-color);
+    padding: 10px 20px;
+    font-family: var(--nav-font);
+    font-size: 17px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .navmenu a i,
+  .navmenu a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
+    background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .navmenu a i:hover,
+  .navmenu a:focus i:hover {
+    background-color: var(--accent-color);
+    color: var(--contrast-color);
+  }
+
+  .navmenu a:hover,
+  .navmenu .active,
+  .navmenu .active:focus {
+    color: var(--nav-dropdown-hover-color);
+  }
+
+  .navmenu .active i,
+  .navmenu .active:focus i {
+    background-color: var(--accent-color);
+    color: var(--contrast-color);
+    transform: rotate(180deg);
+  }
+
+  .navmenu .dropdown ul {
+    position: static;
+    display: none;
+    z-index: 99;
+    padding: 10px 0;
+    margin: 10px 20px;
+    background-color: var(--nav-dropdown-background-color);
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    box-shadow: none;
+    transition: all 0.5s ease-in-out;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .navmenu .dropdown ul ul {
+    background-color: rgba(33, 37, 41, 0.1);
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .navmenu .dropdown>.dropdown-active {
+    display: block;
+    background-color: rgba(33, 37, 41, 0.03);
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .mobile-nav-active {
+    overflow: hidden;
+  }
+
+  .mobile-nav-active .mobile-nav-toggle {
+    color: #fff;
+    position: absolute;
+    font-size: 32px;
+    top: 15px;
+    right: 15px;
+    margin-right: 0;
+    z-index: 9999;
+  }
+
+  .mobile-nav-active .navmenu {
+    position: fixed;
+    overflow: hidden;
+    inset: 0;
+    background: rgba(33, 37, 41, 0.8);
+    transition: 0.3s;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .mobile-nav-active .navmenu>ul {
+    display: block;
+  }
+}
+
+/*--------------------------------------------------------------
+# Global Footer
+--------------------------------------------------------------*/
+.footer {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  font-size: 14px;
+  position: relative;
+}
+
+.footer .footer-about .logo {
+  line-height: 1;
+  margin-bottom: 25px;
+}
+
+.footer .footer-about .logo img {
+  max-height: 40px;
+  margin-right: 6px;
+}
+
+.footer .footer-about .logo span {
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.footer .footer-about p {
+  font-size: 14px;
+  font-family: var(--heading-font);
+}
+
+.footer .social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 50%);
+  font-size: 16px;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.footer .social-links a:hover {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.footer h4 {
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.footer .copyright {
+  padding: 5px 0;
+  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+/*--------------------------------------------------------------
+# Scroll Top Button
+--------------------------------------------------------------*/
+.scroll-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: -15px;
+  z-index: 99999;
+  background-color: var(--accent-color);
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+
+.scroll-top i {
+  font-size: 24px;
+  color: var(--contrast-color);
+  line-height: 0;
+}
+
+.scroll-top:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+  color: var(--contrast-color);
+}
+
+.scroll-top.active {
+  visibility: visible;
+  opacity: 1;
+  bottom: 15px;
+}
+
+/*--------------------------------------------------------------
+# Disable aos animation delay on mobile devices
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  [data-aos-delay] {
+    transition-delay: 0 !important;
+  }
+}
+
+/*--------------------------------------------------------------
+# Global Page Titles & Breadcrumbs
+--------------------------------------------------------------*/
+.page-title {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 170px 0 80px 0;
+  text-align: center;
+  position: relative;
+}
+
+.page-title h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.page-title .breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.page-title .breadcrumbs ol li+li {
+  padding-left: 10px;
+}
+
+.page-title .breadcrumbs ol li+li::before {
+  content: "/";
+  display: inline-block;
+  padding-right: 10px;
+  color: color-mix(in srgb, var(--default-color), transparent 70%);
+}
+
+/*--------------------------------------------------------------
+# Global Sections
+--------------------------------------------------------------*/
+section,
+.section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 60px 0;
+  scroll-margin-top: 90px;
+  overflow: clip;
+}
+
+@media (max-width: 1199px) {
+
+  section,
+  .section {
+    scroll-margin-top: 66px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Global Section Titles
+--------------------------------------------------------------*/
+.section-title {
+  text-align: center;
+  padding-bottom: 60px;
+  position: relative;
+}
+
+.section-title h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.section-title h2:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--accent-color);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.section-title p {
+  margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+.hero {
+  position: relative;
+  padding-top: 160px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-color), transparent 95%) 50%, color-mix(in srgb, var(--accent-color), transparent 98%) 25%, transparent 50%);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--accent-color), transparent 92%), transparent 40%);
+  pointer-events: none;
+}
+
+.hero .hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero .hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.hero .hero-content h1 .accent-text {
+  color: var(--accent-color);
+}
+
+@media (max-width: 992px) {
+  .hero .hero-content {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .hero .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero .hero-content .hero-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 575px) {
+  .hero .hero-content h1 {
+    font-size: 2rem;
+  }
+}
+
+.hero .company-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: color-mix(in srgb, var(--accent-color), transparent 92%);
+  border-radius: 50px;
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+.hero .company-badge i {
+  font-size: 1.25rem;
+}
+
+.hero .btn-primary {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--contrast-color);
+  padding: 0.75rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.hero .btn-primary:hover {
+  background-color: color-mix(in srgb, var(--accent-color), black 20%);
+  border-color: color-mix(in srgb, var(--accent-color), black 20%);
+}
+
+.hero .btn-link {
+  color: var(--heading-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.hero .btn-link:hover {
+  color: var(--accent-color);
+}
+
+.hero .btn-link i {
+  font-size: 1.5rem;
+  vertical-align: middle;
+}
+
+.hero .hero-image {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.hero .hero-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.hero .customers-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 30px;
+  background-color: var(--surface-color);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  animation: float-badge 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero .customers-badge .customer-avatars {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.hero .customers-badge .avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid var(--surface-color);
+  margin-left: -8px;
+}
+
+.hero .customers-badge .avatar:first-child {
+  margin-left: 0;
+}
+
+.hero .customers-badge .avatar.more {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.hero .customers-badge p {
+  font-size: 0.875rem;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+@media (max-width: 992px) {
+  .hero .customers-badge {
+    position: static;
+    margin: 1rem auto;
+    max-width: 250px;
+  }
+}
+
+.hero .stats-row {
+  position: relative;
+  z-index: 1;
+  margin-top: 5rem;
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding-bottom: 2rem;
+}
+
+.hero .stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.hero .stat-item .stat-icon {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: color-mix(in srgb, var(--accent-color), transparent 92%);
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.hero .stat-item .stat-icon i {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+}
+
+.hero .stat-item:hover .stat-icon {
+  background-color: var(--accent-color);
+}
+
+.hero .stat-item:hover .stat-icon i {
+  color: var(--contrast-color);
+}
+
+.hero .stat-item .stat-content {
+  flex-grow: 1;
+}
+
+.hero .stat-item .stat-content h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.hero .stat-item .stat-content p {
+  font-size: 0.875rem;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+  margin: 0;
+}
+
+@media (max-width: 575px) {
+  .hero .stat-item {
+    padding: 1.5rem;
+  }
+}
+
+@keyframes float-badge {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/*--------------------------------------------------------------
+# About Section
+--------------------------------------------------------------*/
+.about .about-meta {
+  color: var(--accent-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.about .about-title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+@media (max-width: 992px) {
+  .about .about-title {
+    font-size: 2rem;
+  }
+}
+
+.about .about-description {
+  margin-bottom: 2rem;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+}
+
+.about .feature-list-wrapper {
+  margin-bottom: 2rem;
+}
+
+.about .feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about .feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.about .feature-list li i {
+  color: var(--accent-color);
+  font-size: 1.25rem;
+}
+
+.about .profile .profile-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.about .profile .profile-name {
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.about .profile .profile-position {
+  color: var(--accent-color);
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.about .contact-info {
+  padding: 1rem 1.5rem;
+  background-color: var(--surface-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+}
+
+.about .contact-info i {
+  color: var(--accent-color);
+  font-size: 1.5rem;
+}
+
+.about .contact-info .contact-label {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.about .contact-info .contact-number {
+  font-weight: 600;
+  margin: 0;
+}
+
+.about .image-wrapper {
+  position: relative;
+}
+
+@media (max-width: 992px) {
+  .about .image-wrapper {
+    padding-left: 0;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .about .image-wrapper .images {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .about .image-wrapper .main-image {
+    margin-left: 0;
+  }
+}
+
+.about .image-wrapper .small-image {
+  position: absolute;
+  top: 20%;
+  left: -10%;
+  width: 45%;
+  border: 8px solid var(--surface-color);
+}
+
+@media (max-width: 992px) {
+  .about .image-wrapper .small-image {
+    position: static;
+    width: 100%;
+    margin: 0 auto;
+    border: 0;
+  }
+}
+
+.about .image-wrapper .experience-badge {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  min-width: 200px;
+  animation: experience-float 3s ease-in-out infinite;
+}
+
+@media (max-width: 992px) {
+  .about .image-wrapper .experience-badge {
+    position: static;
+    width: fit-content;
+    margin: 0 auto;
+  }
+}
+
+.about .image-wrapper .experience-badge h3 {
+  color: var(--contrast-color);
+  font-size: 2.5rem;
+  margin: 0;
+  line-height: 0.5;
+}
+
+.about .image-wrapper .experience-badge h3 span {
+  font-size: 1rem;
+  display: inline-block;
+  margin-left: 0.25rem;
+}
+
+.about .image-wrapper .experience-badge p {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+}
+
+@keyframes experience-float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/*--------------------------------------------------------------
+# Features Section
+--------------------------------------------------------------*/
+.features .nav-tabs {
+  border: 0;
+  background-color: color-mix(in srgb, var(--default-color), transparent 96%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  padding: 6px;
+  width: auto;
+}
+
+.features .nav-item {
+  margin: 0;
+  padding: 0 5px 0 0;
+}
+
+.features .nav-item:last-child {
+  padding-right: 0;
+}
+
+.features .nav-link {
+  background-color: none;
+  color: var(--heading-color);
+  padding: 10px 30px;
+  transition: 0.3s;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 100%;
+  border: 0;
+  margin: 0;
+}
+
+@media (max-width: 468px) {
+  .features .nav-link {
+    padding: 8px 20px;
+  }
+}
+
+.features .nav-link i {
+  padding-right: 15px;
+  font-size: 48px;
+}
+
+.features .nav-link h4 {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.features .nav-link:hover {
+  border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+}
+
+.features .nav-link:hover h4 {
+  color: var(--accent-color);
+}
+
+.features .nav-link.active {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.features .nav-link.active h4 {
+  color: var(--contrast-color);
+}
+
+.features .tab-content {
+  margin-top: 30px;
+}
+
+.features .tab-pane h3 {
+  color: var(--heading-color);
+  font-weight: 700;
+  font-size: 32px;
+  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.features .tab-pane h3:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+  left: 0;
+  bottom: 0;
+}
+
+.features .tab-pane ul {
+  list-style: none;
+  padding: 0;
+}
+
+.features .tab-pane ul li {
+  padding-top: 10px;
+}
+
+.features .tab-pane ul i {
+  font-size: 20px;
+  padding-right: 4px;
+  color: var(--accent-color);
+}
+
+.features .tab-pane p:last-child {
+  margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
+# Features Cards Section
+--------------------------------------------------------------*/
+.features-cards {
+  --default-color: #555;
+  --heading-color: #333;
+}
+
+.features-cards .feature-box {
+  height: 100%;
+  padding: 40px 30px;
+  border-radius: 10px;
+}
+
+.features-cards .feature-box i {
+  font-size: 44px;
+  display: inline-block;
+  line-height: 0;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+}
+
+.features-cards .feature-box h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.features-cards .feature-box p {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+.features-cards .feature-box.orange {
+  background-color: #fff3e2;
+}
+
+.features-cards .feature-box.orange i {
+  color: #edb86e;
+}
+
+.features-cards .feature-box.blue {
+  background-color: #deedfd;
+}
+
+.features-cards .feature-box.blue i {
+  color: #20a5f8;
+}
+
+.features-cards .feature-box.green {
+  background-color: #d5f1e4;
+}
+
+.features-cards .feature-box.green i {
+  color: #48c88a;
+}
+
+.features-cards .feature-box.red {
+  background-color: #fdeded;
+}
+
+.features-cards .feature-box.red i {
+  color: #f28484;
+}
+
+/*--------------------------------------------------------------
+# Features 2 Section
+--------------------------------------------------------------*/
+.features-2 .feature-item .feature-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--accent-color), transparent 92%);
+}
+
+.features-2 .feature-item .feature-icon i {
+  font-size: 24px;
+  color: var(--accent-color);
+}
+
+.features-2 .feature-item .feature-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.features-2 .feature-item .feature-content p {
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+.features-2 .phone-mockup {
+  position: relative;
+  padding: 30px 0;
+}
+
+.features-2 .phone-mockup img {
+  max-width: 300px;
+  height: auto;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+}
+
+@media (max-width: 991.98px) {
+  .features-2 .feature-item {
+    text-align: center !important;
+    margin-bottom: 2rem;
+  }
+
+  .features-2 .feature-item .d-flex {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center !important;
+  }
+
+  .features-2 .phone-mockup {
+    margin: 3rem 0;
+  }
+}
+
+/*--------------------------------------------------------------
+# Call To Action Section
+--------------------------------------------------------------*/
+.call-to-action .container {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  padding: 4rem 2rem;
+}
+
+.call-to-action .content h2,
+.call-to-action .content p {
+  color: var(--contrast-color);
+  position: relative;
+  z-index: 2;
+}
+
+.call-to-action .btn-cta {
+  background-color: color-mix(in srgb, var(--contrast-color) 15%, transparent);
+  color: var(--contrast-color);
+  padding: 12px 40px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  border: 2px solid var(--contrast-color);
+  position: relative;
+  z-index: 2;
+}
+
+.call-to-action .btn-cta:hover {
+  background-color: var(--contrast-color);
+  color: var(--accent-color);
+}
+
+.call-to-action .shape {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.call-to-action .shape svg {
+  width: 100%;
+  height: 100%;
+}
+
+.call-to-action .shape svg path {
+  fill: color-mix(in srgb, var(--contrast-color) 50%, transparent);
+}
+
+.call-to-action .shape-1 {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  right: -50px;
+  opacity: 0.1;
+  transform: rotate(45deg);
+  animation: shapes-float 3s ease-in-out infinite;
+}
+
+.call-to-action .shape-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -50px;
+  left: -50px;
+  opacity: 0.15;
+  transform: rotate(-15deg);
+  animation: shapes-float 4s ease-in-out infinite;
+}
+
+.call-to-action .shape-3 {
+  width: 150px;
+  height: 150px;
+  top: 20%;
+  right: 15%;
+  opacity: 0.08;
+  transform: rotate(15deg);
+}
+
+.call-to-action .dots {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  color: var(--contrast-color);
+}
+
+.call-to-action .dots svg {
+  width: 100%;
+  height: 100%;
+}
+
+.call-to-action .dots-1 {
+  width: 200px;
+  height: 200px;
+  top: -30px;
+  left: 10%;
+  opacity: 0.1;
+  transform: rotate(15deg);
+  animation: shapes-float 4s ease-in-out infinite;
+}
+
+.call-to-action .dots-2 {
+  width: 150px;
+  height: 150px;
+  bottom: 20px;
+  right: 15%;
+  opacity: 0.15;
+  transform: rotate(-10deg);
+}
+
+@keyframes shapes-float {
+
+  0%,
+  100% {
+    transform: scale(0.8) rotate(45deg) translateY(0);
+  }
+
+  50% {
+    transform: scale(0.8) rotate(45deg) translateY(-20px);
+  }
+}
+
+@media (max-width: 992px) {
+  .call-to-action .container {
+    padding: 3rem 1.5rem;
+  }
+
+  .call-to-action .shape-1 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .call-to-action .shape-2 {
+    width: 150px;
+    height: 150px;
+  }
+
+  .call-to-action .shape-3 {
+    width: 100px;
+    height: 100px;
+  }
+
+  .call-to-action .dots-1 {
+    width: 150px;
+    height: 150px;
+  }
+
+  .call-to-action .dots-2 {
+    width: 120px;
+    height: 120px;
+  }
+
+  .call-to-action .dots-3 {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 575px) {
+  .call-to-action .container {
+    border-radius: 0;
+  }
+}
+
+
+
+
+
+/* Garante que a seção hero ocupe 100% da altura da viewport */
+#hero {
+  min-height: calc(100vh - 63px); /* 100% da altura da janela */
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  padding: 0; /* Remove padding extra */
+}
+
+/* Opcional: faz a container ocupar toda a largura */
+#hero .container {
+  width: 100%;
+}
+
+/* Se quiser centralizar o formulário também */
+#hero .form {
+  width: 100%;
+  max-width: 400px; /* ou qualquer largura máxima que preferir */
+  margin: 0 auto;
+}
+
+#hero .text-center p {
+  font-size: calc(1.2rem * var(--hero-font-scale));
+}
+
+#hero .d-flex.justify-content-center {
+  margin-bottom: 5.5rem !important;
+}
+
+.form {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.form-input {
+  width: 100%;
+  height: 60px;
+  font-size: 2.0rem;
+  padding-left: 40px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.form i.fa-search {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #555;
+}
+
+.form .left-pan {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #555;
+  cursor: pointer;
+}
+
+/* Toggle: container de botões bonitos com base na paleta */
+.toggle-radio {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  font-family: inherit;
+}
+
+.toggle-radio input[type="radio"] {
+  display: none;
+}
+
+.toggle-radio label {
+  display: inline-block;
+  padding: 10px 24px;
+  font-size: 1.1rem;
+  border-radius: 25px;
+  border: 2px solid var(--accent-color);
+  background-color: var(--background-color);
+  color: var(--accent-color);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+}
+
+.toggle-radio input[type="radio"]:checked + label {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  font-weight: 600;
+}
+
+.toggle-radio label:hover {
+  background-color: #f5f5f5;
+  color: var(--accent-color);
+}
+/*--------------------------------------------------------------
+# Search Autocomplete Customization
+--------------------------------------------------------------*/
+
+/* Container principal da busca */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 50px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 65px;
+}
+
+.search-container:focus:hover,
+.search-container:hover {
+  transform: scale(1.002);
+}
+
+/* Ícone de busca */
+.search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 25px;
+  color: #666;
+  font-size: 2.2rem;
+}
+
+.search-icon i {
+  font-size: 2.2rem;
+}
+
+/* Autocomplete container */
+.search-autocomplete {
+  flex: 1;
+  position: relative;
+}
+
+/* Input do autocomplete */
+.search-autocomplete .ui-autocomplete-input {
+  width: 100% !important;
+  height: 65px !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 20px !important;
+  font-size: 2.2rem !important;
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Placeholder do input - com suporte para múltiplos navegadores */
+.search-autocomplete .ui-autocomplete-input::placeholder {
+  font-size: 2.0rem !important;
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  opacity: 0.7; /* ADICIONADO - ajusta visibilidade do placeholder */
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+.search-autocomplete .ui-autocomplete-input::-webkit-input-placeholder {
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  font-size: 2.0rem !important;
+}
+
+/* Mozilla Firefox */
+.search-autocomplete .ui-autocomplete-input::-moz-placeholder {
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  font-size: 2.0rem !important;
+}
+
+/* Internet Explorer/Edge antigo */
+.search-autocomplete .ui-autocomplete-input:-ms-input-placeholder {
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  font-size: 2.2rem !important;
+}
+
+/* Botão de busca */
+.search-button {
+  height: 65px !important;
+  padding: 0 30px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: var(--accent-color) !important;
+  color: white !important;
+  font-weight: 500 !important;
+  font-size: 2.0rem !important;
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  cursor: pointer !important;
+  transition: background-color 0.3s !important;
+}
+
+.search-button:hover {
+  color: var(--contrast-color);
+  background: rgba(54, 57, 59, 0.85) !important;
+}
+
+/* Painel de sugestões - AJUSTADO */
+.search-suggestions.ui-autocomplete-panel {
+  margin-top: 76px !important;
+  border-radius: 15px !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  border: none !important;
+  background: white !important;
+  overflow: hidden !important;
+  max-width: 100% !important;
+  max-height: 400px !important;
+}
+
+/* Lista de sugestões - AJUSTADO */
+.search-suggestions .ui-autocomplete-list {
+  padding: 3px 0 !important;
+  max-height: 385px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Estilização da barra de scroll - NOVO */
+.search-suggestions .ui-autocomplete-list::-webkit-scrollbar {
+  width: 7px;
+}
+
+.search-suggestions .ui-autocomplete-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.search-suggestions .ui-autocomplete-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.search-suggestions .ui-autocomplete-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Item da lista - aumentando especificidade */
+.search-suggestions .ui-autocomplete-items .ui-autocomplete-item {
+  padding: 12px 20px !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  font-size: 1.8rem !important;
+  font-family: 'Montserrat', sans-serif !important; /* ADICIONADO */
+  color: #333 !important;
+  background-color: transparent !important;
+  line-height: 1.5 !important;
+}
+
+/* Hover no item - com maior especificidade */
+.search-suggestions .ui-autocomplete-items .ui-autocomplete-item:hover,
+.search-suggestions .ui-autocomplete-items .ui-autocomplete-item.ui-state-highlight,
+.search-suggestions .ui-autocomplete-items .ui-autocomplete-item.ui-state-hover,
+.search-suggestions .ui-autocomplete-items .ui-autocomplete-item.ui-state-focus,
+.search-suggestions .ui-autocomplete-items .ui-autocomplete-item.ui-state-active {
+  background-color: #f8f9fa !important;
+  color: #36393b !important;
+  background-image: none !important;
+  border: none !important;
+  outline: none !important;
+  transform: scale(1.01);
+}
+
+/* Remove elementos desnecessários do PrimeFaces */
+.search-autocomplete .ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-item .ui-icon,
+.search-autocomplete .ui-helper-hidden-accessible {
+  display: none !important;
+}
+
+
+/* TOGGLE ARTISTA/MUSICA */
+
+/* Remove qualquer gradiente ou imagem de fundo dos estados do PrimeFaces */
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+  background-image: none !important;
+}
+
+/* Container dos radio buttons */
+.custom-toggle-container {
+  display: inline-flex;
+  align-items: stretch;
+  background-color: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 50px;
+  padding: 4px;
+  position: relative;
+  height: auto;
+  min-height: 48px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Efeito hover no container - MODIFICADO */
+.custom-toggle-container:hover {
+  transform: scale(1.03); /* ADICIONADO - efeito de levantar */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* MODIFICADO - sombra maior */
+  /* border-color removido */
+}
+
+/* Esconde os radio buttons originais */
+.custom-toggle-container input[type="radio"] {
+  display: none;
+}
+
+/* Ajusta elementos de tabela que o JSF pode gerar */
+.custom-toggle-container table,
+.custom-toggle-container tbody,
+.custom-toggle-container tr,
+.custom-toggle-container td {
+  display: contents;
+}
+
+/* Estilo dos labels */
+.custom-toggle-container label {
+  padding: 12px 30px;
+  cursor: pointer;
+  color: #666;
+  font-size: calc(1rem * var(--hero-font-scale));
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 50px;
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  height: 100%;
+  margin: 0;
+}
+
+/* Hover nos labels não selecionados */
+.custom-toggle-container label:hover {
+  color: var(--accent-color);
+}
+
+/* Estilo do label quando selecionado */
+.custom-toggle-container input[type="radio"]:checked + label {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Hover no label selecionado */
+.custom-toggle-container input[type="radio"]:checked + label:hover {
+  color: #fff;
+}
+
+/* Elemento que cria o fundo deslizante */
+.custom-toggle-container::before {
+  content: '';
+  position: absolute;
+  height: calc(100% - 8px);
+  width: 50%;
+  background-color: var(--accent-color);
+  border-radius: 50px;
+  top: 4px;
+  left: 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(54, 57, 59, 0.3);
+}
+
+/* Move o fundo quando o segundo item é selecionado */
+.custom-toggle-container:has(input[type="radio"]:nth-of-type(2):checked)::before {
+  transform: translateX(calc(100% - 8px));
+}
+
+.custom-toggle-container.second-selected::before {
+  transform: translateX(calc(100% - 8px));
+}
+
+/* Indicador visual de interatividade */
+.custom-toggle-container::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 54px;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  pointer-events: none;
+}
+
+/* Destaque no foco (acessibilidade) */
+.custom-toggle-container:focus-within::after {
+  border-color: var(--accent-color);
+  opacity: 0.3;
+}
+
+
+/* Força Montserrat especificamente no segundo nível de dropdown */
+.navmenu .dropdown .dropdown ul,
+.navmenu .dropdown .dropdown ul li,
+.navmenu .dropdown .dropdown ul li a,
+.navmenu .dropdown ul ul,
+.navmenu .dropdown ul ul li,
+.navmenu .dropdown ul ul li a {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Garante que TODOS os links dentro de dropdowns usem Montserrat */
+.navmenu li li a,
+.navmenu li li li a,
+.navmenu .dropdown .dropdown a {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 400 !important;
+}
+
+/* Força em qualquer nível de aninhamento */
+.navmenu ul ul a,
+.navmenu ul ul ul a,
+.navmenu ul ul ul ul a {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Seletor mais genérico para pegar todos os elementos aninhados */
+.navmenu .dropdown * {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+
+/*--------------------------------------------------------------
+# Login Page Customization
+--------------------------------------------------------------*/
+
+/* Aplica Montserrat em toda a página de login */
+#hero * {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Card de login */
+#hero .card {
+  border-radius: 20px !important; /* Bordas arredondadas */
+  border: none !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Título principal */
+#hero .card h2 {
+  font-size: 3.6rem !important;
+  font-weight: 600 !important;
+  color: var(--accent-color, #36393b) !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Texto de instruções */
+#hero .card p {
+  font-size: 2.0rem !important;
+  color: #666 !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Inputs de formulário */
+#hero .form-control {
+  font-size: 1.6rem !important;
+  padding: 20px 25px !important;
+  padding-left: 50px !important; /* Espaço para o ícone */
+  border-radius: 50px !important;
+  border: 2px solid #e0e0e0 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  transition: all 0.3s ease !important;
+}
+
+#hero .form-control:focus {
+  border-color: var(--accent-color, #36393b) !important;
+  box-shadow: 0 0 0 0.2rem rgba(54, 57, 59, 0.1) !important;
+}
+
+/* Placeholders */
+#hero .form-control::placeholder {
+  font-size: 1.6rem !important;
+  color: #999 !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Ícones dos inputs */
+#hero .form-control-feedback {
+  position: absolute !important;
+  padding-right: 35px !important;
+  left: 20px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #999 !important;
+  font-size: 1.8rem !important;
+  z-index: 3 !important;
+}
+
+/* Ajusta o grupo do formulário para posicionamento dos ícones */
+#hero .form-group {
+  position: relative !important;
+}
+
+#hero .btn-success:hover {
+  background-color: #4a4d50 !important;
+  transform: scale(1.02) !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Links de "esqueci senha" e "registrar" */
+#hero .text-center a {
+  font-size: 1.4rem !important;
+  color: var(--accent-color, #36393b) !important;
+  margin-top: 3rem !important;
+  text-decoration: none !important;
+  font-family: 'Montserrat', sans-serif !important;
+  transition: all 0.3s ease !important;
+}
+
+#hero .text-center a:hover {
+  color: #666 !important;
+  text-decoration: underline !important;
+}
+
+/* Mensagens de erro/sucesso */
+#hero .ui-messages {
+  font-size: 1.1rem !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+#hero .success-message {
+  font-size: 1.1rem !important;
+  color: #28a745 !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Ajusta padding do card body para acomodar fontes maiores */
+#hero .card-body {
+  padding: 3rem !important;
+}
+
+@media (min-width: 768px) {
+  #hero .card-body {
+    padding: 4rem !important;
+  }
+}
+
+/* Centraliza verticalmente considerando header e footer */
+#hero.hero.section {
+  min-height: calc(100vh - 63px) !important; /* Ajuste conforme altura do header/footer */
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+/* Efeito hover no card */
+#hero .card {
+  transition: all 0.3s ease !important;
+}
+
+#hero .card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Aplica o estilo do btn-getstarted ao botão de login */
+#hero .card .btn-getstarted {
+  font-size: 2.0rem !important;
+  font-weight: 500 !important;
+  padding: 15px 40px !important;
+  border-radius: 50px !important;
+  background-color: var(--accent-color, #36393b) !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-family: 'Montserrat', sans-serif !important;
+  transition: all 0.3s ease !important;
+  width: 100% !important; /* Ocupa toda largura no login */
+}
+
+#hero .card .btn-getstarted:hover {
+  transform: scale(1.03);
+  background: rgba(54, 57, 59, 0.85) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Reset para ícones Font Awesome */
+i.fa,
+i.fas,
+i.far,
+i.fab {
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free', FontAwesome, serif !important;
+  font-style: normal !important;
+  font-weight: 900 !important;
+}
+
+/* Garante que a regra global de Montserrat não afete os ícones */
+.search-icon i:before,
+.form-control-feedback:before {
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free', FontAwesome, serif !important;
+}
+
+
+/* Estilo específico para o título de seleção */
+.selection-title {
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 1rem !important;
+}

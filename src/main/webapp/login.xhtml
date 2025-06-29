@@ -4,7 +4,7 @@
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:p="http://primefaces.org/ui"
-        template="/WEB-INF/templates/template-login.xhtml">
+        template="/WEB-INF/templates/template-login-new.xhtml">
 
     <h:outputText value="#{flash.successMessage}"
                   styleClass="success-message"
@@ -12,32 +12,43 @@
 
     <ui:define name="body">
         <h:form>
-            <p class="login-box-msg"><h:outputText value="#{msgsCore['login.text.instructions']}"/></p>
-            <p:messages closable="true"/>
+            <p class="text-center mb-4"><h:outputText value="#{msgsCore['login.text.instructions']}"/></p>
+            <p:messages closable="true" class="mb-4"/>
             <p:focus/>
 
-            <div class="form-group has-feedback">
-                <p:inputText value="#{sessionController.email}" type="email" styleClass="form-control"
-                             placeholder="#{msgsCore['login.field.email.placeholder']}" required="true"
+            <div class="form-group has-feedback mb-4">
+                <p:inputText value="#{sessionController.email}"
+                             type="email"
+                             styleClass="form-control form-control-lg"
+                             placeholder="#{msgsCore['login.field.email.placeholder']}"
+                             required="true"
                              requiredMessage="#{msgsCore['login.field.email.requiredMessage']}"/>
                 <i class="fa fa-envelope form-control-feedback"/>
             </div>
-            <div class="form-group has-feedback">
-                <p:inputText value="#{sessionController.password}" type="password" styleClass="form-control"
-                             placeholder="#{msgsCore['login.field.password.placeholder']}" required="true"
+
+            <div class="form-group has-feedback mb-4">
+                <p:inputText value="#{sessionController.password}"
+                             type="password"
+                             styleClass="form-control form-control-lg"
+                             placeholder="#{msgsCore['login.field.password.placeholder']}"
+                             required="true"
                              requiredMessage="#{msgsCore['login.field.password.requiredMessage']}"/>
                 <i class="fa fa-lock form-control-feedback" style="font-size: 18px"/>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <p:commandButton id="loginButton" styleClass="btn btn-success btn-block"
-                                     value="#{msgsCore['login.button.login']}" action="#{sessionController.login}"
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <p:commandButton id="loginButton"
+                                     styleClass="btn btn-getstarted btn-lg w-100"
+                                     value="#{msgsCore['login.button.login']}"
+                                     action="#{sessionController.login}"
                                      update="@form"/>
                 </div>
             </div>
-        </h:form>
 
-        <p:link outcome="/login.xhtml" value="#{msgsCore['login.text.forgot']}"/><br/>
-        <p:link outcome="/login.xhtml" value="#{msgsCore['login.text.register']}"/>
+            <div class="text-center mt-4">
+                <p:link outcome="/login.xhtml" value="#{msgsCore['login.text.forgot']}" styleClass="d-block mb-2"/>
+            </div>
+        </h:form>
     </ui:define>
 </ui:composition>

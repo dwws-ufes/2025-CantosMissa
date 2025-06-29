@@ -1,0 +1,68 @@
+<div id="header" class="header d-flex align-items-center fixed-top" xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+    <div class="header-container container-fluid container-sm position-relative d-flex align-items-center justify-content-between">
+        <h:link outcome="/index" styleClass="logo d-flex align-items-center me-auto me-xl-0">
+            <h1 class="sitename">#{msgsCore['application.title']}</h1>
+        </h:link>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li class="dropdown">
+                    <a href="#"><span>#{msgsCore['application.header.tempoLiturgico']}</span>
+                        <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                        <ui:repeat value="#{menuController.liturgicalSeasons}" var="liturgicalSeason">
+                            <li class="dropdown">
+                                <h:link outcome="/core/musics/index">
+                                    <f:param name="season" value="#{liturgicalSeason}" />
+                                    <h:outputText value="#{liturgicalSeason.value}" />
+                                    <i class="bi bi-chevron-down toggle-dropdown"></i>
+                                </h:link>
+                                <ul>
+                                    <ui:repeat value="#{menuController.songTypes}" var="songType">
+                                        <li>
+                                            <h:link outcome="/core/musics/index">
+                                                <f:param name="season" value="#{liturgicalSeason}" />
+                                                <f:param name="type" value="#{songType}" />
+                                                #{songType.value}
+                                            </h:link>
+                                        </li>
+                                    </ui:repeat>
+                                </ul>
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <div class="d-flex align-items-center justify-content-between">
+            <h:panelGroup rendered="#{loginServiceBean.currentUser != null}">
+                <div class="d-flex gap-3">
+                    <h:link outcome="/core/manageMusics/index" styleClass="btn-getstarted">
+                        <h:outputText value="#{msgsCore['menu.core.manageMusics']}" />
+                    </h:link>
+
+                    <h:link outcome="/core/manageArtists/index" styleClass="btn-getstarted">
+                        <h:outputText value="#{msgsCore['menu.core.manageArtists']}" />
+                    </h:link>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup>
+                <h:link outcome="/login" styleClass="btn-getstarted"
+                        rendered="#{loginServiceBean.currentUser == null}">
+                    <h:outputText value="#{msgsCore['application.header.administrador']}" />
+                </h:link>
+
+                <h:panelGroup rendered="#{loginServiceBean.currentUser != null}">
+                    <a href="#{facesContext.externalContext.requestContextPath}/logout"
+                       class="btn-getstarted">
+                        <h:outputText value="#{msgs['menu.logout']}" />
+                    </a>
+                </h:panelGroup>
+            </h:panelGroup>
+        </div>
+    </div>
+</div>
