@@ -2,6 +2,7 @@ package br.ufes.dwws.cantosparamissa.core.controller;
 
 import br.ufes.dwws.cantosparamissa.core.domain.LiturgicalSeason;
 import br.ufes.dwws.cantosparamissa.core.domain.SongType;
+import jakarta.annotation.security.PermitAll;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import java.util.Arrays;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Named
 @RequestScoped
+@PermitAll
 public class MenuController {
 
     public List<LiturgicalSeason> getLiturgicalSeasons() {

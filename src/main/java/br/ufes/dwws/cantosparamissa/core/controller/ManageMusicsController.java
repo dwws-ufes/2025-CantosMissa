@@ -7,6 +7,7 @@ import br.ufes.dwws.cantosparamissa.core.persistence.ArtistDAO;
 import br.ufes.inf.labes.jbutler.ejb.application.CrudService;
 import br.ufes.inf.labes.jbutler.ejb.controller.CrudController;
 import br.ufes.inf.labes.jbutler.ejb.controller.PersistentObjectConverterFromId;
+import jakarta.annotation.security.PermitAll;
 import jakarta.ejb.EJB;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Named
 @ViewScoped
+@PermitAll
 public class ManageMusicsController extends CrudController<Music> {
     @EJB
     private ManageMusicsService manageMusicsService;

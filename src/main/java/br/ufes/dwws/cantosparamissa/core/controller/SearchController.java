@@ -4,6 +4,7 @@ import br.ufes.dwws.cantosparamissa.core.domain.Artist;
 import br.ufes.dwws.cantosparamissa.core.domain.Music;
 import br.ufes.dwws.cantosparamissa.core.persistence.ArtistDAO;
 import br.ufes.dwws.cantosparamissa.core.persistence.MusicDAO;
+import jakarta.annotation.security.PermitAll;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.faces.view.ViewScoped;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Named
 @ViewScoped
+@PermitAll
 public class SearchController implements Serializable {
     private String query;
     private String type = "music"; // ou "artist"
@@ -33,9 +35,9 @@ public class SearchController implements Serializable {
     // Busca completa, redireciona para a pagina de resultados da busca
     public String search() {
         if ("artist".equals(this.type)) {
-            return "/core/artists/index.xhtml?q=" + query + "&faces-redirect=true";
+            return "/public/artists/index.xhtml?q=" + query + "&faces-redirect=true";
         }
-        return "/core/musics/index.xhtml?q=" + query + "&faces-redirect=true";
+        return "/public/musics/index.xhtml?q=" + query + "&faces-redirect=true";
     }
 
     // Metodo para autocomplete

@@ -7,6 +7,7 @@ import br.ufes.inf.labes.jbutler.ejb.application.validation.CrudException;
 import br.ufes.inf.labes.jbutler.ejb.persistence.BaseDAO;
 import br.ufes.inf.labes.jbutler.ejb.persistence.exceptions.MultiplePersistentObjectsFoundException;
 import br.ufes.inf.labes.jbutler.ejb.persistence.exceptions.PersistentObjectNotFoundException;
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;

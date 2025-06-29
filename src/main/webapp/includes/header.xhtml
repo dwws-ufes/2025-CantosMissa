@@ -1,7 +1,7 @@
 <div id="header" class="header d-flex align-items-center fixed-top" xmlns:ui="http://java.sun.com/jsf/facelets"
      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
     <div class="header-container container-fluid container-sm position-relative d-flex align-items-center justify-content-between">
-        <h:link outcome="/index" styleClass="logo d-flex align-items-center me-auto me-xl-0">
+        <h:link outcome="/public/index" styleClass="logo d-flex align-items-center me-auto me-xl-0">
             <h1 class="sitename">Cantos para Missa</h1>
         </h:link>
 
@@ -13,7 +13,7 @@
                     <ul>
                         <ui:repeat value="#{menuController.liturgicalSeasons}" var="liturgicalSeason">
                             <li class="dropdown">
-                                <h:link outcome="/core/musics/index">
+                                <h:link outcome="/public/musics/index">
                                     <f:param name="season" value="#{liturgicalSeason}" />
                                     <h:outputText value="#{liturgicalSeason.value}" />
                                     <i class="bi bi-chevron-down toggle-dropdown"></i>
@@ -21,7 +21,7 @@
                                 <ul>
                                     <ui:repeat value="#{menuController.songTypes}" var="songType">
                                         <li>
-                                            <h:link outcome="/core/musics/index">
+                                            <h:link outcome="/public/musics/index">
                                                 <f:param name="season" value="#{liturgicalSeason}" />
                                                 <f:param name="type" value="#{songType}" />
                                                 #{songType.value}
