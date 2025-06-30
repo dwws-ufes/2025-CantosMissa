@@ -10,7 +10,7 @@ import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 
 @Stateless
-@RolesAllowed("ADMIN")
+@PermitAll
 public class ManageMusicsServiceBean extends CrudServiceImpl<Music> implements ManageMusicsService{
     @EJB
     private MusicDAO musicDAO;

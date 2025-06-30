@@ -7,6 +7,11 @@
 		<welcome-file>/public/index.xhtml</welcome-file>
 	</welcome-file-list>
 
+	<error-page>
+		<error-code>500</error-code>
+		<location>/public/index.xhtml</location>
+	</error-page>
+
 	<!-- Delegates rendering of XHTML pages to JSF. -->
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>

@@ -48,7 +48,7 @@
 
                     <!-- Artist data. -->
                     <p:column headerText="#{msgsCore['manageArtists.field.name']}" sortBy="#{entity.name}" filterBy="#{entity.name}" filterStyle="display: none">
-                        <p:link value="#{entity.name}" outcome="/core/viewArtist/index">
+                        <p:link value="#{entity.name}" outcome="/public/viewArtist/index">
                             <f:param name="id" value="#{entity.id}" />
                         </p:link>
                     </p:column>

@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Stateless
-@RolesAllowed("ADMIN")
+@PermitAll
 public class ManageArtistsServiceBean extends CrudServiceImpl<Artist> implements ManageArtistsService{
     @EJB
     private ArtistDAO artistDAO;

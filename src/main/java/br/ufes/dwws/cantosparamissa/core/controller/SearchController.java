@@ -98,7 +98,7 @@ public class SearchController implements Serializable {
                     if (!musics.isEmpty()) {
                         Music music = musics.get(0);
                         redirectUrl = context.getExternalContext().getRequestContextPath() +
-                                "/core/musics/view.xhtml?id=" + music.getId();
+                                "/public/viewMusic/index.xhtml?id=" + music.getId();
                     }
                 } else if ("artist".equals(this.type)) {
                     // Busca o artista pelo nome para pegar o ID
@@ -106,7 +106,7 @@ public class SearchController implements Serializable {
                     if (!artists.isEmpty()) {
                         Artist artist = artists.get(0);
                         redirectUrl = context.getExternalContext().getRequestContextPath() +
-                                "/core/artists/view.xhtml?id=" + artist.getId();
+                                "/public/viewArtist/index.xhtml?id=" + artist.getId();
                     }
                 }
 

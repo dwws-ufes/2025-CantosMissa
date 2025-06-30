@@ -36,7 +36,7 @@
                 color: white;
                 padding: 4px 12px;
                 border-radius: 50rem; /* rounded-pill */
-                font-size: 1rem;
+                font-size: larger;
                 white-space: nowrap;
             }
 
@@ -48,17 +48,18 @@
                     <h2 class="text-center fw-bold fs-1 mb-4">Músicas encontradas</h2>
 
                     <ui:repeat value="#{musicView.musics}" var="music">
-                        <h:link outcome="/public/index.html" styleClass="music-card-link">
+                        <h:link outcome="/public/viewMusic/index" styleClass="music-card-link">
+                            <f:param name="id" value="#{music.id}" />
                             <div class="music-card d-flex justify-content-between align-items-center mb-2 p-4">
                                 <p class="m-0 fs-2">
                                     <strong>#{music.title}</strong> - #{music.artist.name}
                                 </p>
                                 <div class="d-flex gap-2">
                                     <div class="music-card-badge">
-                                        #{music.songType}
+                                        #{music.liturgicalSeason.value}
                                     </div>
                                     <div class="music-card-badge">
-                                        #{music.liturgicalSeason}
+                                        #{music.songType.value}
                                     </div>
                                 </div>
                             </div>

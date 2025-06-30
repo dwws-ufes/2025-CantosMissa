@@ -4,6 +4,7 @@ import br.ufes.dwws.cantosparamissa.core.application.ManageArtistsService;
 import br.ufes.dwws.cantosparamissa.core.domain.Artist;
 import br.ufes.dwws.cantosparamissa.core.domain.Music;
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.security.PermitAll;
 import jakarta.ejb.EJB;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 
 @Named
 @ViewScoped
+@PermitAll
 public class ViewArtistController implements Serializable {
     private static final Logger logger = Logger.getLogger(ViewArtistController.class.getName());
     
@@ -41,7 +43,7 @@ public class ViewArtistController implements Serializable {
                             .getFlash().put("errorMessage", "Artista não encontrado.");
                     // Redireciona para a home
                     FacesContext.getCurrentInstance().getExternalContext()
-                            .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/index.xhtml");
+                            .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
                 }
 
             } catch (NumberFormatException e) {
@@ -51,7 +53,7 @@ public class ViewArtistController implements Serializable {
                 try {
                     // Redireciona para a home
                     FacesContext.getCurrentInstance().getExternalContext()
-                            .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/index.xhtml");
+                            .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
                 } catch (Exception ex) {
                     logger.log(Level.SEVERE, "Erro ao redirecionar após falha de ID", ex);
                 }
@@ -62,7 +64,7 @@ public class ViewArtistController implements Serializable {
                 try {
                     // Redireciona para a home
                     FacesContext.getCurrentInstance().getExternalContext()
-                            .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/index.xhtml");
+                            .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
                 } catch (Exception ex) {
                     logger.log(Level.SEVERE, "Erro ao redirecionar após falha geral", ex);
                 }
@@ -74,7 +76,7 @@ public class ViewArtistController implements Serializable {
             try {
                 // Redireciona para a home
                 FacesContext.getCurrentInstance().getExternalContext()
-                        .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/index.xhtml");
+                        .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
             } catch (Exception e) {
                 logger.log(Level.SEVERE, "Erro ao redirecionar após ausência de ID", e);
             }

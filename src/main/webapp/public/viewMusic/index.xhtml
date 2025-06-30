@@ -6,14 +6,14 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:p="http://primefaces.org/ui"
         xmlns:adm="http://github.com/adminfaces"
-        template="/WEB-INF/templates/template.xhtml">
+        template="/WEB-INF/templates/template-publico.xhtml">
 
    <ui:define name="title">
       <h:outputText value="#{msgsCore['viewMusic.title']}" />
    </ui:define>
 
-   <ui:define name="body">
-      <adm:breadcrumb link="/core/viewMusic/index" title="#{msgsCore['viewMusic.title']}" />
+   <ui:define name="content">
+<!--      <adm:breadcrumb link="/public/viewMusic/index" title="#{msgsCore['viewMusic.title']}" />-->
 
       <h:outputScript name="js/chords.js" target="head" />
 
@@ -25,7 +25,7 @@
                <h:outputText value="#{viewMusicController.selectedEntity.title}" />
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.artist']}" />
-               <p:link outcome="/core/viewArtist/index.xhtml" value="#{viewMusicController.selectedEntity.artist.name}">
+               <p:link outcome="/public/viewArtist/index.xhtml" value="#{viewMusicController.selectedEntity.artist.name}">
                   <f:param name="id" value="#{viewMusicController.selectedEntity.artist.id}" />
                </p:link>
 

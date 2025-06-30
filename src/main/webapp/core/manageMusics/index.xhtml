@@ -48,7 +48,7 @@
 
                     <!-- Music data. -->
                     <p:column headerText="#{msgsCore['manageMusics.field.title']}" sortBy="#{entity.title}" filterBy="#{entity.title}" filterStyle="display: none">
-                        <p:link value="#{entity.title}" outcome="/core/viewMusic/index">
+                        <p:link value="#{entity.title}" outcome="/public/viewMusic/index">
                             <f:param name="id" value="#{entity.id}" />
                         </p:link>
                     </p:column>
