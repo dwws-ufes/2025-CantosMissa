@@ -60,9 +60,9 @@
                 <h:panelGroup rendered="#{loginServiceBean.currentUser != null}">
                     <nav id="navmenu" class="navmenu">
                         <ul>
-                            <li class="dropdown">
+                            <li class="dropdown ps-5">
                                 <a href="#">
-                                    #{loginServiceBean.currentUser.email}
+                                    #{msgs['menu.profile']}
                                     <i class="bi bi-chevron-down toggle-dropdown"></i>
                                 </a>
                                 <ul>
