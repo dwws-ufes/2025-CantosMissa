@@ -20,18 +20,16 @@ html.no-scroll body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow-y: auto; /* Mantém o scroll */
+    overflow-y: auto;
     min-height: 0;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
-/* Esconde a scrollbar no Chrome/Safari/Opera */
 .no-scroll .main::-webkit-scrollbar {
     display: none;
 }
 
-/* Centraliza o conteúdo dentro do main */
 .no-scroll .main > * {
     margin: auto 0;
 }
