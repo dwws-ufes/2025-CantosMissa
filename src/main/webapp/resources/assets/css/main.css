@@ -115,6 +115,7 @@ h6 {
   padding: 20px 0;
   transition: all 0.5s;
   z-index: 997;
+  position: sticky;
 }
 
 .header .header-container {
@@ -125,7 +126,7 @@ h6 {
 }
 
 .scrolled .header .header-container {
-  background: color-mix(in srgb, var(--surface-color), transparent 5%);
+  background: color-mix(in srgb, var(--surface-color), transparent 10%);
 }
 
 .header .logo {

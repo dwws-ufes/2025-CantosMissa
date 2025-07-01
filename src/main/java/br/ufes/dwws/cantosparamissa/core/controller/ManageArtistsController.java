@@ -44,7 +44,7 @@ public class ManageArtistsController extends CrudController<Artist> {
     }
 
     @Override
-    protected void prepEntity() {//
+    protected void prepEntity() {
         if (uploadedFile != null) {
             selectedEntity.setPicture(uploadedFile.getContent());
         }
@@ -65,7 +65,7 @@ public class ManageArtistsController extends CrudController<Artist> {
                                 .getResourceAsStream("/resources/images/default.png");
                         if (is == null) {
                             System.out.println("Imagem padrão não encontrada!");
-                            return new ByteArrayInputStream(new byte[0]); // evita NPE
+                            return new ByteArrayInputStream(new byte[0]); // avoids NPE
                         }
                         return is;
                     })

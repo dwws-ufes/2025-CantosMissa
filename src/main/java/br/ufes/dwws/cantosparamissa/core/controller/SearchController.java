@@ -22,12 +22,11 @@ import java.util.stream.Collectors;
 @PermitAll
 public class SearchController implements Serializable {
     private String query;
-    private String type = "music"; // ou "artist"
+    private String type = "music";
 
     @EJB
     private SearchService searchService;
 
-    // Busca completa, redireciona para a pagina de resultados da busca
     public String search() {
         if ("artist".equals(this.type)) {
             return "/public/artists/index.xhtml?q=" + query + "&faces-redirect=true";
@@ -35,7 +34,6 @@ public class SearchController implements Serializable {
         return "/public/musics/index.xhtml?q=" + query + "&faces-redirect=true";
     }
 
-    // Metodo para autocomplete
     public List<String> completeText(String query) {
         List<String> suggestions = new ArrayList<>();
 
@@ -73,13 +71,12 @@ public class SearchController implements Serializable {
         return suggestions;
     }
 
-    // Metodo para limpar a busca quando o tipo muda
+    // Method to clear search when type changes
     public void onTypeChange(AjaxBehaviorEvent event) {
-        this.query = null; // Limpa a query quando muda o tipo
-        System.out.println("Type changed to: " + this.type); // Debug
+        this.query = null;
     }
 
-    // Metodo para lidar com a seleção de um item
+    // Method for handling item selection
     public void onItemSelect(SelectEvent<String> event) {
         String selectedItem = event.getObject();
         if (selectedItem != null && !selectedItem.isEmpty()) {
@@ -88,7 +85,7 @@ public class SearchController implements Serializable {
                 String redirectUrl = "";
 
                 if ("music".equals(this.type)) {
-                    // Busca a música pelo título para pegar o ID
+                    // Search the song by title to get the ID
                     List<Music> musics = searchService.searchByTitle(selectedItem);
                     if (!musics.isEmpty()) {
                         Music music = musics.get(0);
@@ -96,7 +93,7 @@ public class SearchController implements Serializable {
                                 "/public/viewMusic/index.xhtml?id=" + music.getId();
                     }
                 } else if ("artist".equals(this.type)) {
-                    // Busca o artista pelo nome para pegar o ID
+                    // Search for the artist by name to get the ID
                     List<Artist> artists = searchService.searchByName(selectedItem);
                     if (!artists.isEmpty()) {
                         Artist artist = artists.get(0);

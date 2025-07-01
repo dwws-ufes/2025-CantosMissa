@@ -29,7 +29,7 @@ public class ViewArtistController implements Serializable {
 
     @PostConstruct
     public void init(){
-        // Obtém o id da artista da URL (parâmetro GET)
+        // Get the artist id from the URL (GET parameter)
         String idParam = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
         if (idParam != null) {
@@ -41,7 +41,7 @@ public class ViewArtistController implements Serializable {
                     logger.warning("Artista não encontrado para ID: " + id);
                     FacesContext.getCurrentInstance().getExternalContext()
                             .getFlash().put("errorMessage", "Artista não encontrado.");
-                    // Redireciona para a home
+                    // Redirects to home
                     FacesContext.getCurrentInstance().getExternalContext()
                             .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
                 }
@@ -51,7 +51,7 @@ public class ViewArtistController implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext()
                         .getFlash().put("errorMessage", "ID inválido para a artista.");
                 try {
-                    // Redireciona para a home
+                    // Redirects to home
                     FacesContext.getCurrentInstance().getExternalContext()
                             .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
                 } catch (Exception ex) {
@@ -62,7 +62,7 @@ public class ViewArtistController implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext()
                         .getFlash().put("errorMessage", "Erro ao carregar artista.");
                 try {
-                    // Redireciona para a home
+                    // Redirects to home
                     FacesContext.getCurrentInstance().getExternalContext()
                             .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
                 } catch (Exception ex) {
@@ -74,7 +74,7 @@ public class ViewArtistController implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext()
                     .getFlash().put("errorMessage", "Nenhum ID de artista informado.");
             try {
-                // Redireciona para a home
+                // Redirects to home
                 FacesContext.getCurrentInstance().getExternalContext()
                         .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
             } catch (Exception e) {

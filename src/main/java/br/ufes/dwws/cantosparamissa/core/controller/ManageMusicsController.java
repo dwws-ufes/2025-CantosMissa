@@ -52,7 +52,7 @@ public class ManageMusicsController extends CrudController<Music> {
 
     public void setArtistName(String artistName) { this.artistName = artistName; }
 
-    // Conversor usado no campo de autocomplete do artista
+    // Converter used in artist autocomplete field
     private PersistentObjectConverterFromId<Artist> artistConverter;
     @Inject
     void initConverter(ArtistDAO artistDAO) {

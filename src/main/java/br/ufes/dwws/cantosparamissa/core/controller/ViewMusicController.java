@@ -29,7 +29,7 @@ public class ViewMusicController implements Serializable {
 
     @PostConstruct
     public void init(){
-        // Obtém o id da música da URL (parâmetro GET)
+        // Gets the song id from the URL (GET parameter)
         String idParam = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
         if (idParam != null) {
@@ -41,7 +41,7 @@ public class ViewMusicController implements Serializable {
                     logger.warning("Música não encontrada para ID: " + id);
                     FacesContext.getCurrentInstance().getExternalContext()
                             .getFlash().put("errorMessage", "Música não encontrada.");
-                    // Redireciona para a home
+                    // Redirects to home
                     FacesContext.getCurrentInstance().getExternalContext()
                             .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
                 }
@@ -51,7 +51,7 @@ public class ViewMusicController implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext()
                         .getFlash().put("errorMessage", "ID inválido para a música.");
                 try {
-                    // Redireciona para a home
+                    // Redirects to home
                     FacesContext.getCurrentInstance().getExternalContext()
                             .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
                 } catch (Exception ex) {
@@ -62,7 +62,7 @@ public class ViewMusicController implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext()
                         .getFlash().put("errorMessage", "Erro ao carregar música.");
                 try {
-                    // Redireciona para a home
+                    // Redirects to home
                     FacesContext.getCurrentInstance().getExternalContext()
                             .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
                 } catch (Exception ex) {
@@ -74,7 +74,7 @@ public class ViewMusicController implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext()
                     .getFlash().put("errorMessage", "Nenhum ID de música informado.");
             try {
-                // Redireciona para a home
+                // Redirects to home
                 FacesContext.getCurrentInstance().getExternalContext()
                         .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/public/index.xhtml");
             } catch (Exception e) {
@@ -90,7 +90,7 @@ public class ViewMusicController implements Serializable {
     public List<MusicKey> getAvailableKeys(){
         List<MusicKey> availableKeys = new ArrayList<>();
         String entityKeyValue = selectedEntity.getMusicKey().getValue();
-        // Se o tom da música for menor, só pode escolher entre tons menores
+        // If the key of the music is minor, you can only choose between minor keys.
         if(entityKeyValue.endsWith("m")){
             availableKeys.add(MusicKey.A_MINOR);
             availableKeys.add(MusicKey.B_FLAT_MINOR);
@@ -104,7 +104,7 @@ public class ViewMusicController implements Serializable {
             availableKeys.add(MusicKey.F_SHARP_MINOR);
             availableKeys.add(MusicKey.G_MINOR);
             availableKeys.add(MusicKey.G_SHARP_MINOR);
-        } else { // Mesmo para tom maior
+        } else { // Same for major key
             availableKeys.add(MusicKey.A);
             availableKeys.add(MusicKey.B_FLAT);
             availableKeys.add(MusicKey.B);
@@ -132,7 +132,7 @@ public class ViewMusicController implements Serializable {
                 return "https://www.youtube.com/embed/" + link.split("youtu.be/")[1].split("\\?")[0];
             }
         } catch (Exception e) {
-            return null; // erro de parsing
+            return null; // parsing error
         }
         return null;
     }

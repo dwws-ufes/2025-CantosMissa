@@ -47,7 +47,7 @@ public class ManageUserController extends CrudController<User> implements Serial
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário criado com sucesso!"));
         newUser = new User();
         newUserPassword = "";
-        users = manageUserService.findAll(); // Atualiza tabela
+        users = manageUserService.findAll();
     }
 
     public void updatePassword() {
@@ -59,8 +59,6 @@ public class ManageUserController extends CrudController<User> implements Serial
         this.selectedUserForPasswordChange = user;
         this.newPassword = "";
     }*/
-
-    // Getters e Setters
 
     public User getNewUser() {
         return newUser;
