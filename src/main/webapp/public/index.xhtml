@@ -10,6 +10,11 @@
 	</ui:define>
 
 	<ui:define name="content">
+
+		<h:outputScript>
+			document.documentElement.classList.add('no-scroll');
+		</h:outputScript>
+
 		<script>
 			document.addEventListener('DOMContentLoaded', function() {
 				const toggleContainer = document.querySelector('.custom-toggle-container');

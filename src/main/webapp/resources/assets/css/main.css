@@ -2042,3 +2042,87 @@ i.fab {
   color: #333 !important;
   margin-bottom: 1rem !important;
 }
+
+
+
+/* Card com rolagem para a lista de usuários */
+.user-list-card {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 30px;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.user-list-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Scrollbar customizado (opcional e compatível com Webkit) */
+.user-list-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.user-list-card::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 10px;
+}
+
+.user-list-card::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+}
+
+/* SelectOneMenu arredondado como os inputs */
+.custom-select-rounded .ui-selectonemenu-label {
+  padding-left: 36px !important;
+  font-size: 1.6rem !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.custom-select-rounded .ui-selectonemenu-trigger {
+  border-top-right-radius: 50px !important;
+  border-bottom-right-radius: 50px !important;
+}
+
+.ui-selectonemenu {
+  border-radius: 50px !important;
+  border: 2px solid #e0e0e0 !important;
+  padding: 10px 10px !important;
+  font-size: 1.6rem !important;
+  height: auto !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Ícone no select */
+.ui-selectonemenu.form-control + .form-control-feedback {
+  top: 50% !important;
+  left: 20px !important;
+  transform: translateY(-50%) !important;
+  z-index: 2 !important;
+}
+
+/* Estilização do trigger do selectOneMenu */
+.ui-selectonemenu-trigger {
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 16px !important;
+  font-size: 1.4rem !important;
+  border-top-right-radius: 50px !important;
+  border-bottom-right-radius: 50px !important;
+  background: transparent !important;
+  border-left: none !important;
+}
+
+/* Garante que o ícone da seta apareça */
+.ui-selectonemenu-trigger::before {
+  content: '\f107'; /* Unicode do ícone "caret-down" do Font Awesome */
+  font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome, serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+  color: #555;
+}
+

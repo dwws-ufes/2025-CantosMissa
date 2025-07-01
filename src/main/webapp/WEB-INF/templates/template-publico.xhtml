@@ -21,18 +21,13 @@
     <h:outputStylesheet name="assets/vendor/glightbox/css/glightbox.min.css"/>
     <h:outputStylesheet name="assets/vendor/swiper/swiper-bundle.min.css"/>
     <h:outputStylesheet name="assets/css/main.css"/>
-    <h:outputStylesheet name="assets/css/no-scroll.css"/>
 </h:head>
 
 <h:body styleClass="index-page">
 
-<!--    <h:outputScript>-->
-<!--        document.documentElement.classList.add('no-scroll');-->
-<!--    </h:outputScript>-->
-
     <ui:include src="/includes/header.xhtml"/>
 
-    <main class="main">
+    <main class="main" style="min-height: calc(100vh - 63px);">
         <ui:insert name="content"/>
     </main>
 

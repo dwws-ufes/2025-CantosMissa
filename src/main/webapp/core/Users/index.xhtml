@@ -3,6 +3,7 @@
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
         template="/WEB-INF/templates/template-publico.xhtml">
 
     <ui:define name="title">
@@ -10,58 +11,80 @@
     </ui:define>
 
     <ui:define name="content">
-        <style>
-            .user-card:hover {
-                background-color: #edeff0;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-                transform: scale(1.01);
-                transition: all 0.3s ease;
-            }
-        </style>
-
         <section id="hero" class="hero section">
             <div class="container">
-                <div class="w-50 mx-auto mt-5">
+                <div class="w-75 mx-auto mt-5 d-flex flex-column gap-4">
 
-                <!-- Formulário de Novo Usuário -->
-                <div class="row height d-flex justify-content-center align-items-center mb-5 mt-4 w-100">
-                    <h2 class="text-center fw-bold fs-1 mb-4 mt-8">Criar Novo Usuário</h2>
+                    <!-- Formulário de Novo Usuário -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="text-center">Criar Novo Usuário</h2>
 
-                    <h:form>
-                        <div class="mb-3">
-                            <h:outputLabel for="email" value="Email" styleClass="form-label" />
-                            <h:inputText id="email" value="#{manageUserController.newUser.email}" styleClass="form-control" required="true" />
+                            <h:form>
+                                <p:messages closable="true" class="mb-4"/>
+                                <p:focus/>
+
+                                <div class="form-group has-feedback mb-4">
+                                    <p:inputText id="email"
+                                                 value="#{manageUserController.newUser.email}"
+                                                 type="email"
+                                                 styleClass="form-control form-control-lg"
+                                                 placeholder="Email"
+                                                 required="true"
+                                                 requiredMessage="O campo de e-mail é obrigatório." />
+                                    <i class="fa fa-envelope form-control-feedback"/>
+                                </div>
+
+                                <div class="form-group has-feedback mb-4">
+                                    <p:password id="password"
+                                                value="#{manageUserController.newUserPassword}"
+                                                styleClass="form-control form-control-lg"
+                                                placeholder="Senha"
+                                                feedback="false"
+                                                required="true"
+                                                requiredMessage="A senha é obrigatória." />
+                                    <i class="fa fa-lock form-control-feedback" style="font-size: 18px"/>
+                                </div>
+
+                                <div class="form-group has-feedback mb-4">
+                                    <p:selectOneMenu id="role"
+                                                     value="#{manageUserController.newUser.role}"
+                                                     styleClass="form-control form-control-lg custom-select-rounded"
+                                                     required="true"
+                                                     requiredMessage="Perfil obrigatório.">
+                                        <f:selectItem itemLabel="Selecione um perfil" itemValue="" noSelectionOption="true"/>
+                                        <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
+                                    </p:selectOneMenu>
+                                    <i class="fa fa-user form-control-feedback"/>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p:commandButton value="Criar Usuário"
+                                                         action="#{manageUserController.createUser}"
+                                                         update="@form"
+                                                         styleClass="btn btn-getstarted btn-lg w-100" />
+                                    </div>
+                                </div>
+                            </h:form>
                         </div>
+                    </div>
 
-                        <div class="mb-3">
-                            <h:outputLabel for="password" value="Senha" styleClass="form-label" />
-                            <h:inputSecret id="password" value="#{manageUserController.newUserPassword}" styleClass="form-control" required="true" />
+                    <!-- Lista de Usuários -->
+                    <div class="card user-list-card">
+                        <div class="card-body user-list-scroll">
+                            <h2 class="text-center">Usuários Cadastrados</h2>
+
+                            <ui:repeat value="#{manageUserController.users}" var="user">
+                                <div class="card p-3 rounded-4 mb-3 shadow-sm user-card fs-4">
+                                    <div><strong>Email:</strong> #{user.email}</div>
+                                    <div><strong>Perfil:</strong> #{user.role}</div>
+                                </div>
+                            </ui:repeat>
                         </div>
+                    </div>
 
-                        <div class="mb-3">
-                            <h:outputLabel for="role" value="Perfil" styleClass="form-label" />
-                            <h:selectOneMenu id="role" value="#{manageUserController.newUser.role}" styleClass="form-select" required="true">
-                                <f:selectItem itemLabel="ADMIN" itemValue="ADMIN" />
-                            </h:selectOneMenu>
-                        </div>
-
-                        <div class="mt-3">
-                            <h:commandButton value="Criar Usuário" action="#{manageUserController.createUser}" styleClass="btn btn-primary" />
-                        </div>
-                    </h:form>
-                </div>
-
-                <!-- Lista de Usuários -->
-                <div class="row height d-flex justify-content-center align-items-center">
-                    <h2 class="text-center fw-bold fs-1 mb-4">Usuários Cadastrados</h2>
-
-                    <ui:repeat value="#{manageUserController.users}" var="user">
-                        <div class="card p-3 rounded-4 mb-3 shadow-sm user-card fs-4">
-                            <div><strong>Email:</strong> #{user.email}</div>
-                            <div><strong>Perfil:</strong> #{user.role}</div>
-                        </div>
-                    </ui:repeat>
-                </div>
                 </div>
             </div>
         </section>
