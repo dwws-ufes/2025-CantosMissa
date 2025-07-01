@@ -13,27 +13,27 @@
    </ui:define>
 
    <ui:define name="content">
-<!--      <adm:breadcrumb link="/public/viewMusic/index" title="#{msgsCore['viewMusic.title']}" />-->
 
       <h:outputScript name="js/chords.js" target="head" />
 
       <h:form id="form">
-         <p:panel styleClass="card no-border">
-            <p:panelGrid columns="2" cellpadding="5" layout="grid" styleClass="ui-fluid card" columnClasses="ui-grid-col-4,ui-grid-col-8">
+         <p:panel styleClass="card main-card no-border">
+
+            <p:panelGrid columns="2" cellpadding="8" layout="grid" styleClass="ui-fluid card inner-card" columnClasses="ui-grid-col-4,ui-grid-col-8">
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.title']}" />
-               <h:outputText value="#{viewMusicController.selectedEntity.title}" />
+               <h:outputText value="#{viewMusicController.selectedEntity.title}" styleClass="text-content"/>
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.artist']}" />
-               <p:link outcome="/public/viewArtist/index.xhtml" value="#{viewMusicController.selectedEntity.artist.name}">
+               <p:link outcome="/public/viewArtist/index.xhtml" value="#{viewMusicController.selectedEntity.artist.name}" styleClass="text-link">
                   <f:param name="id" value="#{viewMusicController.selectedEntity.artist.id}" />
                </p:link>
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.liturgicalSeason']}" />
-               <h:outputText value="#{viewMusicController.selectedEntity.liturgicalSeason.value}" />
+               <h:outputText value="#{viewMusicController.selectedEntity.liturgicalSeason.value}" styleClass="text-content"/>
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.songType']}" />
-               <h:outputText value="#{viewMusicController.selectedEntity.songType.value}" />
+               <h:outputText value="#{viewMusicController.selectedEntity.songType.value}" styleClass="text-content"/>
 
                <p:outputLabel rendered="#{not empty viewMusicController.youtubeEmbedUrl}"
                               value="#{msgsCore['manageMusics.field.youtubeLink']}" />
@@ -51,15 +51,13 @@
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.musicKey']}" />
                <h:panelGroup layout="block" styleClass="key-controls" style="text-align:left; margin-bottom: 1rem;">
-                  <!-- Botão para diminuir 1/2 tom -->
-                  <p:commandButton icon="pi pi-minus"
+
+                  <p:commandButton icon="fa fa-minus"
                                    onclick="transpose(-1);"
                                    type="button"
-                                   styleClass="ui-button-secondary"
-                                   title="Diminuir ½ tom"
-                                   style="margin-right: 0.5rem; width: 2rem;" />
+                                   styleClass="key-btn"
+                                   title="Diminuir ½ tom" />
 
-                  <!-- Tom atual clicável -->
                   <h:outputText id="keyLabel"
                                 value="#{viewMusicController.selectedEntity.musicKey.value}"
                                 styleClass="key-label"/>
@@ -71,31 +69,20 @@
                      </ui:repeat>
                   </p:overlayPanel>
 
-                  <!-- Botão para aumentar 1/2 tom -->
-                  <p:commandButton icon="pi pi-plus"
+                  <p:commandButton icon="fa fa-plus"
                                    onclick="transpose(1);"
                                    type="button"
-                                   styleClass="ui-button-secondary"
-                                   title="Aumentar ½ tom"
-                                   style="margin-left: 0.5rem; width: 2rem" />
+                                   styleClass="key-btn"
+                                   title="Aumentar ½ tom" />
                </h:panelGroup>
 
                <p:outputLabel value="#{msgsCore['manageMusics.field.chords']}" />
                <h:outputText id="chordsDisplay" value="#{viewMusicController.selectedEntity.chords}" escape="false"
                              style="font-family: monospace; white-space: pre-wrap;" />
             </p:panelGrid>
+
          </p:panel>
       </h:form>
-      <style>
-         .chord, .key-label {
-            color: #0066cc;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s;
-         }
-         .key-label:hover {
-            color: #ff6600;
-         }
-      </style>
+
    </ui:define>
 </ui:composition>

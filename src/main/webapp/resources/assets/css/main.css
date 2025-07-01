@@ -2044,8 +2044,9 @@ i.fab {
 }
 
 
-
-/* Card com rolagem para a lista de usuários */
+/*--------------------------------------------------------------
+# User Manage Page Customization
+--------------------------------------------------------------*/
 .user-list-card {
   max-height: 400px;
   overflow-y: auto;
@@ -2060,7 +2061,6 @@ i.fab {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Scrollbar customizado (opcional e compatível com Webkit) */
 .user-list-card::-webkit-scrollbar {
   width: 8px;
 }
@@ -2074,7 +2074,6 @@ i.fab {
   background-color: #f0f0f0;
 }
 
-/* SelectOneMenu arredondado como os inputs */
 .custom-select-rounded .ui-selectonemenu-label {
   padding-left: 36px !important;
   font-size: 1.6rem !important;
@@ -2095,7 +2094,6 @@ i.fab {
   font-family: 'Montserrat', sans-serif !important;
 }
 
-/* Ícone no select */
 .ui-selectonemenu.form-control + .form-control-feedback {
   top: 50% !important;
   left: 20px !important;
@@ -2103,7 +2101,6 @@ i.fab {
   z-index: 2 !important;
 }
 
-/* Estilização do trigger do selectOneMenu */
 .ui-selectonemenu-trigger {
   height: 100% !important;
   display: flex !important;
@@ -2117,12 +2114,117 @@ i.fab {
   border-left: none !important;
 }
 
-/* Garante que o ícone da seta apareça */
 .ui-selectonemenu-trigger::before {
-  content: '\f107'; /* Unicode do ícone "caret-down" do Font Awesome */
+  content: '\f107';
   font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome, serif;
   font-weight: 900;
   font-size: 1.6rem;
   color: #555;
 }
 
+/*--------------------------------------------------------------
+# View Music/Artist Pages Customization
+--------------------------------------------------------------*/
+.main-card {
+  max-width: 1300px;
+  margin: 2rem auto;
+  padding: 2.5rem 3rem;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  background: #fff;
+  border: none;
+}
+
+.inner-card {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 2rem 3rem;
+  box-shadow: none;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#form, #form * {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.text-content {
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.text-link {
+  font-size: 1.3rem;
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+  color: #004999;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+  margin-bottom: 1.5rem;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.chord, .key-label {
+  color: #0066cc;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+  font-size: 1.2rem;
+}
+
+.key-label:hover {
+  color: #ff6600;
+}
+
+i.fa,
+i.fas,
+i.far,
+i.fab {
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free', FontAwesome, serif !important;
+  font-style: normal !important;
+  font-weight: 900 !important;
+}
+
+.key-btn {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  font-size: 1.3rem !important;
+  margin: 0 0.3rem;
+  transition: background-color 0.3s ease;
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free', FontAwesome, serif !important;
+}
+
+.ui-button .pi::before {
+  font-family: 'PrimeIcons' !important;
+  font-style: normal;
+}
+
+.ui-button .fa::before {
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free', FontAwesome !important;
+  font-style: normal;
+}
+
+i.pi-search::before {
+  font-family: 'PrimeIcons' !important;
+  font-style: normal !important;
+}

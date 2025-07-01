@@ -22,12 +22,11 @@
         <adm:breadcrumb link="/core/manageArtists/index" title="#{msgsCore['manageArtists.title']}" />
 
         <h:form id="form" enctype="multipart/form-data">
-            <!-- The listing. -->
+
             <p:panel header="#{msgsCore['manageArtists.text.entities']}" styleClass="card no-border">
                 <p:dataTable id="dt-entities" widgetVar="dtEntities" var="entity" value="#{manageArtistsController.entities}" emptyMessage="#{msgsCore['manageArtists.text.emptyMessage']}" reflow="true" selection="#{manageArtistsController.selectedEntities}" rowKey="#{entity.id}" paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
                     <p:ajax event="filter" ignoreAutoUpdate="true" />
                     <f:facet name="footer">
-                        <!-- New and Delete buttons. -->
                         <div style="float: right; margin-top: -40px;">
                             <p:commandButton value="#{msgs['jbutler.crud.button.create']}" icon="pi pi-plus" actionListener="#{manageArtistsController.openNew}" update=":form:manage-entity-content" oncomplete="PF('formDialog').show()" style="margin-right: .5rem">
                                 <p:resetInput target=":form:manage-entity-content" />
@@ -46,7 +45,6 @@
 
                     <p:column width="40" selectionMode="multiple" exportable="false"></p:column>
 
-                    <!-- Artist data. -->
                     <p:column headerText="#{msgsCore['manageArtists.field.name']}" sortBy="#{entity.name}" filterBy="#{entity.name}" filterStyle="display: none">
                         <p:link value="#{entity.name}" outcome="/public/viewArtist/index">
                             <f:param name="id" value="#{entity.id}" />
@@ -73,7 +71,6 @@
                 </p:dataTable>
             </p:panel>
 
-            <!-- Dialog to create new entities or update existing ones. -->
             <p:dialog header="#{msgsCore['manageArtists.title.detail']}"
                       showEffect="fade"
                       widgetVar="formDialog"
@@ -111,13 +108,11 @@
                 </f:facet>
             </p:dialog>
 
-            <!-- Dialog to confirm deletion. -->
             <p:confirmDialog widgetVar="deleteEntityDialog" showEffect="fade" width="300" message="#{msgsCore['manageArtists.text.deleteConfirmation']}" header="#{msgs['jbutler.crud.title.confirmation']}" severity="warn">
                 <p:commandButton value="#{msgs['jbutler.crud.button.yes']}" icon="pi pi-check" actionListener="#{manageArtistsController.delete}" process="@this" oncomplete="PF('deleteEntityDialog').hide()" />
                 <p:commandButton value="#{msgs['jbutler.crud.button.no']}" type="button" icon="pi pi-times" onclick="PF('deleteEntityDialog').hide()" />
             </p:confirmDialog>
 
-            <!-- Global dialog used by p:confirm tags. -->
             <p:confirmDialog global="true" showEffect="fade" width="300">
                 <p:commandButton value="#{msgs['jbutler.crud.button.no']}" type="button" icon="pi pi-times" styleClass="ui-confirmdialog-no" />
                 <p:commandButton value="#{msgs['jbutler.crud.button.yes']}" type="button" icon="pi pi-check" styleClass="ui-confirmdialog-yes" />
