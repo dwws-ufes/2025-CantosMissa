@@ -1,13 +1,13 @@
-package br.ufes.dwws.cantosparamissa.core.view;
+package br.ufes.dwws.cantosparamissa.core.controller;
 
+import br.ufes.dwws.cantosparamissa.core.application.MusicSearchService;
 import br.ufes.dwws.cantosparamissa.core.domain.LiturgicalSeason;
 import br.ufes.dwws.cantosparamissa.core.domain.Music;
 import br.ufes.dwws.cantosparamissa.core.domain.SongType;
-import br.ufes.dwws.cantosparamissa.core.persistence.MusicDAO;
 import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
@@ -16,12 +16,12 @@ import java.util.Map;
 
 @Named
 @ViewScoped
-public class MusicView implements Serializable {
+public class MusicSearchController implements Serializable {
     private List<Music> musics = List.of();
     private String query;
 
-    @Inject
-    private MusicDAO musicDAO;
+    @EJB
+    private MusicSearchService musicSearchService;
 
     @PostConstruct
     public void init() {
@@ -37,7 +37,7 @@ public class MusicView implements Serializable {
             try {
                 var season = LiturgicalSeason.valueOf(seasonParam);
                 var type = SongType.valueOf(typeParam);
-                musics = musicDAO.searchByLiturgicalSeasonAndSongType(season, type);
+                musics = musicSearchService.searchByLiturgicalSeasonAndSongType(season, type);
                 return;
             } catch (IllegalArgumentException e) {
                 musics = List.of();
@@ -48,7 +48,7 @@ public class MusicView implements Serializable {
         if (seasonParam != null) {
             try {
                 var season = LiturgicalSeason.valueOf(seasonParam);
-                musics = musicDAO.searchByLiturgicalSeason(season);
+                musics = musicSearchService.searchByLiturgicalSeason(season);
                 return;
             } catch (IllegalArgumentException e) {
                 musics = List.of();
@@ -58,7 +58,7 @@ public class MusicView implements Serializable {
 
         if (queryParam != null && !queryParam.isBlank()) {
             query = queryParam;
-            musics = musicDAO.searchByTitle(queryParam);
+            musics = musicSearchService.searchByTitle(queryParam);
         }
     }
 

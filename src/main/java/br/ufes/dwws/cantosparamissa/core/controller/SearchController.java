@@ -1,14 +1,13 @@
 package br.ufes.dwws.cantosparamissa.core.controller;
 
+import br.ufes.dwws.cantosparamissa.core.application.SearchService;
 import br.ufes.dwws.cantosparamissa.core.domain.Artist;
 import br.ufes.dwws.cantosparamissa.core.domain.Music;
-import br.ufes.dwws.cantosparamissa.core.persistence.ArtistDAO;
-import br.ufes.dwws.cantosparamissa.core.persistence.MusicDAO;
 import jakarta.annotation.security.PermitAll;
+import jakarta.ejb.EJB;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.primefaces.event.SelectEvent;
 
@@ -25,12 +24,8 @@ public class SearchController implements Serializable {
     private String query;
     private String type = "music"; // ou "artist"
 
-    @Inject
-    private MusicDAO musicDAO;
-
-    @Inject
-    private ArtistDAO artistDAO;
-
+    @EJB
+    private SearchService searchService;
 
     // Busca completa, redireciona para a pagina de resultados da busca
     public String search() {
@@ -50,7 +45,7 @@ public class SearchController implements Serializable {
 
         try {
             if ("music".equals(type)) {
-                List<Music> musics = musicDAO.searchByTitle(query.trim());
+                List<Music> musics = searchService.searchByTitle(query.trim());
                 if (musics.isEmpty()) {
                     suggestions.add("Nenhuma música encontrada");
                 } else {
@@ -60,7 +55,7 @@ public class SearchController implements Serializable {
                             .collect(Collectors.toList());
                 }
             } else if ("artist".equals(this.type)) {
-                List<Artist> artists = artistDAO.searchByName(query.trim());
+                List<Artist> artists = searchService.searchByName(query.trim());
                 if (artists.isEmpty()) {
                     suggestions.add("Nenhum artista encontrado");
                 } else {
@@ -94,7 +89,7 @@ public class SearchController implements Serializable {
 
                 if ("music".equals(this.type)) {
                     // Busca a música pelo título para pegar o ID
-                    List<Music> musics = musicDAO.searchByTitle(selectedItem);
+                    List<Music> musics = searchService.searchByTitle(selectedItem);
                     if (!musics.isEmpty()) {
                         Music music = musics.get(0);
                         redirectUrl = context.getExternalContext().getRequestContextPath() +
@@ -102,7 +97,7 @@ public class SearchController implements Serializable {
                     }
                 } else if ("artist".equals(this.type)) {
                     // Busca o artista pelo nome para pegar o ID
-                    List<Artist> artists = artistDAO.searchByName(selectedItem);
+                    List<Artist> artists = searchService.searchByName(selectedItem);
                     if (!artists.isEmpty()) {
                         Artist artist = artists.get(0);
                         redirectUrl = context.getExternalContext().getRequestContextPath() +

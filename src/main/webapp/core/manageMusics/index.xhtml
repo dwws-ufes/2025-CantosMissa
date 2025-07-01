@@ -56,16 +56,13 @@
                         <h:outputText value="#{entity.artist.name}" />
                     </p:column>
                     <p:column headerText="#{msgsCore['manageMusics.field.musicKey']}">
-                        <h:outputText value="#{entity.musicKey}" />
-                    </p:column>
-                    <p:column headerText="#{msgsCore['manageMusics.field.chords']}">
-                        <h:outputText value="#{entity.chords}" />
+                        <h:outputText value="#{entity.musicKey.value}" />
                     </p:column>
                     <p:column headerText="#{msgsCore['manageMusics.field.liturgicalSeason']}" filterBy="#{entity.liturgicalSeason}" filterStyle="display: none">
-                        <h:outputText value="#{entity.liturgicalSeason}" />
+                        <h:outputText value="#{entity.liturgicalSeason.value}" />
                     </p:column>
                     <p:column headerText="#{msgsCore['manageMusics.field.songType']}" filterBy="#{entity.songType}" filterStyle="display: none">
-                        <h:outputText value="#{entity.songType}" />
+                        <h:outputText value="#{entity.songType.value}" />
                     </p:column>
                     <p:column headerText="#{msgsCore['manageMusics.field.youtubeLink']}">
                         <h:outputText value="#{entity.youtubeLink}" />
