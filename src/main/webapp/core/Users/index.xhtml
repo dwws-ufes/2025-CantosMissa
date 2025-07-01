@@ -20,7 +20,7 @@
                         <div class="card-body">
                             <h2 class="text-center">Criar Novo Usuário</h2>
 
-                            <h:form>
+                            <h:form id="formCriarUsuario">
                                 <p:messages closable="true" class="mb-4"/>
                                 <p:focus/>
 
@@ -52,7 +52,6 @@
                                                      styleClass="form-control form-control-lg custom-select-rounded"
                                                      required="true"
                                                      requiredMessage="Perfil obrigatório.">
-                                        <f:selectItem itemLabel="Selecione um perfil" itemValue="" noSelectionOption="true"/>
                                         <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
                                     </p:selectOneMenu>
                                     <i class="fa fa-user form-control-feedback"/>
@@ -63,8 +62,9 @@
                                     <div class="col-12">
                                         <p:commandButton value="Criar Usuário"
                                                          action="#{manageUserController.createUser}"
-                                                         update="@form"
-                                                         styleClass="btn btn-getstarted btn-lg w-100" />
+                                                         update="formCriarUsuario"
+                                                         styleClass="btn btn-getstarted btn-lg w-100"
+                                                        />
                                     </div>
                                 </div>
                             </h:form>
@@ -75,15 +75,77 @@
                     <div class="card user-list-card">
                         <div class="card-body user-list-scroll">
                             <h2 class="text-center">Usuários Cadastrados</h2>
-
+                            <h:form>
                             <ui:repeat value="#{manageUserController.users}" var="user">
                                 <div class="card p-3 rounded-4 mb-3 shadow-sm user-card fs-4">
                                     <div><strong>Email:</strong> #{user.email}</div>
                                     <div><strong>Perfil:</strong> #{user.role}</div>
+
+                                    <!-- Botão de Editar -->
+                                    <p:commandButton icon="pi pi-pencil"
+                                                     value="Editar"
+                                                     styleClass="btn btn-primary mt-2"
+                                                     process="@this"
+                                                     update=":formEdit:manage-entity-content"
+                                                     oncomplete="PF('formDialog').show()">
+                                        <f:setPropertyActionListener value="#{user}" target="#{manageUserController.selectedEntity}" />
+                                        <f:setPropertyActionListener value="" target="#{manageUserController.newPassword}" />
+                                        <p:resetInput target=":formEdit:manage-entity-content" />
+                                    </p:commandButton>
                                 </div>
                             </ui:repeat>
+                            </h:form>
+
                         </div>
                     </div>
+
+                    <!--Dialogo para editar usuario-->
+                    <h:form id="formEdit">
+                        <p:dialog header="Editar Usuário"
+                                  widgetVar="formDialog"
+                                  modal="true"
+                                  responsive="true"
+                                  width="450"
+                                  showEffect="fade"
+                                  style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
+
+                            <p:outputPanel id="manage-entity-content">
+                                <p:outputPanel rendered="#{not empty manageUserController.selectedEntity}">
+                                    <p:panelGrid columns="2" layout="grid" styleClass="ui-fluid card"
+                                                 columnClasses="ui-grid-col-4,ui-grid-col-8">
+
+                                        <p:outputLabel for="editEmail" value="Email" />
+                                        <p:inputText id="editEmail" value="#{manageUserController.selectedEntity.email}" required="true" />
+
+                                        <p:outputLabel for="editRole" value="Perfil" />
+                                        <p:selectOneMenu id="editRole" value="#{manageUserController.selectedEntity.role}" required="true">
+                                            <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel for="editPassword" value="Nova Senha" />
+                                        <p:password id="editPassword"
+                                                    value="#{manageUserController.newPassword}"
+                                                    required="false"
+                                                    feedback="false"
+                                                    placeholder="Deixe em branco para manter a atual" />
+
+                                    </p:panelGrid>
+                                </p:outputPanel>
+                            </p:outputPanel>
+
+                            <f:facet name="footer">
+                                <p:commandButton id="saveButton"
+                                                 value="Salvar"
+                                                 icon="pi pi-check"
+                                                 actionListener="#{manageUserController.save}"
+                                                 update="manage-entity-content"
+                                                 process="manage-entity-content @this"
+                                                 oncomplete="if(!args.validationError) PF('formDialog').hide()" />
+                                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('formDialog').hide()" />
+                                <p:defaultCommand target="saveButton" />
+                            </f:facet>
+                        </p:dialog>
+                    </h:form>
 
                 </div>
             </div>

@@ -45,8 +45,10 @@ public class ManageUserController extends CrudController<User> implements Serial
     public void createUser() {
         manageUserService.createUser(newUser, newUserPassword);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário criado com sucesso!"));
+
         newUser = new User();
         newUserPassword = "";
+
         users = manageUserService.findAll(); // Atualiza tabela
     }
 
@@ -55,10 +57,29 @@ public class ManageUserController extends CrudController<User> implements Serial
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Senha atualizada com sucesso!"));
     }
 
-    /*public void setSelectedUserForPasswordChange(User user) {
-        this.selectedUserForPasswordChange = user;
-        this.newPassword = "";
-    }*/
+    @Override
+    public void save() {
+        try {
+            prepEntity();
+
+            super.save();
+
+            // Se a nova senha foi preenchida, atualiza
+            if (newPassword != null && !newPassword.isBlank()) {
+                manageUserService.updatePassword(selectedEntity, newPassword);
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage("Senha atualizada com sucesso!"));
+            }
+
+            // Limpa o campo de nova senha
+            newPassword = "";
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário salvo com sucesso!"));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao salvar usuário", e.getMessage()));
+        }
+    }
 
     // Getters e Setters
 
@@ -101,4 +122,5 @@ public class ManageUserController extends CrudController<User> implements Serial
     public void setSelectedUserForPasswordChange(User selectedUserForPasswordChange) {
         this.selectedUserForPasswordChange = selectedUserForPasswordChange;
     }
+
 }
