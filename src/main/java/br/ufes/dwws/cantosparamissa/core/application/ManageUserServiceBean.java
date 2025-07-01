@@ -77,7 +77,7 @@ public class ManageUserServiceBean extends CrudServiceImpl<User> implements Mana
         CrudException crudException = null;
         String exceptionMessage = "O usuário não pode ser editado devido a erros de validação.";
 
-        // Regra: não podem existir dois usuários com mesmo email diferentes
+        // validação do e-mail (igual)
         boolean violated = false;
         try {
             User existing = userDAO.retrieveByEmail(entity.getEmail());
@@ -85,28 +85,23 @@ public class ManageUserServiceBean extends CrudServiceImpl<User> implements Mana
                 violated = true;
             }
         } catch (PersistentObjectNotFoundException e) {
-            // Tudo certo
+            // ok
         } catch (MultiplePersistentObjectsFoundException e) {
             violated = true;
-            Logger.getLogger(ManageUserServiceBean.class.getName()).log(
-                    Level.WARNING,
-                    String.format(
-                            "Foram encontrados múltiplos registros para a entidade %s com o parâmetro: %s",
-                            e.getEntityClass().getSimpleName(),
-                            e.getParams() != null && e.getParams().length > 0 ? e.getParams()[0] : "N/A"
-                    ),
-                    e
-            );
+            Logger.getLogger(getClass().getName()).log(Level.WARNING, "Erro de duplicação de email", e);
         }
 
-        if (violated)
+        if (violated) {
             crudException = addFieldValidationError(crudException, exceptionMessage,
                     "emailField", "manageUsers.error.emailExists");
+        }
 
-        // Validação senha similar à create
-        if (entity.getPassword() == null || entity.getPassword().isBlank() || entity.getPassword().length() > 128) {
-            crudException = addFieldValidationError(crudException, exceptionMessage,
-                    "passwordField", "manageUsers.error.invalidPassword");
+        // 👇 Só valida a senha se vier preenchida!
+        if (entity.getPassword() != null && !entity.getPassword().isBlank()) {
+            if (entity.getPassword().length() > 128) {
+                crudException = addFieldValidationError(crudException, exceptionMessage,
+                        "passwordField", "manageUsers.error.invalidPassword");
+            }
         }
 
         if (crudException != null)
@@ -114,8 +109,8 @@ public class ManageUserServiceBean extends CrudServiceImpl<User> implements Mana
     }
 
 
+
     public void createUser(User user, String password) {
-        // Aqui você deve codificar a senha antes de salvar
         user.setPassword(encryptPassword(password));
         userDAO.save(user);
     }
