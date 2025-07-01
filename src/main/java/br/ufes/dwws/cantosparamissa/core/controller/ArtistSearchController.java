@@ -1,29 +1,25 @@
-package br.ufes.dwws.cantosparamissa.core.view;
+package br.ufes.dwws.cantosparamissa.core.controller;
 
-import br.ufes.dwws.cantosparamissa.core.domain.User;
-import br.ufes.dwws.cantosparamissa.core.persistence.UserDAO;
+import br.ufes.dwws.cantosparamissa.core.application.ArtistSearchService;
+import br.ufes.dwws.cantosparamissa.core.domain.Artist;
 import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Named
 @ViewScoped
-public class UserView implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    private List<User> users = new ArrayList<>();
+public class ArtistSearchController implements Serializable {
+    private List<Artist> artists = List.of();
     private String query;
 
-    @Inject
-    private UserDAO userDAO;
+    @EJB
+    private ArtistSearchService artistSearchService;
 
     @PostConstruct
     public void init() {
@@ -33,13 +29,13 @@ public class UserView implements Serializable {
 
         String queryParam = params.get("q");
         if (queryParam != null && !queryParam.isBlank()) {
-            query = queryParam.trim();
-            users = userDAO.searchByEmail(query);
+            query = queryParam;
+            artists = artistSearchService.searchByName(queryParam);
         }
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<Artist> getArtists() {
+        return artists;
     }
 
     public String getQuery() {
@@ -50,3 +46,4 @@ public class UserView implements Serializable {
         this.query = query;
     }
 }
+

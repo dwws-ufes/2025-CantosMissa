@@ -47,7 +47,7 @@
                 <div class="row height d-flex justify-content-center align-items-center">
                     <h2 class="text-center fw-bold fs-1 mb-4">Músicas encontradas</h2>
 
-                    <ui:repeat value="#{musicView.musics}" var="music">
+                    <ui:repeat value="#{musicSearchController.musics}" var="music">
                         <h:link outcome="/public/viewMusic/index" styleClass="music-card-link">
                             <f:param name="id" value="#{music.id}" />
                             <div class="music-card d-flex justify-content-between align-items-center mb-2 p-4">
