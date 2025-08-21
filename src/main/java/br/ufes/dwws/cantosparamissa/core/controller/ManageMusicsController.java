@@ -7,11 +7,18 @@ import br.ufes.dwws.cantosparamissa.core.persistence.ArtistDAO;
 import br.ufes.inf.labes.jbutler.ejb.application.CrudService;
 import br.ufes.inf.labes.jbutler.ejb.controller.CrudController;
 import br.ufes.inf.labes.jbutler.ejb.controller.PersistentObjectConverterFromId;
+import br.ufes.inf.labes.jbutler.ejb.persistence.exceptions.MultiplePersistentObjectsFoundException;
+import br.ufes.inf.labes.jbutler.ejb.persistence.exceptions.PersistentObjectNotFoundException;
 import jakarta.annotation.security.PermitAll;
 import jakarta.ejb.EJB;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.Literal;
 
 import java.util.List;
 
@@ -60,5 +67,36 @@ public class ManageMusicsController extends CrudController<Music> {
     }
     public PersistentObjectConverterFromId<Artist> getArtistConverter() {
         return artistConverter;
+    }
+
+    public void suggestArtist() throws PersistentObjectNotFoundException, MultiplePersistentObjectsFoundException {
+        String title = selectedEntity.getTitle();
+        if(title != null && title.length() > 2) {
+            String query = "PREFIX dbo: <http://dbpedia.org/ontology/>\n" +
+                    "PREFIX dbp: <http://dbpedia.org/property/>\n" +
+                    "select ?artist_name\n" +
+                    "where{\n" +
+                    "         ?uri a dbo:Song ;\n" +
+                    "                    dbp:name \"" + title + "\"@en ;\n" +
+                    "                    dbp:artist ?artist .\n" +
+                    "         ?artist dbp:name ?artist_name .\n" +
+                    "}\n" +
+                    "limit 1";
+            QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query);
+            ResultSet results = queryExecution.execSelect();
+
+            if(results.hasNext()) {
+                QuerySolution querySolution = results.next();
+                Literal artistNameLiteral = querySolution.getLiteral("artist_name");
+                artistName = artistNameLiteral.getString();
+
+                try{
+                    Artist artist = manageArtistsService.retrieveByName(artistName);
+                    selectedEntity.setArtist(artist);
+                }
+                catch(PersistentObjectNotFoundException | MultiplePersistentObjectsFoundException ignored) {
+                }
+            }
+        }
     }
 }

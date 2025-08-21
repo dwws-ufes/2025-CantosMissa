@@ -33,6 +33,9 @@ public class ManageArtistsServiceBean extends CrudServiceImpl<Artist> implements
     }
 
     @Override
+    public Artist retrieveByName(String name) throws PersistentObjectNotFoundException, MultiplePersistentObjectsFoundException { return artistDAO.retrieveByFullName(name); }
+
+    @Override
     public void validateCreate(Artist entity) throws CrudException {
         CrudException crudException = null;
         String exceptionMessage = "O artista não pode ser criado devido a erros de validação.";

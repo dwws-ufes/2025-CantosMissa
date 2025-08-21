@@ -103,6 +103,12 @@
                                              placeholder="#{msgsCore['manageMusics.field.placeholder.title']}"
                                              required="true">
                                     <p:ajax event="blur" process="@this" update="titleMsgs" />
+                                    <p:ajax event="blur"
+                                            listener="#{manageMusicsController.suggestArtist}"
+                                            process="@this"
+                                            update="artistField"
+                                            onstart="document.getElementById('ajaxloader').style.display='block'"
+                                            oncomplete="document.getElementById('ajaxloader').style.display='none'" />
                                 </p:inputText>
                             </h:panelGroup>
 
@@ -122,6 +128,9 @@
                                                 converter="#{manageMusicsController.artistConverter}">
                                     <p:ajax event="blur" process="@this" update="artistMsgs" />
                                 </p:autoComplete>
+                                <img id="ajaxloader"
+                                     src="#{facesContext.externalContext.requestContextPath}/resources/images/loading.gif"
+                                         style="display: none; float: right;"  alt="loading..." width="40" height="40"/>
                             </h:panelGroup>
 
                             <p:outputLabel for="keyField" value="#{msgsCore['manageMusics.field.musicKey']}" />
