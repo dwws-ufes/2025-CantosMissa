@@ -20,7 +20,7 @@
 
     <ui:define name="content">
         <adm:breadcrumb link="/core/manageMusics/index" title="#{msgsCore['manageMusics.title']}" />
-
+        <a style="float: right" href="#{facesContext.externalContext.requestContextPath}/data/musics">RDF</a>
         <h:form id="form">
             <!-- The listing. -->
             <p:panel header="#{msgsCore['manageMusics.text.entities']}" styleClass="card no-border">
