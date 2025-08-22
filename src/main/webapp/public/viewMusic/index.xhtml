@@ -14,7 +14,9 @@
 
    <ui:define name="content">
 
-      <h:outputScript name="js/chords.js" target="head" />
+       <h:outputScript name="js/chords.js" target="head" />
+
+       <a style="float: right" href="#{facesContext.externalContext.requestContextPath}/data/Music/#{viewMusicController.selectedEntity.id}">RDF</a>
 
       <h:form id="form">
          <p:panel styleClass="card main-card no-border">
