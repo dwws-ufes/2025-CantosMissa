@@ -12,6 +12,8 @@ import br.ufes.inf.labes.jbutler.ejb.persistence.exceptions.MultiplePersistentOb
 import br.ufes.inf.labes.jbutler.ejb.persistence.exceptions.PersistentObjectNotFoundException;
 import jakarta.annotation.security.PermitAll;
 import jakarta.ejb.EJB;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -150,6 +152,20 @@ public class ManageMusicsController extends CrudController<Music> {
                         selectedEntity.setArtist(artist);
                     } catch (PersistentObjectNotFoundException | MultiplePersistentObjectsFoundException ignored) { }
                 }
+                else {
+                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Nada encontrado na DBpedia", "Não há sugestão para este título.");
+                    FacesContext.getCurrentInstance().addMessage(null, msg);
+                    return;
+                }
+            }
+            catch (Exception e) {
+                // sem rede
+                System.out.println("[WARN] DBpedia indisponível: " + e.getMessage());
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                        "Sem conexão", "Não foi possível consultar a DBpedia agora. Tente novamente depois.");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                return;
             }
         }
     }
