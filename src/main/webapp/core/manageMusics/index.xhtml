@@ -22,6 +22,7 @@
         <adm:breadcrumb link="/core/manageMusics/index" title="#{msgsCore['manageMusics.title']}" />
 
         <h:form id="form">
+            <p:growl id="growl" showDetail="true" life="4000" />
             <!-- The listing. -->
             <p:panel styleClass="card no-border">
                 <f:facet name="header">
@@ -115,7 +116,7 @@
                                     <p:ajax event="blur"
                                             listener="#{manageMusicsController.suggestArtist}"
                                             process="@this"
-                                            update="titleMsgs artistField"
+                                            update="titleMsgs artistField growl"
                                             onstart="document.getElementById('ajaxloader').style.display='block'"
                                             oncomplete="document.getElementById('ajaxloader').style.display='none'" />
                                 </p:inputText>
