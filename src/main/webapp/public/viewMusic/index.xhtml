@@ -16,10 +16,18 @@
 
        <h:outputScript name="js/chords.js" target="head" />
 
-       <a style="float: right" href="#{facesContext.externalContext.requestContextPath}/data/Music/#{viewMusicController.selectedEntity.id}">RDF</a>
-
       <h:form id="form">
          <p:panel styleClass="card main-card no-border">
+            <f:facet name="header">
+               <h:panelGroup style="display:flex; align-items:center;">
+                  <h:outputText value="#{msgsCore['viewMusic.title']}" />
+                  <p:button value="RDF"
+                            href="#{facesContext.externalContext.requestContextPath}/data/Music/#{viewMusicController.selectedEntity.id}"
+                            icon="pi pi-share-alt"
+                            style="margin-left:1rem;"
+                            styleClass="ui-button-outlined ui-button-secondary"/>
+               </h:panelGroup>
+            </f:facet>
 
             <p:panelGrid columns="2" cellpadding="8" layout="grid" styleClass="ui-fluid card inner-card" columnClasses="ui-grid-col-4,ui-grid-col-8">
 
