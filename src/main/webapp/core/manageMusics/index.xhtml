@@ -112,11 +112,10 @@
                                              value="#{manageMusicsController.selectedEntity.title}"
                                              placeholder="#{msgsCore['manageMusics.field.placeholder.title']}"
                                              required="true">
-                                    <p:ajax event="blur" process="@this" update="titleMsgs" />
                                     <p:ajax event="blur"
                                             listener="#{manageMusicsController.suggestArtist}"
                                             process="@this"
-                                            update="artistField"
+                                            update="titleMsgs artistField"
                                             onstart="document.getElementById('ajaxloader').style.display='block'"
                                             oncomplete="document.getElementById('ajaxloader').style.display='none'" />
                                 </p:inputText>
