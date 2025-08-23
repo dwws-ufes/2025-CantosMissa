@@ -20,10 +20,20 @@
 
     <ui:define name="content">
         <adm:breadcrumb link="/core/manageMusics/index" title="#{msgsCore['manageMusics.title']}" />
-        <a style="float: right" href="#{facesContext.externalContext.requestContextPath}/data/musics">RDF</a>
+
         <h:form id="form">
             <!-- The listing. -->
-            <p:panel header="#{msgsCore['manageMusics.text.entities']}" styleClass="card no-border">
+            <p:panel styleClass="card no-border">
+                <f:facet name="header">
+                    <h:panelGroup style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+                        <h:outputText value="#{msgsCore['manageMusics.text.entities']}" />
+                        <p:button value="RDF"
+                                  href="#{facesContext.externalContext.requestContextPath}/data/musics"
+                                  icon="pi pi-share-alt"
+                                  style="margin-left: 1rem;"
+                                  styleClass="ui-button-outlined ui-button-secondary"/>
+                    </h:panelGroup>
+                </f:facet>
                 <p:dataTable id="dt-entities" widgetVar="dtEntities" var="entity" value="#{manageMusicsController.entities}" emptyMessage="#{msgsCore['manageMusics.text.emptyMessage']}" reflow="true" selection="#{manageMusicsController.selectedEntities}" rowKey="#{entity.id}" paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
                     <p:ajax event="filter" ignoreAutoUpdate="true" />
                     <f:facet name="footer">
