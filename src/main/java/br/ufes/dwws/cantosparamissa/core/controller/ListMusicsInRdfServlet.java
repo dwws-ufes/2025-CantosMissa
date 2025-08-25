@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(urlPatterns = { "/data/musics" })
+@WebServlet(urlPatterns = { "/public/data/musics" })
 public class ListMusicsInRdfServlet extends HttpServlet {
     @EJB
     private MusicDAO musicDAO;
@@ -31,7 +31,7 @@ public class ListMusicsInRdfServlet extends HttpServlet {
         List<Music> musics = musicDAO.retrieveAll();
 
         Model model = ModelFactory.createDefaultModel();
-        String myNS = "http://localhost:8080/cantosparamissa/data/Music/";
+        String myNS = "http://localhost:8080/cantosparamissa/public/data/Music/";
         String moNS = "http://purl.org/ontology/mo/";
         model.setNsPrefix("mo", moNS);
 
@@ -45,7 +45,7 @@ public class ListMusicsInRdfServlet extends HttpServlet {
         Property moPerformer = model.createProperty(moNS + "performer");
 
         for (Music music : musics) {
-            String artistURI = "http://localhost:8080/cantosparamissa/data/Artist/" + music.getArtist().getId();
+            String artistURI = "http://localhost:8080/cantosparamissa/public/data/Artist/" + music.getArtist().getId();
             Resource artistRes = model.createResource(artistURI)
                     .addProperty(RDF.type, moMusicArtist)
                     .addProperty(RDFS.label, music.getArtist().getName());
