@@ -18,7 +18,7 @@ import org.apache.jena.vocabulary.RDFS;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = { "/data/Music/*" })
+@WebServlet(urlPatterns = { "/public/data/Music/*" })
 public class MusicInRdfServlet extends HttpServlet {
     @EJB
     private MusicDAO musicDAO;
@@ -49,7 +49,7 @@ public class MusicInRdfServlet extends HttpServlet {
         }
 
         Model model = ModelFactory.createDefaultModel();
-        String myNS = "http://localhost:8080/cantosparamissa/data/Music/";
+        String myNS = "http://localhost:8080/cantosparamissa/public/data/Music/";
         String moNS = "http://purl.org/ontology/mo/";
         model.setNsPrefix("mo", moNS);
 
@@ -62,7 +62,7 @@ public class MusicInRdfServlet extends HttpServlet {
         Property moText = model.createProperty(moNS + "text");
         Property moPerformer = model.createProperty(moNS + "performer");
 
-        String artistURI = "http://localhost:8080/cantosparamissa/data/Artist/" + music.getArtist().getId();
+        String artistURI = "http://localhost:8080/cantosparamissa/public/data/Artist/" + music.getArtist().getId();
         Resource artistRes = model.createResource(artistURI)
                 .addProperty(RDF.type, moMusicArtist)
                 .addProperty(RDFS.label, music.getArtist().getName());
